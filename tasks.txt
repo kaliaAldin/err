@@ -1,0 +1,7 @@
+1-  div of the text space details of hospital and rooms / Done 
+
+
+2-  fixing the marker of the room incase room selected - replaced with idea of animation
+4-  map controlling dive / ongoing step 
+3-  language  compoonent 
+4- reponsive design CSS 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <title>خريطة الخرطوم المدنية</title>
+
+    <link rel="stylesheet" href="style/style.css">
+
+</head>
+<body class="body">
+    <div class="header" id ="headermain">
+        <img src="images/logo.png" alt="" class = "logo">
+        <div class="headerText">Khartoum CIVIC MAP خريطة الخرطوم المدنية</div> 
+        
+    </div>
+    <div class="container">
+        <div class="buttons">
+            <div class="hosContatiner"><div id="HosList"><button id="hos" class="hos">Hospitals مستشفيات</button></div>
+            <div id="hosDetails" class="HosDe"></div></div>
+            <div class="roomContatiner"><div id="RoomList" ><button id="ER" class="ER" >Emergency Response Rooms غرف طوارئ</button></div>
+            <div id="RoomDetails" class="RoomDe"></div></div>
+            
+            <!--div><button id= "C" class="conflict">risky zones مناطق خطرة</button></div>
+            <div><button id= "story" class="conflict">Stories قصص</button></div-->
+        </div>
+        
+            <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
