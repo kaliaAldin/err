@@ -15,7 +15,7 @@ function myFunction() {
 
 var map = L.map('map').setView([15.629717, 32.530528], 12);
 
-L.tileLayer('http://localhost:5000/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}', {
+L.tileLayer('http://192.168.1.8:80/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}', {
   maxZoom: 30,
   id: 'ahmed-isam/clhos6n5v01ml01qt6cqgcmnr',
   tileSize: 512,
@@ -24,7 +24,7 @@ L.tileLayer('http://localhost:5000/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}
 
 var request = new XMLHttpRequest();
 
-request.open("GET", 'http://localhost:5000/data', true)
+request.open("GET", 'http://192.168.1.8:80/data', true)
 request.onreadystatechange = function () {
   if (request.readyState === XMLHttpRequest.DONE) {
     if (request.status === 200) {

@@ -32,8 +32,7 @@ def mapbox_tiles_proxy(path):
     mapbox_url = f'https://api.mapbox.com/styles/v1/{path}'
     mapbox_url_with_token = f'{mapbox_url}?access_token={MAPBOX_ACCESS_TOKEN}'
 
-    # Debugging: Print the constructed URL
-    print("Constructed Mapbox URL:", mapbox_url_with_token)
+   
 
     # Send the request to the Mapbox API
     response = requests.get(mapbox_url_with_token)
@@ -48,7 +47,7 @@ def mapbox_tiles_proxy(path):
 
 @app.route('/data')
 def retrieve_data():
-    data_url = "http://localhost:5501/sample.json"
+    data_url = "http://localhost:5000/sample.json"
     response = requests.get(data_url)
     if response.ok:
         # If successful, return the data content and status code
@@ -213,4 +212,4 @@ with open ("sample.json","w") as DataFile:
 if __name__ == '__main__':
     
 
-    app.run(debug=True)
+    app.run()
