@@ -3,6 +3,7 @@ from flask_cors import CORS  # Import CORS
 import requests
 import os.path
 import json
+from functools import lru_cache
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -27,6 +28,7 @@ CORS(app)  # Enable CORS for all origins on all routes
 MAPBOX_ACCESS_TOKEN = ''
 
 # Endpoint to proxy Mapbox requests
+@lru_cache(maxsize=128)
 @app.route('/mapbox-tiles/styles/v1/<path:path>')
 def mapbox_tiles_proxy(path):
     mapbox_url = f'https://api.mapbox.com/styles/v1/{path}'
@@ -46,28 +48,20 @@ def mapbox_tiles_proxy(path):
         return jsonify({'error': 'Failed to fetch map tile'}), response.status_code
 
 @app.route('/data')
+
 def retrieve_data():
-    data_url = "http://localhost:5000/sample.json"
-    response = requests.get(data_url)
-    if response.ok:
-        # If successful, return the data content and status code
-        return response.content, response.status_code
-    else:
-        # If unsuccessful, return an error response
-        return jsonify({'error': 'Failed to fetch data'}), response.status_code
-
-
-def extractHosInfo():
-  """Shows basic usage of the Sheets API.
-  Prints values from a sample spreadsheet.
-  """
+    data_url = "sample.json"
+    with open(data_url) as dataobject:
+       data = json.load(dataobject)
+       return data
+    
+def extractHosRoomsInfo():
+ 
   creds = None
-  # The file token.json stores the user's access and refresh tokens, and is
-  # created automatically when the authorization flow completes for the first
-  # time.
+
   if os.path.exists("token.json"):
     creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-  # If there are no (valid) credentials available, let the user log in.
+  
   if not creds or not creds.valid:
     if creds and creds.expired and creds.refresh_token:
       creds.refresh(Request())
@@ -85,25 +79,32 @@ def extractHosInfo():
 
     # Call the Sheets API
     sheet = service.spreadsheets()
-    result = (
+    
+    #read the hospital sheet 
+    resultHos = (
         sheet.values()
         .get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=SAMPLE_RANGE_NAME_Hos)
         .execute()
     )
-    values = result.get("values", {})
+    resultRooms = (
+        sheet.values()
+        .get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=SAMPLE_RANGE_NAME_Room)
+        .execute()
+    )
 
-    if not values:
+    #getting hospital values and Insert them in dict then array for json 
+    valuesHos = resultHos.get("values", {})
+    if not valuesHos:
       print("No data found.")
       return
     hospitalArray= []
-    for row in values:
+    for row in valuesHos:
       # Print columns A and E, which correspond to indices 0 and 4.
         Hospitalsdic = {}
         
         try:
 
             Hospitalsdic["name"] = row[0]
-            
             Hospitalsdic["District"] = row[1]
             Hospitalsdic["Status"] = row[2]
             Hospitalsdic["ERR"] = row[3]
@@ -114,56 +115,18 @@ def extractHosInfo():
             Hospitalsdic["Notes"] = row[11]
             
         except IndexError:
+            print("one of the rows is empty check google sheet")
             pass
         hospitalArray.append(Hospitalsdic)
     
-  
     
-      
-    
-  except HttpError as err:
-    print(err)
-  return hospitalArray
-def extractROOMInfo():
-  """Shows basic usage of the Sheets API.
-  Prints values from a sample spreadsheet.
-  """
-  creds = None
-  # The file token.json stores the user's access and refresh tokens, and is
-  # created automatically when the authorization flow completes for the first
-  # time.
-  if os.path.exists("token.json"):
-    creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-  # If there are no (valid) credentials available, let the user log in.
-  if not creds or not creds.valid:
-    if creds and creds.expired and creds.refresh_token:
-      creds.refresh(Request())
-    else:
-      flow = InstalledAppFlow.from_client_secrets_file(
-          "credentials2.json", SCOPES
-      )
-      creds = flow.run_local_server(port=0)
-    # Save the credentials for the next run
-    with open("token.json", "w") as token:
-      token.write(creds.to_json())
+    valuesRooms = resultRooms.get("values", {})
 
-  try:
-    service = build("sheets", "v4", credentials=creds)
-
-    # Call the Sheets API
-    sheet = service.spreadsheets()
-    result = (
-        sheet.values()
-        .get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=SAMPLE_RANGE_NAME_Room)
-        .execute()
-    )
-    values = result.get("values", {})
-
-    if not values:
+    if not valuesRooms:
       print("No data found.")
       return
     roomArray= []
-    for row in values:
+    for row in valuesRooms:
       # Print columns A and E, which correspond to indices 0 and 4.
         Roomsdic = {}
         
@@ -189,27 +152,20 @@ def extractROOMInfo():
 
             
         except IndexError:
+            print("one of the rows is empty check google sheet")
             pass
         roomArray.append(Roomsdic)
-    
-  
-
-    
       
-   
   except HttpError as err:
     print(err)
-  return  roomArray
+  json_object ["BaseERR"] =  roomArray
+  json_object ["Hospitals"] = hospitalArray
 
-rooms = extractROOMInfo()
-hospitals = extractHosInfo()
-json_object["Hospitals"] = hospitals
-json_object ["BaseERR"] = rooms
-with open ("sample.json","w") as DataFile:
-   json.dump(json_object , DataFile)
+  with open ("sample.json","w") as DataFile:
+    json.dump(json_object , DataFile)
    
 
 if __name__ == '__main__':
     
-
+    extractHosRoomsInfo()
     app.run()

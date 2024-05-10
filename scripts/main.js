@@ -15,7 +15,7 @@ function myFunction() {
 
 var map = L.map('map').setView([15.629717, 32.530528], 12);
 
-L.tileLayer('http://192.168.1.8:80/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}', {
+L.tileLayer('http://localhost:5000/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}', {
   maxZoom: 30,
   id: 'ahmed-isam/clhos6n5v01ml01qt6cqgcmnr',
   tileSize: 512,
@@ -24,7 +24,7 @@ L.tileLayer('http://192.168.1.8:80/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}
 
 var request = new XMLHttpRequest();
 
-request.open("GET", 'http://192.168.1.8:80/data', true)
+request.open("GET", 'http://localhost:5000/data', true)
 request.onreadystatechange = function () {
   if (request.readyState === XMLHttpRequest.DONE) {
     if (request.status === 200) {
@@ -78,12 +78,15 @@ var ErrIcon = L.icon({
 var roomButton = document.getElementById("ER");
 var roomDiv = document.getElementById("RoomList");
 var roomDetails = document.getElementById("RoomDetails")
+var mobileDisplay = document.getElementById("mobileDesplayID")
+ 
 var RoomsDisplayed = false; // Track whether Rooms are currently displayed
 var RoomDropdown = null;
 
 roomButton.onclick = function(){
   HosDetails.innerHTML =   "" 
   roomDetails.innerHTML =""
+  mobileDisplay.innerHTML= ""
   if(!RoomsDisplayed){
     if(hospitalsDisplayed){
       HosDiv.removeChild(hospitalDropdown);
@@ -102,9 +105,7 @@ roomButton.onclick = function(){
 
     for(var i = 0 ; i < ErrInfo.length ; i++){
       var ErrGeolocation = ErrInfo[i].geolocation;
-      var ErrroomNum = ErrInfo[i].activeRooms;
-      var ErrName = ErrInfo[i].name;
-      var ErrDistrict = ErrInfo[i].district;
+      
        
 
      
@@ -122,10 +123,14 @@ roomButton.onclick = function(){
           var selectedIndex = RoomDropdown.selectedIndex;
           if (selectedIndex !== -1) {
             defaultZoomLevel= 13;
-            roomDetails.innerHTML = " Emergency Response Base is located " + ErrInfo[selectedIndex].district 
+            var roomDetailsText = " Emergency Response Base is located " + ErrInfo[selectedIndex].district 
             + "</br> With "  + ErrInfo[selectedIndex].activeRooms + " active Rooms"
             +" and " + ErrInfo[selectedIndex].kitchens + " Kitchens " 
             + "</br> Area probably controlled by " + ErrInfo[selectedIndex].control
+            roomDetails.innerHTML = roomDetailsText
+            mobileDisplay.innerHTML = roomDetailsText
+            mobileDisplay.style.backgroundColor = "rgba(250, 79, 79, 0.888)"
+            mobileDisplay.style.transition = "20ms" 
              
             var selectedRoomGbs = ErrInfo[selectedIndex].geolocation;
             if (!isNaN(selectedRoomGbs[0]) && !isNaN(selectedRoomGbs[1])) {
@@ -135,52 +140,63 @@ roomButton.onclick = function(){
           }
         });
 
-
+        initialRadius = 800 
         var roomCircle = L.circle([ErrGeolocation[0],ErrGeolocation[1]], {
-          radius:800,
+          radius:initialRadius,
           color: roomColor,
           fillColor: roomColor,
           fillOpacity: .5,
           weight: 0
         })
         responseRooms = roomCircle.bindPopup(ErrInfo[i].name).addTo(map);
-        responseRooms.on("mouseover", function(){
-          
-         
-          overlayCircle = L.circle(this._latlng, {
-            radius:1200,
-            color: "blue",
-            fillColor: "blue",
-            fillOpacity: .5,
-            weight: 0
-          }).bindPopup(this._popup._content).addTo(map)
+      
+        function onRoomClic() { 
 
-          
-          overlayCircle.on("mouseout",function(){
-            map.removeLayer(overlayCircle)
-            
-          })
-          overlayCircle.on('click' ,  function() { 
-            
-        
-        
             for(var m = 0 ; m < ErrInfo.length ; m++){
               if (ErrInfo[m].geolocation[0] == this._latlng["lat"]){
                 RoomDropdown.selectedIndex = m 
                 
-                roomDetails.innerHTML = " Emergency Response Base is located " + ErrInfo[m].district 
+                var roomDetailsTextClick = " Emergency Response Base is located " + ErrInfo[m].district 
                 + "</br> With "  + ErrInfo[m].activeRooms + " active Rooms"
                 +" and " + ErrInfo[m].kitchens + " Kitchens " 
                 + "</br> Area probably controlled by " + ErrInfo[m].control
+                roomDetails.innerHTML = roomDetailsTextClick
+                mobileDisplay.innerHTML = roomDetailsTextClick
+                mobileDisplay.style.backgroundColor = "rgba(250, 79, 79, 0.888)"
+              
+
                 
             }
             }
-            
-            
+      
             map.setView(this._latlng, 13);
-            } ).openPopup()    
-        })
-        }else {
+            } 
+            function mouseOver(){ this.setStyle({ fillColor: 'lightblue', color: 'lightblue' });
+            this.setRadius(initialRadius * 2 )
+            this.openPopup()
+            roomDetails.style.backgroundColor = "lightblue"
+            roomDetails.style.color = "black"
+            }
+
+            function mouseOut(){this.setStyle({ fillColor: 'red', color: 'red' });
+            this.setRadius(initialRadius )
+            this.closePopup()
+            roomDetails.style.backgroundColor = "rgba(250, 79, 79, 0.888)"
+            roomDetails.style.color = "white"
+
+
+            
+
+            }
+            responseRooms.on("mouseover" , mouseOver)
+            responseRooms.on("mouseout" , mouseOut)
+            
+            responseRooms.on('click' , onRoomClic )
+            responseRooms.on('touchstart',onRoomClic)
+           
+
+        }
+        else {
       console.error("Invalid GeoLocation data for room: " + RoomsNameType[i].RoomName);}
     }
     RoomsDisplayed = true;
@@ -210,6 +226,8 @@ hosButton.onclick = function(){
   //First remove any text details from the page
   HosDetails.innerHTML =   "" 
   roomDetails.innerHTML =""
+  mobileDisplay.innerHTML= ""
+
   if(!hospitalsDisplayed){
     // Remove rooms dropdown if it's currently displayed
     if (RoomDropdown) {
@@ -253,10 +271,14 @@ hosButton.onclick = function(){
           for(var m = 0 ; m < hospitalInfo.length ; m++){
             if (hospitalInfo[m].geolocation[0] == this._latlng["lat"]){
               hospitalDropdown.selectedIndex = m 
-              HosDetails.innerHTML =   " Hospital is " 
+             var  hosDetailsTextOnclick =   " Hospital is " 
               + hospitalInfo[m].HospitalStatus + " </br> located in " 
               + String(hospitalInfo[m].district)+  
               "</br>The area  probably controlled by " + hospitalInfo [m].controlled;
+              HosDetails.innerHTML = hosDetailsTextOnclick
+              mobileDisplay.innerHTML = hosDetailsTextOnclick
+            mobileDisplay.style.backgroundColor = "rgba(91, 89, 229, 0.904)"
+
               
           }
           }
@@ -266,8 +288,12 @@ hosButton.onclick = function(){
         
         })
         marker.on("mouseover" , function(){
+          console.log(this)
           this.openPopup()
+     
+          
         })
+        
 
       // Create an option element for each hospital
       var option = document.createElement("option");
@@ -305,10 +331,14 @@ hospitalDropdown.addEventListener('change', function() {
     defaultZoomLevel = 13;
     //0Details.innerHTML = ""; // Clearing the Details div
     //roomButton.innerHTML = ""; //clearing room button
-    HosDetails.innerHTML =   " Hospital is " 
+    hosDetailsText =   " Hospital is " 
     + hospitalInfo[selectedIndex].HospitalStatus + " </br> located in " 
     + String(hospitalInfo[selectedIndex].district)+  
     "</br>The area  probably controlled by " + hospitalInfo [selectedIndex].controlled;
+    HosDetails.innerHTML = hosDetailsText
+    mobileDisplay.innerHTML = HosDetails.innerHTML
+    mobileDisplay.style.backgroundColor = "rgba(91, 89, 229, 0.904)"
+    mobileDisplay.style.transition = "20ms"    
       
   
   
