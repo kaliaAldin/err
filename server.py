@@ -18,7 +18,7 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = "16KMfaaFco92BFtoiUEzbbBy0OMSFVNPbj3sDPrSHgpg"
 SAMPLE_RANGE_NAME_Hos = "Hospitals!A2:L18"
-SAMPLE_RANGE_NAME_Room = "BaseERR!A2:S44"
+SAMPLE_RANGE_NAME_Room = "BaseERR!A2:S60"
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all origins on all routes
@@ -67,7 +67,7 @@ def extractHosRoomsInfo():
       creds.refresh(Request())
     else:
       flow = InstalledAppFlow.from_client_secrets_file(
-          "credentials2.json", SCOPES
+          "credentialERR.json", SCOPES
       )
       creds = flow.run_local_server(port=0)
     # Save the credentials for the next run
