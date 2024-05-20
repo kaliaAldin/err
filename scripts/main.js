@@ -15,7 +15,7 @@ function myFunction() {
 
 var map = L.map('map').setView([15.629717, 32.530528], 12);
 
-L.tileLayer('http://localhost:5000/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}', {
+L.tileLayer('https://sudancivicmap.com/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}', {
   maxZoom: 30,
   id: 'ahmed-isam/clhos6n5v01ml01qt6cqgcmnr',
   tileSize: 512,
@@ -24,7 +24,7 @@ L.tileLayer('http://localhost:5000/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}
 
 var request = new XMLHttpRequest();
 
-request.open("GET", 'http://localhost:5000/data', true)
+request.open("GET", 'https://sudancivicmap.com/data', true)
 request.onreadystatechange = function () {
   if (request.readyState === XMLHttpRequest.DONE) {
     if (request.status === 200) {
@@ -288,7 +288,7 @@ hosButton.onclick = function(){
         
         })
         marker.on("mouseover" , function(){
-          console.log(this)
+          
           this.openPopup()
      
           

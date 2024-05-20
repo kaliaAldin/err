@@ -25,7 +25,7 @@ CORS(app)  # Enable CORS for all origins on all routes
 
 # Mapbox access token
 #access tocken
-MAPBOX_ACCESS_TOKEN = ''
+MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYWhtZWQtaXNhbSIsImEiOiJjbHcyMjVmYTkwaDBhMm1sY3E0cG4wczl2In0.QXRFHvDqdpXEfp8UJAPhmQ'
 
 # Endpoint to proxy Mapbox requests
 @lru_cache(maxsize=128)
