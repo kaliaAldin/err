@@ -2,6 +2,7 @@
 import os
 from flask import Flask, jsonify
 from flask_cors import CORS
+from flask_caching import Cache
 import requests
 import json
 from functools import lru_cache
@@ -18,11 +19,13 @@ SAMPLE_RANGE_NAME_Room = "BaseERR!A2:S60"
 
 app = Flask(__name__)
 CORS(app)
+cache = Cache(app, config={'CACHE_TYPE': 'FileSystemCache', 'CACHE_DIR': 'cache-directory'})
 
 MAPBOX_ACCESS_TOKEN = os.getenv('MAPBOX_ACCESS_TOKEN')
 
-@lru_cache(maxsize=128)
+
 @app.route('/mapbox-tiles/styles/v1/<path:path>')
+@cache.cached(timeout=3600, query_string=True)  # Cache for 1 hour
 def mapbox_tiles_proxy(path):
     mapbox_url = f'https://api.mapbox.com/styles/v1/{path}'
     mapbox_url_with_token = f'{mapbox_url}?access_token={MAPBOX_ACCESS_TOKEN}'
