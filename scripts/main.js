@@ -174,27 +174,47 @@ roomButton.onclick = function(){
         })
         responseRooms = roomCircle.bindPopup(ErrInfo[i].name).addTo(map);
       
-        function onRoomClic() { 
-
-            for(var m = 0 ; m < ErrInfo.length ; m++){
-              if (ErrInfo[m].geolocation[0] == this._latlng["lat"]){
-                RoomDropdown.selectedIndex = m 
-                
-                var roomDetailsTextClick = ErrInfo[m].activeRooms + " Base ERR" + " with " + ErrInfo[m].kitchens + " Communal Kitchens, "
-                + ErrInfo[m].children_center + " Children Centers," + ErrInfo[m].pots + " Pots, " +  ErrInfo[m].women_coop + " Women coops, "
-                + ErrInfo[m].women_break + " Women break rooms"
-               +"</br> Area  controlled by " + ErrInfo[m].control
-                roomDetails.innerHTML = roomDetailsTextClick
-                mobileDisplay.innerHTML = roomDetailsTextClick
-                mobileDisplay.style.backgroundColor = "rgba(250, 79, 79, 0.888)"
+        function onRoomClic() {
+          for (var m = 0; m < ErrInfo.length; m++) {
+            if (ErrInfo[m].geolocation[0] == this._latlng["lat"]) {
+              RoomDropdown.selectedIndex = m;
+        
+              var detailsArray = [];
               
-
-                
+              // Check each property and add it to the detailsArray if its value is greater than 0
+              if (ErrInfo[m].activeRooms > 0) {
+                detailsArray.push(ErrInfo[m].activeRooms + " Base ERR");
+              }
+              if (ErrInfo[m].kitchens > 0) {
+                detailsArray.push(ErrInfo[m].kitchens + " Communal Kitchens");
+              }
+              if (ErrInfo[m].children_center > 0) {
+                detailsArray.push(ErrInfo[m].children_center + " Children Centers");
+              }
+              if (ErrInfo[m].pots > 0) {
+                detailsArray.push(ErrInfo[m].pots + " Pots");
+              }
+              if (ErrInfo[m].women_coop > 0) {
+                detailsArray.push(ErrInfo[m].women_coop + " Women Coops");
+              }
+              if (ErrInfo[m].women_break > 0) {
+                detailsArray.push(ErrInfo[m].women_break + " Women Break Rooms");
+              }
+        
+              // Add the controlled area information
+              detailsArray.push("Area controlled by " + ErrInfo[m].control);
+        
+              // Join the details and set it as innerHTML
+              var roomDetailsTextClick = detailsArray.join(", ") + "</br>";
+              roomDetails.innerHTML = roomDetailsTextClick;
+              mobileDisplay.innerHTML = roomDetailsTextClick;
+              mobileDisplay.style.backgroundColor = "rgba(250, 79, 79, 0.888)";
+        
+              map.setView(this._latlng, 13);
             }
-            }
-      
-            map.setView(this._latlng, 13);
-            } 
+          }
+        }
+         
             function mouseOver(){ this.setStyle({ fillColor: 'lightblue', color: 'lightblue' });
             this.setRadius(initialRadius * 2 )
             this.openPopup()
