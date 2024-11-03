@@ -113,6 +113,8 @@ def extractHosRoomsInfo():
                 Roomsdic["childrencenters"] = row[10]
                 Roomsdic["womenrestrooms"] = row[11]
                 Roomsdic["womencoops"] = row[12]
+                Roomsdic["volunteers"] = row[14]
+                Roomsdic['ServedPopulation'] = row[15]
                 Roomsdic["geolocation"] = row[16]
                 Roomsdic["controlledby"] = row[17]
             except IndexError:

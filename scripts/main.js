@@ -122,23 +122,47 @@ roomButton.onclick = function(){
         RoomDropdown.addEventListener('change', function() {
           var selectedIndex = RoomDropdown.selectedIndex;
           if (selectedIndex !== -1) {
-            defaultZoomLevel= 13;
-            var roomDetailsText = " Emergency Response Base is located " + ErrInfo[selectedIndex].district 
-            + "</br> With "  + ErrInfo[selectedIndex].activeRooms + " active Rooms"
-            +" and " + ErrInfo[selectedIndex].kitchens + " Kitchens " 
-            + "</br> Area probably controlled by " + ErrInfo[selectedIndex].control
-            roomDetails.innerHTML = roomDetailsText
-            mobileDisplay.innerHTML = roomDetailsText
-            mobileDisplay.style.backgroundColor = "rgba(250, 79, 79, 0.888)"
-            mobileDisplay.style.transition = "20ms" 
-             
+            defaultZoomLevel = 13;
+            
+            var detailsArray = [];
+            
+            // Check each property and add it to the detailsArray if its value is greater than 0
+            if (ErrInfo[selectedIndex].activeRooms > 0) {
+              detailsArray.push(ErrInfo[selectedIndex].activeRooms + " Base ERR");
+            }
+            if (ErrInfo[selectedIndex].kitchens > 0) {
+              detailsArray.push(ErrInfo[selectedIndex].kitchens + " Communal Kitchens");
+            }
+            if (ErrInfo[selectedIndex].children_center > 0) {
+              detailsArray.push(ErrInfo[selectedIndex].children_center + " Children Centers");
+            }
+            if (ErrInfo[selectedIndex].pots > 0) {
+              detailsArray.push(ErrInfo[selectedIndex].pots + " Pots");
+            }
+            if (ErrInfo[selectedIndex].women_coop > 0) {
+              detailsArray.push(ErrInfo[selectedIndex].women_coop + " Women Coops");
+            }
+            if (ErrInfo[selectedIndex].women_break > 0) {
+              detailsArray.push(ErrInfo[selectedIndex].women_break + " Women Break Rooms");
+            }
+        
+            // Add the controlled area information
+            detailsArray.push("Area controlled by " + ErrInfo[selectedIndex].control);
+        
+            // Join the details and set it as innerHTML
+            var roomDetailsText = detailsArray.join(", ") + "</br>";
+            roomDetails.innerHTML = roomDetailsText;
+            mobileDisplay.innerHTML = roomDetailsText;
+            mobileDisplay.style.backgroundColor = "rgba(250, 79, 79, 0.888)";
+            mobileDisplay.style.transition = "20ms";
+        
             var selectedRoomGbs = ErrInfo[selectedIndex].geolocation;
             if (!isNaN(selectedRoomGbs[0]) && !isNaN(selectedRoomGbs[1])) {
               map.setView([selectedRoomGbs[0], selectedRoomGbs[1]], defaultZoomLevel);
-              //var roommarker = new L.marker([selectedRoomGbs[0], selectedRoomGbs[1]], { icon: ErrIcon }).addTo(map);
             }
           }
         });
+        
 
         initialRadius = 800 
         var roomCircle = L.circle([ErrGeolocation[0],ErrGeolocation[1]], {
@@ -146,7 +170,7 @@ roomButton.onclick = function(){
           color: roomColor,
           fillColor: roomColor,
           fillOpacity: .5,
-          weight: 0
+          weight: 0,
         })
         responseRooms = roomCircle.bindPopup(ErrInfo[i].name).addTo(map);
       
@@ -156,10 +180,10 @@ roomButton.onclick = function(){
               if (ErrInfo[m].geolocation[0] == this._latlng["lat"]){
                 RoomDropdown.selectedIndex = m 
                 
-                var roomDetailsTextClick = " Emergency Response Base is located " + ErrInfo[m].district 
-                + "</br> With "  + ErrInfo[m].activeRooms + " active Rooms"
-                +" and " + ErrInfo[m].kitchens + " Kitchens " 
-                + "</br> Area probably controlled by " + ErrInfo[m].control
+                var roomDetailsTextClick = ErrInfo[m].activeRooms + " Base ERR" + " with " + ErrInfo[m].kitchens + " Communal Kitchens, "
+                + ErrInfo[m].children_center + " Children Centers," + ErrInfo[m].pots + " Pots, " +  ErrInfo[m].women_coop + " Women coops, "
+                + ErrInfo[m].women_break + " Women break rooms"
+               +"</br> Area  controlled by " + ErrInfo[m].control
                 roomDetails.innerHTML = roomDetailsTextClick
                 mobileDisplay.innerHTML = roomDetailsTextClick
                 mobileDisplay.style.backgroundColor = "rgba(250, 79, 79, 0.888)"
@@ -403,6 +427,11 @@ function handleJsonRoomData(data){
     var kitchens = data.BaseERR[i].kitchens;
     var district = data.BaseERR[i].district;
     var control = data.BaseERR[i].controlledby;
+    var pots = data.BaseERR[i].pots;
+    var health_clinic = data.BaseERR[i].clinics;
+    var children_center = data.BaseERR[i].childrencenters;
+    var women_coop = data.BaseERR[i].womencoops;
+    var women_break = data.BaseERR[i].womenrestrooms;
 
     var geolocationArray = roomLocation.split(',').map(function (item) {
       return parseFloat(item.trim()); // Trim any whitespace around the numbers
@@ -410,7 +439,9 @@ function handleJsonRoomData(data){
 
     // Check if geolocationArray contains valid coordinates
     if (geolocationArray.length === 2 && !isNaN(geolocationArray[0]) && !isNaN(geolocationArray[1])) {
-      resultArray.push({ name: name, geolocation: geolocationArray, activeRooms:activeRooms, district: district, control: control, kitchens:kitchens });
+      resultArray.push({ name: name, geolocation: geolocationArray, activeRooms:activeRooms, district: district, control: control, kitchens:kitchens , pots: pots , clinic: health_clinic,
+        children_center: children_center, women_coop: women_coop , women_break: women_break    
+      });
     } else {
       console.error("Invalid GPSLocation data for hospital: " + name);
     }
