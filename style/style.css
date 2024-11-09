@@ -302,7 +302,7 @@ display:flex;
     position: relative;
     margin: auto;
     margin-left: 0 !important;
-    width: 25vh;
+    width: 28vh;
     
     font-size:  1.3rem;
     text-transform: uppercase;
@@ -338,6 +338,7 @@ display:flex;
     border-color: white;
     font-size: 12px;
     margin-top: 5px;
+    width: 27vh;
     text-align: center;
   
 
