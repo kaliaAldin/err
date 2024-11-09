@@ -133,6 +133,9 @@ roomButton.onclick = function(){
             if (ErrInfo[selectedIndex].kitchens > 0) {
               detailsArray.push(ErrInfo[selectedIndex].kitchens + " Communal Kitchens");
             }
+            if (ErrInfo[selectedIndex].clinic > 0) {
+              detailsArray.push(ErrInfo[selectedIndex].clinic + " Clinics");
+            }
             if (ErrInfo[selectedIndex].children_center > 0) {
               detailsArray.push(ErrInfo[selectedIndex].children_center + " Children Centers");
             }
@@ -145,9 +148,12 @@ roomButton.onclick = function(){
             if (ErrInfo[selectedIndex].women_break > 0) {
               detailsArray.push(ErrInfo[selectedIndex].women_break + " Women Break Rooms");
             }
+            if(ErrInfo[selectedIndex].pobulation > 0){
+              detailsArray.push(" Serving pobulation of " + ErrInfo[selectedIndex].pobulation + " people " )
+            }
         
             // Add the controlled area information
-            detailsArray.push("Area controlled by " + ErrInfo[selectedIndex].control);
+            detailsArray.push("<br>Area controlled by " + ErrInfo[selectedIndex].control);
         
             // Join the details and set it as innerHTML
             var roomDetailsText = detailsArray.join(", ") + "</br>";
@@ -188,6 +194,10 @@ roomButton.onclick = function(){
               if (ErrInfo[m].kitchens > 0) {
                 detailsArray.push(ErrInfo[m].kitchens + " Communal Kitchens");
               }
+              if (ErrInfo[m].clinic > 0) {
+                detailsArray.push(ErrInfo[m].clinic + " Clinics");
+              }
+
               if (ErrInfo[m].children_center > 0) {
                 detailsArray.push(ErrInfo[m].children_center + " Children Centers");
               }
@@ -200,9 +210,12 @@ roomButton.onclick = function(){
               if (ErrInfo[m].women_break > 0) {
                 detailsArray.push(ErrInfo[m].women_break + " Women Break Rooms");
               }
+              if(ErrInfo[m].pobulation > 0){
+                detailsArray.push( " serving pobulation of " +ErrInfo[m].pobulation + " people") 
+              }
         
               // Add the controlled area information
-              detailsArray.push("Area controlled by " + ErrInfo[m].control);
+              detailsArray.push("<br>Area controlled by " + ErrInfo[m].control);
         
               // Join the details and set it as innerHTML
               var roomDetailsTextClick = detailsArray.join(", ") + "</br>";
@@ -441,6 +454,7 @@ function handleJsonRoomData(data){
   resultArray = [];
   for(var i = 0 ; i < data.BaseERR.length;i++){
 
+    var servedPobulation = data.BaseERR[i].ServedPopulation;
     var name = data.BaseERR[i].baseerr;
     var roomLocation = data.BaseERR[i].geolocation;
     var activeRooms =  data.BaseERR[i].rooms;
@@ -459,8 +473,8 @@ function handleJsonRoomData(data){
 
     // Check if geolocationArray contains valid coordinates
     if (geolocationArray.length === 2 && !isNaN(geolocationArray[0]) && !isNaN(geolocationArray[1])) {
-      resultArray.push({ name: name, geolocation: geolocationArray, activeRooms:activeRooms, district: district, control: control, kitchens:kitchens , pots: pots , clinic: health_clinic,
-        children_center: children_center, women_coop: women_coop , women_break: women_break    
+      resultArray.push({ name: name, geolocation: geolocationArray, activeRooms:activeRooms, district: district, control: control, kitchens:kitchens , 
+        pots: pots , clinic: health_clinic,children_center: children_center, women_coop: women_coop , women_break: women_break , pobulation:servedPobulation    
       });
     } else {
       console.error("Invalid GPSLocation data for hospital: " + name);
