@@ -15,7 +15,7 @@ json_object = {}
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 SAMPLE_SPREADSHEET_ID = "16KMfaaFco92BFtoiUEzbbBy0OMSFVNPbj3sDPrSHgpg"
 SAMPLE_RANGE_NAME_Hos = "Hospitals!A2:L18"
-SAMPLE_RANGE_NAME_Room = "BaseERR!A2:S60"
+SAMPLE_RANGE_NAME_Room = "BaseERR!A2:T70"
 
 app = Flask(__name__)
 CORS(app)
@@ -117,6 +117,8 @@ def extractHosRoomsInfo():
                 Roomsdic['ServedPopulation'] = row[15]
                 Roomsdic["geolocation"] = row[16]
                 Roomsdic["controlledby"] = row[17]
+                Roomsdic["ArabicNAme"] = row[18]
+                Roomsdic["Discription"] = row[19]
             except IndexError:
                 print("one of the rows is empty check google sheet")
                 pass
