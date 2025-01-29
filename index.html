@@ -16,15 +16,34 @@
     <div class="header" id ="headermain">
         <a href="https://khartoumerr.org/"><img src="images/logo.png" alt="" class = "logo"></a>
         <div class="headerText">Khartoum CIVIC MAP خريطة الخرطوم المدنية</div> 
+       <button class="mapDispaly" onclick="displayMap()" id="mapStory">Map</button>
         
     </div>
-    <div class="container">
+    <div class="intro" id ="intro">
+       
+
+        The Counter-Militarisation Mapping project is a critical exploration of the dominant narrative surrounding the Sudan conflict, reframing it through an visual  lens to emphasize the experiences of civilian-led movements. 
+        By shifting the focus from military-centric perspectives to the humanitarian efforts and social solidarity of non-combatant actors, this project challenges conventional portrayals of the conflict as a binary struggle.<br>
+        Through the integration of mapping and visual methodologies, this work highlights the pivotal role of grassroots initiatives in mitigating the impacts of conflict and supporting affected communities.<br>
+        Specifically, the map documents the extensive efforts of the emergency response rooms in Khartoum, showcasing their crucial contributions to sustaining lives and fostering resilience within the city. <br>
+        Updated daily by activists, the <a  class="Firstpagelinks" href="https://sudancivicmap.com/data"  >database</a> is designed as an open-source platform, providing valuable insights for researchers, artists, and activists. It serves as both a dynamic resource and a testament to the collective agency of civilian actors in conflict zones.<br>This project features an interactive map implemented using the Leaflet.js JavaScript library, with map tiles powered by Mapbox. The core data is collaboratively contributed by activists from the Emergency Response Room, stored in a shared Google Sheet.
+
+        The API and JavaScript code developed for this project are open source and accessible via the <a   class="Firstpagelinks" href="https://github.com/kaliaAldin/err"> GitHub repository</a>, 
+        allowing others to explore, adapt, and utilize them for their own initiatives.
+    </div>
+    
+  
+
+    <div class="container" id="container">
+        <div id="map"></div>
         <div class="buttons">
-            <div class="hosContatiner"><div id="HosList"><button id="hos" class="hos">Hospitals مستشفيات</button></div>
-            <div id="hosDetails" class="HosDe"></div></div>
-            <div class="roomContatiner"><div id="RoomList" ><button id="ER" class="ER" >Emergency Response Rooms غرف الطوارئ</button></div>
-            <div id="RoomDetails" class="RoomDe"></div></div>
             
+            <div class="hosContatiner"><div id="HosList"><button id="hos" class="hos"><span> HOSPITALSمستشفيات</span> </button></div>
+            <div id="hosDetails" class="HosDe"></div></div>
+            <div class="roomContatiner"><div id="RoomList" ><button id="ER" class="ER" ><span> Emergency Response Rooms <br>غرف الطوارئ </span></button></div>
+            
+            <div id="RoomDetails" class="RoomDe"></div></div>
+            <div><button id= "story" class="Stories">Stories قصص</button></div>
             
             
             <!--div><button id= "C" class="conflict">risky zones مناطق خطرة</button></div>
@@ -34,14 +53,16 @@
         
         
        
-        <div id="map"></div>
+        
             
     </div>
     <footer>
+       <!-- <a href="https://khartoumerr.org/"><img src="images/logo.png" alt="" class = "logo"></a>-->
         <p class="cells">KHARTOUM-SUDAN </p>
             <p class="cells"><a href="https://khartoumerr.org/contact-us">CONTACT US</a></p>
         <p class="cells">EMERGENCY RESPONSE ROOMS KHARTOUM</p>
             <p class="cells"><a href="https://khartoumerr.org/">www.khartoumerr.org/</a></p>  
+            
         </footer>
     
 
