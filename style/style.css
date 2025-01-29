@@ -3,79 +3,131 @@
     appearance: none; /* Remove default styling in some browsers */
     -webkit-appearance: none; /* Remove default styling in WebKit browsers */
     -moz-appearance: none; /* Remove default styling in Firefox */
+    background-color: rgb(76, 30, 79, 1);
+}
+.intro{
+    display: block;
+    text-align: justify;
+    margin: auto;
+    font-size: 40px;
+    color:antiquewhite;
+    padding: 5%;
+    margin-bottom: 5%;
+    margin-top: 2%;
+    
+
 }
 
-
 #map{
-    height: 80vh;
-    width: 70%;
-    border: 3px solid black;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    border: 3px solid rgb(254, 254, 254);
     margin-left: 0rem;
     margin-top: 0;
     border-radius: 10px;
+    
     
     
 }
 .header{
     position: relative;
     display: flex;
-    width: 98%;
     width: 100%;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    width: 100%;
+   
+    
     font-size: 40px;
     text-align: right;
-    border: 3px solid black;
+    border: 3px solid rgb(255, 255, 255);
     border-radius: 10px;
+  margin-bottom: auto;
+
   
+ 
     
 }
+
 .headerText{
-    margin-left: 25%;
-    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin-left: auto;
+    text-align: right;
+    padding-bottom: 2%;
+    
+    margin-top: 3%;
+    color:antiquewhite;
+    text-transform: uppercase;
+}
+.Firstpagelinks {
+   font-weight: 800;
 }
 
+.mapDispaly{
+    display: flex;
+    margin-left: auto;
+    float: right;
+    margin-bottom: 0;
+    font-size: 30px;
+   align-self:right;
+   margin-right: 3%;
+   height: 2%;
+   background-color: rgb(76, 30, 79, 1);
+   border-color: black;
+   padding: auto;
+   margin-top: 4%;
+   border-width: 2px;
+   font-weight: 500;
+   padding-top: 2px;
+   color: antiquewhite;
+}
+
+
 .logo{
+    display: inline-block;
+    justify-content: flex-start;
+    
     width: 14rem;
     height: 7rem;
-    padding-right: 70%;
-    margin-right: 10%;
-    margin-top: 0;
+    padding-right: 0;
+    margin-right: auto;
+    margin-top: 2%;
 padding: 0;
-object-fit:cover;}
+object-fit:cover;
+vertical-align: bottom;
+display: none;
+
+}
     
 .container{
 
-display: flex;
+
 vertical-align: top;   
-text-align:center;
+text-align:left;
   
 padding:0rem;
-padding-top: 0.5vh;
+padding-top: 1vh;
 padding-left: 0rem;
 padding-right: 0rem;
 margin-bottom: 0;
+display: none;
+
 
 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.buttons{
-
-
-margin-right:0.5rem;
-margin-top: 10%;
-margin-left: 0;
-display:block;
-align-items: normal;
-float: inline-start;
-
-font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-width: 30%;
-text-align: left;
-
-
-
+.buttons {
+    position: absolute; /* Ensure buttons are positioned relative to the map container */
+    top: 40%; /* Adjust the top distance as needed */
+    left: 30px; /* Adjust the left distance as needed */
+    z-index: 1000; /* Ensure buttons are above the map */
+    display: flex; /* Use flexbox for alignment if needed */
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Add space between buttons */
+    width: 25%;
+   
 }
 .hos{
 
@@ -89,8 +141,9 @@ border: 3px solid rgb(9, 9, 9);
 
 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 transition: 1s;
-background-color: white;
-border-radius: 25px;
+background-color: antiquewhite;
+border-radius: 10px;
+width: 50vh;
 }
 .hos:hover, .hos:active{
     background-color: rgba(91, 89, 229, 0.904);
@@ -100,22 +153,23 @@ border-radius: 25px;
     transition: 1s;
 }
 
+
 .ER{
 
 width: 50vh;
 padding-left: 1rem;
-padding-right: 1rem;
+padding-right: 0;
 border: none;
-margin-top: 1%;
+margin: top 0;;
 margin-bottom: 1%;
-font-size: 1.5rem;
-text-align: left;
+font-size: 1.2rem;
+text-align: center;
 text-transform: uppercase;
 transition:1s;
-background-color: white;
+background-color: antiquewhite;
 border: 3px solid rgb(9, 9, 9);
 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-border-radius: 25px;
+border-radius: 10px;
 }
 .ER:hover, .ER:active{
     background-color: rgba(250, 79, 79, 0.888);
@@ -125,32 +179,65 @@ border-radius: 25px;
     box-shadow: 4px 4px rgba(219, 41, 41, 0.904);
     transition: 10ms;
 }
+.Stories{
+width: 50vh;
+padding-left: 1rem;
+padding-right: 0;
+border: none;
+margin: top 0;;
+margin-bottom: 1%;
+font-size: 1.2rem;
+text-align: center;
+text-transform: uppercase;
+transition:1s;
+background-color: antiquewhite;
+border: 3px solid rgb(9, 9, 9);
+font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+border-radius: 10px;
+
+}
+.Stories:hover, .Stories:active{
+    background-color: rgb(139, 48, 145);
+    
+    color: white;
+    border: 3px solid black;
+    box-shadow: 4px 4px rgba(76, 30, 79, 1);
+    transition: 10ms;
+}
 .mobileDesplay{
     display: none;}
 
-
+    
 .RoomDe{
-    padding-left: 0.5rem;
+    padding: 0.2rem;
 
     background-color: rgba(250, 79, 79, 0.888);;
-    color: white;
-    font-size: 1rem;
-    border: 3px solid black;
+    color: white !important;
+    font-size: 100%;
+    border: 1px solid rgb(255, 255, 255);
     transition: 1s;
+    width: 100%;
+    opacity: 80%;
+    border-radius: 10px;
+
+
+
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
 .RoomDe:hover{
-    font-size: 1.5rem;
-    transition: 60ms;
+    font-size: 20px;
+    transition: 0ms;
 }
 .HosDe{
         padding-left: 0.5rem;
 
-    background-color: rgba(91, 89, 229, 0.904);
+    background-color: rgba(76, 30, 79, 0.904);
     color: white;
-    font-size: 1rem;
-    border: 3px solid black;
+    font-size: 20px;
+    width: 100%;
+    opacity: 80%;
+    border: 3px solid rgb(255, 255, 255);
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
@@ -166,8 +253,9 @@ border-radius: 25px;
     
     position: relative;
     display: block;
-    background-color:rgba(91, 89, 229, 0.904);
-    font-size: 100%;
+    background-color:rgba(76, 30, 79, 0.904);
+    font-size: 20px;
+    border-radius: 10px ;
     color: white;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border-color: white;
@@ -176,11 +264,14 @@ border-radius: 25px;
 a{ color:rgb(2, 2, 2)
 
 }
+a:hover{
+    color:antiquewhite;
+}
 
 
 
 .hosClasses{
- color: rgb(107, 15, 95);    
+ color: srgb(255, 255, 255);    
  font-size: larger;
 border-color: white;}
 
@@ -195,19 +286,98 @@ border-color: white;}
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border-color: white;
     margin-top: 0;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-left: 8px;
+    margin-bottom: 5px;
 }
+.videos .leaflet-popup-content-wrapper{
+    width: 600px;
+}
+.leaflet-popup-content-wrapper{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    color: rgb(76, 30, 79, 1);
+    font-weight: 800;
+  background-color: rgba(169, 229, 249, 0.5);
+    
+}
+.leaflet-popup-tip{
+    background-color: rgba(169, 229, 249, 0.5);
+}
+
+.potsClass .leaflet-popup-content-wrapper{
+    background-color: rgba(250, 126, 97, 0.5);
+   
+  
+    
+}
+
+.potsClass .leaflet-popup-tip{
+    background-color:rgba(250, 126, 97, 0.5) ;
+}
+.childrenCenterPopUp .leaflet-popup-content-wrapper{
+    background-color: rgba(245, 217, 146, 0.5);
+  
+}
+.childrenCenterPopUp .leaflet-popup-tip{
+    background-color: rgba(245, 217, 146, 0.5);
+}
+.clinicPopUp .leaflet-popup-content-wrapper{
+background-color: rgba(210, 127, 216, .5);
+}
+.clinicPopUp .leaflet-popup-tip{
+background-color: rgba(210, 127, 216, .5);
+}
+.comuPopUp .leaflet-popup-content-wrapper{
+    background-color: rgba(254, 225, 199, 0.904);
+}
+.comuPopUp  .leaflet-popup-tip {
+    background-color:rgba(254, 225, 199, 0.904) ;
+}
+.baseErrPopUp .leaflet-popup-content-wrapper{
+    background-color: rgba(246, 174, 194, 0.9);
+}
+.baseErrPopUp .leaflet-popup-tip{
+    background-color: rgba(246, 174, 194, 0.9);
+}
+.womenBreakPopup .leaflet-popup-content-wrapper{
+    background-color: rgb(75, 205, 241, 0.9);
+    
+}
+.womenBreakPopup .leaflet-popup-tip{
+    background-color: rgba(75, 205, 241, 1);
+}
+.pobulationPopup .leaflet-popup-content-wrapper{
+    background-color:rgba(104, 172, 103, 0.9);
+}
+.pobulationPopup .leaflet-popup-tip{
+    background-color: rgba(104, 172, 103, 0.9);
+}
+.womenCoopPopup .leaflet-popup-content-wrapper{
+    background-color: rgba(62, 84, 207, 0.9);
+    color: blanchedalmond;
+}
+ .imageFrame{
+    border: 5px solid rgb(76, 30, 79, 1); /* Red border */
+    border-radius: 10px;      /* Rounded corners */
+    box-shadow: 0 4px 8px rgb(76, 30, 79, 1); /* Optional shadow */
+    
+ }
+  
 footer {
     
     border: 0.1rem #000 solid;
     border-left: 0;
-    border-right: 0;
+    border-right:0;
     text-align: center;
     font-size: 1.5vw; 
     height:auto;
    
-    margin-top: .2%;
+    margin-top: auto;
    
     background-color:none;
+    margin-bottom: 0%;
 }
 
 .cells {
@@ -215,7 +385,7 @@ footer {
     border-right: 0.5vh #000 solid;
     
     text-align: center;
-    color: rgba(3, 3, 5, 0.904);
+    color: rgba(244, 244, 244, 0.904);
     
     padding: 0.2vw 0.2vw;
     margin: 0.2vw;
@@ -231,15 +401,37 @@ p:last-child {
 
 a { text-decoration: none;}
 @media only screen 
-and (min-device-width : 300px) 
+and (min-device-width : 200px) 
 and (max-device-width : 812px) { .container{
-display:flex;
+    display: none;
+    margin-top: 0;
+    
+
 }
 .body{
     width: 98%;
 }
+.buttons{
+    display: flex;
+    flex-flow: column;
+    top: 40%;
+    font-size: 70%;
+    width: 50%;
+    gap: 0;
+}
+.mapDispaly{
+    display: inline;
+    margin-left: 10%;
+   margin-right: 10%;
+   margin-bottom: 3px;
+   border-radius: 5px;
+    
+  
+}
 .header{
-    width: 95%;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
     border-radius: 25px;
     padding: 3px;
     font-size: 32px;
@@ -251,27 +443,53 @@ display:flex;
     text-align: center;
    
 }
-.container{
-    display: block;
-    width: 95%;
+.intro{
+    font-size: 100%;
 }
+
 .logo{
   display: none;}
-.buttons{
-    display: flex;
-    padding-left: 0rem !important;
-    text-align: left;
-    margin:0rem !important ;
-    flex-grow: 1;
-    flex-basis: 200;
-    
+.hos span{
+    display: none;
 }
-.hosContatiner{
-    margin-right: 0.5vh;
-    margin-bottom: 0.5vh;
-    margin-top: .2vh;
-    margin-left:1vh;
+.hos::after {
+    content: "HOSPITALS";
+    font-size: 15px;
+    font-weight: 600;
+   
+    margin: 0;
 }
+.hos{
+    width: 50%;
+    padding: 1px;
+    padding-top: 0;
+    text-align: center;
+    margin-top: 0px;
+    opacity: 80%;
+}
+.ER span{
+    display: none;
+}
+.ER::after{
+    content: "ERR";
+    font-size: 15px;
+    font-weight: 600;
+   
+    margin: 0;
+
+}
+.ER{
+    width: 50%;
+    padding: 1px;
+    padding-top: 0;
+    text-align: center;
+    margin-top: 0px;
+    opacity: 80%;
+}
+.Stories{
+    display: none;
+}
+
 .RoomDe{
     display: none;
 
@@ -280,106 +498,24 @@ display:flex;
     display: none;
 
 }
-
-#map{
-    height:60vh ;
-    width: 100%;
-    border: 3px solid black;
-    border-radius: 10px;
-    margin: 0rem;
-    margin-right: auto;
-    
-    
+#roomDropdown{
+  
+    font-size: 14px;
+    width: 50%;
+    margin-left: 0;
+  
 }
-.hos{
-    position: relative;
-
-    padding-left: 1rem;
-    padding-right: 1rem;
-    
-    margin-top: 20% ;
-    margin-bottom: 0.5rem;
-    font-size:  1.3rem;
-    text-transform: uppercase;
-    
-    background-color: white;
-    text-align: center;
-    color: black;
-    margin-right:0 !important;
-    border-radius: 25px;
-
-
-}
-.ER{
-    position: relative;
-    margin: auto;
-    margin-left: 0 !important;
-    width: 26vh;
-    
-    font-size:  1.3rem;
-    text-transform: uppercase;
-    text-align: center;
-    background-color: white;
-    color : black;
-    border-radius: 25px;
-    
-
-}
-
 #hospitalDropdown{
     
-    position: inherit;
-    display: block;
-    background-color:rgba(91, 89, 229, 0.904);
-    font-size: small;
-    color: white;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    border-color: white;
     font-size: 14px;
-    margin-left: 1vh;
+} 
+.leaflet-popup-content-wrapper{
+    font-size: 14px;
     text-align: center;
-}  
-#roomDropdown{
-    position: relative;
-    display: inline-block;
-    background-color:rgba(250, 79, 79, 0.888);
-    
-   
-    color: white;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    border-color: white;
-    font-size: 15px;
-    margin-top: 5px;
-    width: 25vh;
-    text-align: center;
-  
-
 }
-.roomContatiner{
-    margin-left:0.5vh;
-   
-    margin-bottom: 2%;
-    margin-top: 10%;
-}
-.mobileDesplay{
-    display: flex;
- 
-    position: sticky;
-    width: 100%;
-    margin-top: 140px;
-    margin-bottom: 1%;
-    
-text-align: center;
-border: 2px solid black;
-color: white;
-text-align: left;
-margin-left: 2%;
-border-radius: 10px;
-padding: 1px;
 
-margin-left: 0%;
-flex-grow: 1;
-flex-basis: 200;}
+
+
 footer {
     
     border: 0.1rem #000 solid;
@@ -391,7 +527,7 @@ footer {
    
     margin-top: 0.5vh;
    
-    background-color:whitesmoke;
+    background-color:none;
     margin-right: 1.2vh;
 }
 
@@ -400,7 +536,7 @@ footer {
     border-right: none;
     
     text-align: center;
-    color: rgba(91, 89, 229, 0.904);
+    color: antiquewhite;
     
     padding: 0vw 0.2vw;
     margin: 0.5vw;

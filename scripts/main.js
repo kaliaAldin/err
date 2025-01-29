@@ -13,14 +13,30 @@ function myFunction() {
 
 // set up the map, retrieve the map from Flask endpoint
 
-var map = L.map('map').setView([15.629717, 32.530528], 12);
-
+var map = L.map('map').setView([15.629717, 32.530528], 13);
 L.tileLayer('https://sudancivicmap.com/mapbox-tiles/styles/v1/{id}/tiles/{z}/{x}/{y}', {
   maxZoom: 30,
   id: 'ahmed-isam/clhos6n5v01ml01qt6cqgcmnr',
   tileSize: 512,
   zoomOffset: -1,
 }).addTo(map);
+// Force map to recalculate its size after initialization
+var videoIcon = L.icon({
+  iconUrl: "images/videoIcon.png",
+  shadowUrl: '/images/marker-shadow.png',
+  iconSize: [70, 70],
+  shadowSize: [70, 70],
+  iconAnchor: [12, 55],
+  shadowAnchor: [4, 62],
+  popupAnchor: [-1, -36]
+});
+var storiesbutton = document.getElementById("story")
+var firstVideo = L.marker([15.639717, 32.540528],{ icon: videoIcon }).bindPopup(`<iframe width="560" height="315" src="https://www.youtube.com/embed/LwOtvXB_Nwk?si=_JZL9scwMPV1Hq5t" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,{className:"videos"})
+var secondVideo = L.marker([15.639717 - .12, 32.540528 + .04],{ icon: videoIcon }).bindPopup(`<iframe width="560" height="315" src="https://www.youtube.com/embed/UEQPi9febBA?si=d3UiKM9h7HWm7BBP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,{className:"videos"})
+var thirdVideo = L.marker([15.639717 - .08, 32.540528 + .04],{ icon: videoIcon }).bindPopup(`<iframe width="560" height="315" src="https://www.youtube.com/embed/S6LGZRqsYnk?si=fb7TOyvtf2oZjLGi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,{className:"videos"})
+var fourthVideo = L.marker([15.639717 - .01, 32.540528 + .06],{ icon: videoIcon }).bindPopup(`<iframe width="560" height="315" src="https://www.youtube.com/embed/lLzjpKwYMSw?si=s_YXw0VNwHEfOUZW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,{className:"videos"})
+var fifthVideo = L.marker([15.639717 - .06, 32.540528 - .03],{ icon: videoIcon }).bindPopup(`<iframe width="560" height="315" src="https://www.youtube.com/embed/0EuxcBheteI?si=sk6Bzzv3xhHNgYf5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,{className:"videos"})
+var sixthVideo = L.marker([15.639717 - .06, 32.540528- 0.09 ],{ icon: videoIcon }).bindPopup(`<<iframe width="560" height="315" src="https://www.youtube.com/embed/I_IBKcGYjlY?si=hx_KaNdbbxzG7mS5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,{className:"videos"})
 
 var request = new XMLHttpRequest();
 
@@ -73,6 +89,7 @@ var ErrIcon = L.icon({
   shadowAnchor: [4, 62],
   popupAnchor: [-3, -76]
 })
+var roomlayergroup = null
 // Rooms button behaviour 
 // Rooms button onclick event
 var roomButton = document.getElementById("ER");
@@ -82,8 +99,52 @@ var mobileDisplay = document.getElementById("mobileDesplayID")
  
 var RoomsDisplayed = false; // Track whether Rooms are currently displayed
 var RoomDropdown = null;
+storiesbutton.onclick = function(){
+  
+  HosDetails.innerHTML =   "" 
+  roomDetails.innerHTML ="For the safety of citizens and activists, these videos do not represent actual locations"
+  mobileDisplay.innerHTML= ""
+  roomDetails.style.backgroundColor =  " rgb(139, 48, 145)"
+  if (RoomDropdown) {
+    roomDiv.removeChild(RoomDropdown);
+    RoomDropdown = null;
+    RoomsDisplayed = false;
+  }
+
+  if (roomlayergroup) {
+    map.removeLayer(roomlayergroup);
+  }
+
+  map.eachLayer(function(layer) {
+    if (layer instanceof L.Circle) {
+      map.removeLayer(layer);
+    }
+    if (layer instanceof L.Marker) {
+      map.removeLayer(layer);
+    }
+  });
+
+  if (roomlayergroup) {
+    map.removeLayer(roomlayergroup);
+  }
+  if(hospitalsDisplayed){
+    HosDiv.removeChild(hospitalDropdown);
+    hospitalDropdown = null;
+    hospitalsDisplayed = false;
+  }
+  
+  firstVideo.addTo(map)
+  secondVideo.addTo(map)
+  thirdVideo.addTo(map)
+  fourthVideo.addTo(map)
+  fifthVideo.addTo(map)
+  sixthVideo.addTo(map)
+}
 
 roomButton.onclick = function(){
+  if (roomlayergroup) {
+    map.removeLayer(roomlayergroup);
+  }
   HosDetails.innerHTML =   "" 
   roomDetails.innerHTML =""
   mobileDisplay.innerHTML= ""
@@ -109,7 +170,7 @@ roomButton.onclick = function(){
        
 
      
-        roomColor = "red";
+        var roomColor = "wheat";
         
     if(!isNaN(ErrGeolocation[0]) && !isNaN(ErrGeolocation[1])){
       var roomOption = document.createElement("option");
@@ -122,7 +183,7 @@ roomButton.onclick = function(){
         RoomDropdown.addEventListener('change', function() {
           var selectedIndex = RoomDropdown.selectedIndex;
           if (selectedIndex !== -1) {
-            defaultZoomLevel = 13;
+            defaultZoomLevel = 14;
             
             var detailsArray = [];
             
@@ -179,42 +240,257 @@ roomButton.onclick = function(){
           weight: 0,
         })
         responseRooms = roomCircle.bindPopup(ErrInfo[i].name).addTo(map);
+
       
         function onRoomClic() {
+          if (roomlayergroup) {
+            map.removeLayer(roomlayergroup);
+             
+          }
+
+          
+          
+          
+         // this.setStyle({ fillColor: 'lightblue', color: 'lightblue' })
+          
+          
           for (var m = 0; m < ErrInfo.length; m++) {
+            
             if (ErrInfo[m].geolocation[0] == this._latlng["lat"]) {
               RoomDropdown.selectedIndex = m;
-        
-              var detailsArray = [];
               
+              var detailsArray = [];
+              var roominfolayer = [];
+           
               // Check each property and add it to the detailsArray if its value is greater than 0
               if (ErrInfo[m].activeRooms > 0) {
-                detailsArray.push(ErrInfo[m].activeRooms + " Base ERR");
+                //detailsArray.push(ErrInfo[m].activeRooms + " Base ERR");
+                var baseErrPopup = L.popup ({className:"baseErrPopUp"})
+                baseErrPopup.setContent(ErrInfo[m].activeRooms + " Base ERR")
+                 var activeroomscircle = L.circle([ErrInfo[m].geolocation[0]+ .02,ErrInfo[m].geolocation[1] +.01], {
+                  radius:400,
+                  color: "rgba(246, 174, 194, 0.9)",
+                  fillColor: "rgba(246, 174, 194, 0.9)",
+                  
+                  weight: 0,
+                }).setStyle({ fillOpacity: 0 }).bindPopup(baseErrPopup)
+                activeroomscircle.on("mouseover", function(){
+                  this.openPopup()
+                })
+               
+                var activeroomline = L.polygon([
+                  [ErrInfo[m].geolocation[0]+ .02,ErrInfo[m].geolocation[1] +.01],
+                  [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]],
+                  
+              ]).setStyle({color: 'rgba(246, 174, 194, 0.9)',opacity: 0});
+              animateLineWithRAF(activeroomline, 1);
+              animateCircleWithRAF(activeroomscircle, 400, 0.8)
+              roominfolayer.push(activeroomscircle,activeroomline)
+
               }
               if (ErrInfo[m].kitchens > 0) {
-                detailsArray.push(ErrInfo[m].kitchens + " Communal Kitchens");
+                var kitchenline = L.polygon([
+                  [ErrInfo[m].geolocation[0]+ .01,ErrInfo[m].geolocation[1] +.02],
+                  [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]]
+                  
+              ])
+              var comuPooUp =L.popup({className:"comuPopUp"})
+                comuPooUp.setContent(ErrInfo[m].kitchens + " Communal Kitchens")
+              kitchenline.setStyle({color:"rgba(254, 225, 199, 0.904)" , opacity:1 , weight: 5})
+                var kitchencircle = L.circle([ErrInfo[m].geolocation[0]+ .01,ErrInfo[m].geolocation[1] +.02], {
+                  radius:400,
+                  color: "rgba(254, 225, 199, 0.904)",
+                  fillColor: "rgba(254, 225, 199, 0.904)",
+                  fillOpacity: 0,
+                  weight: 0,
+                }).bindPopup( comuPooUp)
+                kitchencircle.on("mouseover" , function(){
+          
+                  this.openPopup()
+             
+                  
+                })
+                animateLineWithRAF(kitchenline, 1);
+               animateCircleWithRAF(kitchencircle, 400, 0.8)
+                
+                //detailsArray.push(ErrInfo[m].kitchens + " Communal Kitchens");
+                roominfolayer.push(kitchencircle,kitchenline)
               }
               if (ErrInfo[m].clinic > 0) {
-                detailsArray.push(ErrInfo[m].clinic + " Clinics");
+                //detailsArray.push(ErrInfo[m].clinic + " Clinics");
+                var clinicPopUp =L.popup({className:"clinicPopUp"})
+                clinicPopUp.setContent(ErrInfo[m].clinic + " Clinics")
+                var cliniccircle = L.circle([ErrInfo[m].geolocation[0]- .01,ErrInfo[m].geolocation[1] +.01], {
+                  radius:400,
+                  color: "rgba(210, 127, 216, 1)",
+                  fillColor: "rgba(210, 127, 216, 1)",
+                  
+                  weight: 0,
+                }).setStyle({ fillOpacity: 0 }).bindPopup(clinicPopUp)
+                cliniccircle.on("mouseover", function(){
+                  this.openPopup()
+                })
+               
+                var clinicline = L.polygon([
+                  [ErrInfo[m].geolocation[0]- .01,ErrInfo[m].geolocation[1] +.01],
+                  [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]],
+                  
+              ]).setStyle({color: 'rgba(210, 127, 216, 1)',opacity: 0});
+              animateLineWithRAF(clinicline, 1);
+              animateCircleWithRAF(cliniccircle, 400, 0.8)
+              roominfolayer.push(cliniccircle,clinicline)
               }
 
               if (ErrInfo[m].children_center > 0) {
-                detailsArray.push(ErrInfo[m].children_center + " Children Centers");
+                //detailsArray.push(ErrInfo[m].children_center + " Children Centers");
+                var ChildrenCenterPopUp =L.popup({className:"childrenCenterPopUp"})
+                ChildrenCenterPopUp.setContent(ErrInfo[m].children_center + " Children Centers")
+                var childrencentercircle = L.circle([ErrInfo[m].geolocation[0]- .01,ErrInfo[m].geolocation[1] -.01], {
+                  radius:400,
+                  color: "rgba(245, 217, 146, 0.9)",
+                  fillColor: " rgba( 245, 217, 146, 0.9)",
+                  
+                  weight: 0,
+                }).setStyle({ fillOpacity: 0 }).bindPopup(ChildrenCenterPopUp)
+                childrencentercircle.on("mouseover" , function(){
+                  this.openPopup()
+                })
+               
+                var childrenCenterLine = L.polygon([
+                  [ErrInfo[m].geolocation[0]- .01,ErrInfo[m].geolocation[1] -.01],
+                  [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]],
+                  
+              ]).setStyle({color: 'rgba(226, 210, 169, 0.9)',opacity: 0});
+              animateLineWithRAF(childrenCenterLine, 1);
+              animateCircleWithRAF(childrencentercircle, 400, 0.8)
+              roominfolayer.push(childrencentercircle,childrenCenterLine)
               }
               if (ErrInfo[m].pots > 0) {
-                detailsArray.push(ErrInfo[m].pots + " Pots");
+                //detailsArray.push(ErrInfo[m].pots + " Pots");
+                var potsPopUp =L.popup( {className: "potsClass"})
+                potsPopUp.setContent("<div>" +ErrInfo[m].pots + " Pots </div>" )
+                
+                var potscircle = L.circle([ErrInfo[m].geolocation[0]+.02,ErrInfo[m].geolocation[1] -.01], {
+                  radius:400,
+                  color: "rgba(250, 126, 97, 0.904)",
+                  fillColor: "rgba(250, 126, 97, 0.904)",
+                  
+                  weight: 0,
+                }).setStyle({ fillOpacity: 0 }).bindPopup(potsPopUp)
+                potscircle.on("mouseover", function(){
+                  this.openPopup()
+                })
+               
+                var potsLine = L.polygon([
+                  [ErrInfo[m].geolocation[0]+ .02,ErrInfo[m].geolocation[1] -.01],
+                  [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]],
+                  
+              ]).setStyle({color: 'rgba(250, 126, 97, 0.904)',opacity: 0});
+              animateLineWithRAF(potsLine, 1);
+              animateCircleWithRAF(potscircle, 400, 0.8)
+              roominfolayer.push(potscircle,potsLine)
               }
               if (ErrInfo[m].women_coop > 0) {
-                detailsArray.push(ErrInfo[m].women_coop + " Women Coops");
+                var women_coopPopup = L.popup({className:"womenCoopPopup"})
+                women_coopPopup.setContent(ErrInfo[m].women_coop + " Women Coops")
+                womenCoopCircle = L.circle([ErrInfo[m].geolocation[0] +.01 ,ErrInfo[m].geolocation[1] -.02],{
+                  radius:400,
+                  color: "rgba(62, 84, 207, 0.9)",
+                  fillColor: "rgba(62, 84, 207, 0.9)",
+                  
+                  weight: 0,
+                }).setStyle({ fillOpacity: 0 }).bindPopup(women_coopPopup)
+                womenCoopCircle.on("mouseover" , function(){
+                  this.openPopup()
+                })
+                womenCoopLine = L.polygon([
+                  [ErrInfo[m].geolocation[0] +.01 ,ErrInfo[m].geolocation[1] -.02],
+                  [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]],
+                  
+              ]).setStyle({color: 'rgba(62, 84, 207, 0.9)',opacity: 0});
+               animateLineWithRAF(womenCoopLine,1)
+                animateCircleWithRAF(womenCoopCircle, 400, 0.8)
+                roominfolayer.push(womenCoopCircle , womenCoopLine)
+                
+
+                //detailsArray.push( "<br>" +ErrInfo[m].women_coop + " Women Coops");
               }
               if (ErrInfo[m].women_break > 0) {
-                detailsArray.push(ErrInfo[m].women_break + " Women Break Rooms");
+                //detailsArray.push(ErrInfo[m].women_break + " Women Break Rooms");
+                var women_BreakPopup = L.popup({className:"womenBreakPopup"})
+                women_BreakPopup.setContent(ErrInfo[m].women_break + " Women Break Rooms")
+                womenBreakCircle = L.circle([ErrInfo[m].geolocation[0] -.005 ,ErrInfo[m].geolocation[1] -.02],{
+                  radius:400,
+                  color: "rgba(75, 205, 241, 0.9)",
+                  fillColor: "rgba(75, 205, 241, 0.9)",
+                  
+                  weight: 0,
+                }).setStyle({ fillOpacity: 0 }).bindPopup(women_BreakPopup)
+                womenBreakCircle.on("mouseover" , function(){
+                  this.openPopup()
+                })
+                womenBreakLine = L.polygon([
+                  [ErrInfo[m].geolocation[0] -.005 ,ErrInfo[m].geolocation[1] -.02],
+                  [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]],
+                  
+              ]).setStyle({color: 'rgba(75, 205, 241, 0.9)',opacity: 0});
+                animateLineWithRAF(womenBreakLine,1)
+                animateCircleWithRAF(womenBreakCircle, 400, 0.8)
+                roominfolayer.push(womenBreakCircle , womenBreakLine)
               }
               if(ErrInfo[m].pobulation > 0){
-                detailsArray.push( " serving pobulation of " +ErrInfo[m].pobulation + " people") 
+                var pobulationRadius = ErrInfo[m].pobulation/10
+                if (pobulationRadius > 2000){
+                  pobulationRadius = 2000
+                } 
+                //detailsArray.push( " serving pobulation of " +ErrInfo[m].pobulation + " people") 
+                var PobulationPopup = L.popup({className:"pobulationPopup"})
+                PobulationPopup.setContent("Serving pobulation of " +ErrInfo[m].pobulation + " people")
+               pobulationCircle = L.circle([ErrInfo[m].geolocation[0] -.03 ,ErrInfo[m].geolocation[1] -.005],{
+                  radius:400,
+                  color: "rgba(104, 172, 103, 0.9)",
+                  fillColor: "rgba(104, 172, 103, 0.9)",
+                  
+                  weight: 0,
+                }).setStyle({ fillOpacity: 0 }).bindPopup(PobulationPopup)
+                pobulationCircle.on("mouseover" , function(){
+                  this.openPopup()
+                })
+                pobulationLine = L.polygon([
+                  [ErrInfo[m].geolocation[0] -.03 ,ErrInfo[m].geolocation[1] -.005],
+                  [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]],
+                  
+              ]).setStyle({color: 'rgba(104, 172, 103, 1)',opacity: 0});
+                animateLineWithRAF(pobulationLine,1)
+                animateCircleWithRAF(pobulationCircle, pobulationRadius, 0.8)
+                roominfolayer.push(pobulationCircle , pobulationLine)
               }
-        
+              var roomImageUrl = ErrInfo[m].roomPhoto
+              var alttext = ErrInfo[m].name +' Emergency  room activity '
+              var roomImglatlng = L.latLngBounds([
+                [ErrInfo[m].geolocation[0] +.08 ,ErrInfo[m].geolocation[1] + 0.09], // Southwest corner
+                [ErrInfo[m].geolocation[0] +.03,ErrInfo[m].geolocation[1]+0.03] // Northeast corner
+            ]);
+              var imageOverlay = L.imageOverlay(roomImageUrl, roomImglatlng, {
+                opacity: 0.8,
+                
+                alt: alttext,
+                className: "imageFrame",
+                interactive: true
+            })
+            var Photoline = L.polygon([
+             [ ErrInfo[m].geolocation[0] +.03,ErrInfo[m].geolocation[1]+0.03],
+              [ErrInfo[m].geolocation[0],ErrInfo[m].geolocation[1]],
+              
+          ]).setStyle({color: ' rgb(76, 30, 79, 1) ',opacity: 1 , weight:3});
+            roominfolayer.push(imageOverlay , Photoline)
+              roomlayergroup =L.featureGroup(roominfolayer)
+             
+
+              roomlayergroup.openPopup().addTo(map)
+              
               // Add the controlled area information
+              detailsArray.push(ErrInfo[m].roomDiscription)
               detailsArray.push("<br>Area controlled by " + ErrInfo[m].control);
         
               // Join the details and set it as innerHTML
@@ -223,7 +499,7 @@ roomButton.onclick = function(){
               mobileDisplay.innerHTML = roomDetailsTextClick;
               mobileDisplay.style.backgroundColor = "rgba(250, 79, 79, 0.888)";
         
-              map.setView(this._latlng, 13);
+              map.setView(this._latlng, 13.4);
             }
           }
         }
@@ -231,23 +507,18 @@ roomButton.onclick = function(){
             function mouseOver(){ this.setStyle({ fillColor: 'lightblue', color: 'lightblue' });
             this.setRadius(initialRadius * 2 )
             this.openPopup()
-            roomDetails.style.backgroundColor = "lightblue"
+            roomDetails.style.backgroundColor = "rgba(169, 229, 249, 0.5)"
             roomDetails.style.color = "black"
             }
 
-            function mouseOut(){this.setStyle({ fillColor: 'red', color: 'red' });
+            function mouseOut(){this.setStyle({ fillColor: 'wheat', color: 'wheat' });
             this.setRadius(initialRadius )
-            this.closePopup()
+           
             roomDetails.style.backgroundColor = "rgba(250, 79, 79, 0.888)"
-            roomDetails.style.color = "white"
+            roomDetails.style.color = "Black" } 
 
-
-            
-
-            }
             responseRooms.on("mouseover" , mouseOver)
             responseRooms.on("mouseout" , mouseOut)
-            
             responseRooms.on('click' , onRoomClic )
             responseRooms.on('touchstart',onRoomClic)
            
@@ -262,6 +533,7 @@ roomButton.onclick = function(){
   if (layer instanceof L.Circle) {
     map.removeLayer(layer);
   }
+  
 });
 
 // Remove the dropdown menu
@@ -273,13 +545,16 @@ if (RoomDropdown) {
 
 RoomsDisplayed = false;
 defaultZoomLevel = 13;
-map.setView([15.609705, 32.530528], defaultZoomLevel);}
+map.setView([15.609706, 32.530528], defaultZoomLevel);}
 
 }
 
 //// hospital button and behavior 
 
 hosButton.onclick = function(){
+  if (roomlayergroup) {
+    map.removeLayer(roomlayergroup);
+  }
   //First remove any text details from the page
   HosDetails.innerHTML =   "" 
   roomDetails.innerHTML =""
@@ -296,6 +571,9 @@ hosButton.onclick = function(){
     // Remove rooms from the map if displayed
     map.eachLayer(function(layer) {
       if (layer instanceof L.Circle) {
+        map.removeLayer(layer);
+      }
+      if (layer instanceof L.Marker) {
         map.removeLayer(layer);
       }
     });
@@ -466,6 +744,9 @@ function handleJsonRoomData(data){
     var children_center = data.BaseERR[i].childrencenters;
     var women_coop = data.BaseERR[i].womencoops;
     var women_break = data.BaseERR[i].womenrestrooms;
+    var roomArabic = data.BaseERR[i].ArabicName
+    var roomDiscreption = data.BaseERR[i].Discription
+    var photo = data.BaseERR[i].photos
 
     var geolocationArray = roomLocation.split(',').map(function (item) {
       return parseFloat(item.trim()); // Trim any whitespace around the numbers
@@ -474,11 +755,72 @@ function handleJsonRoomData(data){
     // Check if geolocationArray contains valid coordinates
     if (geolocationArray.length === 2 && !isNaN(geolocationArray[0]) && !isNaN(geolocationArray[1])) {
       resultArray.push({ name: name, geolocation: geolocationArray, activeRooms:activeRooms, district: district, control: control, kitchens:kitchens , 
-        pots: pots , clinic: health_clinic,children_center: children_center, women_coop: women_coop , women_break: women_break , pobulation:servedPobulation    
+        pots: pots , clinic: health_clinic,children_center: children_center, women_coop: women_coop , women_break: women_break , pobulation:servedPobulation ,
+        roomArabicName:roomArabic , roomDiscription:roomDiscreption   , roomPhoto:photo
       });
     } else {
       console.error("Invalid GPSLocation data for hospital: " + name);
     }
  }
  return resultArray
+}
+function animateCircleWithRAF(circle, targetRadius, targetOpacity, duration = 700) {
+  const startTime = performance.now();
+  const initialRadius = 0;
+  const initialOpacity = 0;
+
+  function step(currentTime) {
+    const elapsedTime = currentTime - startTime;
+    const progress = Math.min(elapsedTime / duration, 1); // Normalize progress (0 to 1)
+
+    const currentRadius = initialRadius + progress * targetRadius;
+    const currentOpacity = initialOpacity + progress * targetOpacity;
+
+    circle.setStyle({ fillOpacity: currentOpacity });
+    circle.setRadius(currentRadius);
+
+    if (progress < 1) {
+      requestAnimationFrame(step); // Continue animation
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+// Animation function for lines using requestAnimationFrame
+function animateLineWithRAF(line, targetOpacity, duration = 2000) {
+  const startTime = performance.now();
+  const initialOpacity = 0;
+
+  function step(currentTime) {
+    const elapsedTime = currentTime - startTime;
+    const progress = Math.min(elapsedTime / duration, 1); // Normalize progress (0 to 1)
+
+    const currentOpacity = initialOpacity + progress * targetOpacity;
+
+    line.setStyle({ opacity: currentOpacity });
+
+    if (progress < 1) {
+      requestAnimationFrame(step); // Continue animation
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+var  intro  = document.getElementById("intro")
+var  mapStoryButton = document.getElementById("mapStory")
+var container =  document.getElementById("container")
+function displayMap(){
+  if (mapStoryButton.innerHTML == "Map"){
+  mapStoryButton.innerHTML =  mapStoryButton.innerHTML.replace("Map", "Story")
+  intro.style.display ="none"
+  container.style.display = "flex";
+  setTimeout(() => {
+    map.invalidateSize();
+  }, 100);}
+  else{
+    mapStoryButton.innerHTML =  mapStoryButton.innerHTML.replace("Story", "Map")
+   container.style.display = "none"
+   intro.style.display ="block"
+  }
 }
