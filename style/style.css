@@ -6,22 +6,33 @@
     background-color: rgb(76, 30, 79, 1);
 }
 .intro{
-    display: block;
-    text-align: justify;
-    margin: auto;
-    font-size: 40px;
-    color:antiquewhite;
-    padding: 5%;
-    margin-bottom: 5%;
-    margin-top: 2%;
+    position: absolute;
+  top: 0;
+  left: 20%;
+  z-index: 9999;
+  width: 50%;
+  font-size: small;
+  height: 50vh;
+  margin-top: 25vh;
+  background-color: rgba(250, 235, 215, 0.687);
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: rgba(76, 30, 79, 0.95);
+  padding: 4%;
+  overflow-y: auto;
+  
+  
     
 
 }
 
 #map{
-    position: relative;
+    position: absolute !important;
     height: 100vh;
-    width: 100%;
+    width: 99%;
     border: 3px solid rgb(254, 254, 254);
     margin-left: 0rem;
     margin-top: 0;
@@ -31,57 +42,50 @@
     
 }
 .header{
+    display: none;
     position: relative;
     display: flex;
     width: 100%;
     width: 100%;
    
     
-    font-size: 40px;
+    font-size: 20px;
     text-align: right;
-    border: 3px solid rgb(255, 255, 255);
-    border-radius: 10px;
-  margin-bottom: auto;
+    
+    
+    margin-bottom: auto;
 
   
  
     
 }
 
-.headerText{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    margin-left: auto;
-    text-align: right;
-    padding-bottom: 2%;
-    
-    margin-top: 3%;
-    color:antiquewhite;
-    text-transform: uppercase;
-}
+
 .Firstpagelinks {
    font-weight: 800;
 }
 
 .mapDispaly{
-    display: flex;
+    display: inline-block;
+    position:absolute;
     margin-left: auto;
-    float: right;
+      z-index: 9999;
+
     margin-bottom: 0;
     font-size: 30px;
-   align-self:right;
-   margin-right: 3%;
-   height: 2%;
+ 
+  
+   margin-left: 190vh;
+   height: 5%;
    background-color: rgb(76, 30, 79, 1);
    border-color: black;
    padding: auto;
-   margin-top: 4%;
+   margin-top: 12vh;
    border-width: 2px;
    font-weight: 500;
    padding-top: 2px;
    color: antiquewhite;
+   border-radius: 10px;
 }
 
 
@@ -104,7 +108,8 @@ display: none;
 .container{
 
 
-vertical-align: top;   
+display: inline;
+   
 text-align:left;
   
 padding:0rem;
@@ -112,22 +117,39 @@ padding-top: 1vh;
 padding-left: 0rem;
 padding-right: 0rem;
 margin-bottom: 0;
-display: none;
-
 
 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .buttons {
+    display:inline;
     position: absolute; /* Ensure buttons are positioned relative to the map container */
-    top: 40%; /* Adjust the top distance as needed */
+    top: 15%; /* Adjust the top distance as needed */
     left: 30px; /* Adjust the left distance as needed */
     z-index: 1000; /* Ensure buttons are above the map */
     display: flex; /* Use flexbox for alignment if needed */
     flex-direction: column; /* Stack buttons vertically */
     gap: 10px; /* Add space between buttons */
-    width: 25%;
+    width: 10%;
+    display: inline;
    
+}
+.headerText{
+   padding-left: 1rem;
+padding-right: 1rem;
+
+margin-bottom: 1%;
+font-size:  1.5rem;
+text-transform: uppercase;
+color: antiquewhite;
+
+font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+transition: 1s;
+background-color:rgba(76, 30, 79, 0.95);
+border-radius: 10px;
+width: 50vh;
+text-align: center;
+margin-bottom: 10%;
 }
 .hos{
 
@@ -143,7 +165,8 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
 transition: 1s;
 background-color: antiquewhite;
 border-radius: 10px;
-width: 50vh;
+width: 20vh;
+
 }
 .hos:hover, .hos:active{
     background-color: rgba(91, 89, 229, 0.904);
@@ -156,7 +179,7 @@ width: 50vh;
 
 .ER{
 
-width: 50vh;
+width: 20vh;
 padding-left: 1rem;
 padding-right: 0;
 border: none;
@@ -180,7 +203,7 @@ border-radius: 10px;
     transition: 10ms;
 }
 .Stories{
-width: 50vh;
+width: 20vh;
 padding-left: 1rem;
 padding-right: 0;
 border: none;
@@ -209,35 +232,35 @@ border-radius: 10px;
 
     
 .RoomDe{
-    padding: 0.2rem;
+    
 
     background-color: rgba(250, 79, 79, 0.888);;
     color: white !important;
     font-size: 100%;
-    border: 1px solid rgb(255, 255, 255);
+   
     transition: 1s;
-    width: 100%;
+    width: 50vh;
     opacity: 80%;
+    max-height: 50vh;
+    max-width: 50vh;
     border-radius: 10px;
+    overflow-y: auto;
 
 
 
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
-.RoomDe:hover{
-    font-size: 20px;
-    transition: 0ms;
-}
+
 .HosDe{
         padding-left: 0.5rem;
 
     background-color: rgba(76, 30, 79, 0.904);
     color: white;
     font-size: 20px;
-    width: 100%;
+    width: 50vh;
     opacity: 80%;
-    border: 3px solid rgb(255, 255, 255);
+   
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
@@ -260,6 +283,8 @@ border-radius: 10px;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border-color: white;
     transition:1s;
+    max-width: 10%;
+    max-width: 15vh;
 }  
 a{ color:rgb(2, 2, 2)
 
@@ -290,6 +315,7 @@ border-color: white;}
     border-radius: 10px;
     margin-left: 8px;
     margin-bottom: 5px;
+    max-width: 30vh;
 }
 .videos .leaflet-popup-content-wrapper{
     width: 600px;
@@ -403,7 +429,7 @@ a { text-decoration: none;}
 @media only screen 
 and (min-device-width : 200px) 
 and (max-device-width : 812px) { .container{
-    display: none;
+    display: flex;
     margin-top: 0;
     
 
@@ -411,6 +437,7 @@ and (max-device-width : 812px) { .container{
 .body{
     width: 98%;
 }
+
 .buttons{
     display: flex;
     flex-flow: column;
@@ -431,7 +458,7 @@ and (max-device-width : 812px) { .container{
 .header{
     display: flex;
     flex-flow: column;
-    width: 100%;
+    width: 98%;
     border-radius: 25px;
     padding: 3px;
     font-size: 32px;
@@ -445,6 +472,13 @@ and (max-device-width : 812px) { .container{
 }
 .intro{
     font-size: 100%;
+    height: 100%;
+    width: 100%;
+    left: 1vh;
+    right: 1vh;
+    margin-top: 45%;
+     background-color:  rgb(76, 30, 79, 1);
+     color:antiquewhite;
 }
 
 .logo{
@@ -487,7 +521,22 @@ and (max-device-width : 812px) { .container{
     opacity: 80%;
 }
 .Stories{
+    width: 50%;
+    padding: 1px;
+    padding-top: 0;
+    text-align: center;
+    margin-top: 0px;
+    opacity: 80%;
+}
+.Stories span{
     display: none;
+}
+.Stories::after{
+    content: "STORIES";
+    font-size: 15px;
+    font-weight: 600;
+   
+    margin: 0;
 }
 
 .RoomDe{

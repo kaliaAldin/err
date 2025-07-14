@@ -1,0 +1,98 @@
+Here's a chronological summary of the code's functionality, explaining what happens step by step:
+
+### 1. Initialization Phase (When page loads)
+- **DOM Elements Load**: The HTML document loads and all DOM elements become available
+- **Configuration Setup**: 
+  - Map center coordinates and zoom level are set
+  - Tile layer configuration for the map is defined
+  - Icons for markers (videos, hospitals, emergency rooms) are configured
+  - Video marker positions and YouTube IDs are defined
+
+- **Map Initialization**:
+  - Leaflet map is created with the configured center/zoom
+  - Tile layer is added to the map
+  - Map size is recalculated after a short delay
+
+### 2. Data Loading Phase
+- **API Request**: 
+  - A GET request is made to `https://sudancivicmap.com/data`
+  - Response is awaited asynchronously
+
+- **Data Processing**:
+  - Hospital data is parsed:
+    - Name, location, status, district, and controlling faction are extracted
+    - Geolocation strings are converted to numeric arrays
+    - Invalid locations are filtered out
+  - Emergency Room (ERR) data is parsed:
+    - Extensive details including kitchens, clinics, population served, etc.
+    - Geolocation and all operational metrics are processed
+    - Photos and descriptions are included
+
+### 3. UI Setup Phase
+- **Event Listeners** are added for:
+  - Window scroll (for sticky header)
+  - Hospital button
+  - Emergency Room button
+  - Stories button
+  - Map/Story toggle button
+
+- **Video Markers** are prepared (but not yet displayed) with:
+  - Custom icons
+  - YouTube embed popups
+  - Position data
+
+### 4. User Interaction Flow
+
+#### A. When Hospital Button is Clicked:
+1. Clears any existing emergency room displays
+2. Creates a dropdown menu of hospitals
+3. For each hospital:
+   - Places a marker on map (green if operational, red if not)
+   - Adds click/mouseover events showing:
+     - Popup with status
+     - Detailed info in sidebar
+   - Centers map when selected
+4. Updates details panel when selection changes
+
+#### B. When Emergency Room Button is Clicked:
+1. Clears any existing hospital displays
+2. Creates a dropdown menu of emergency rooms
+3. For each room:
+   - Draws a circular area on map
+   - Adds interactive features:
+     - Mouseover highlights
+     - Click shows detailed breakdown
+4. When a room is selected:
+   - Animates connecting lines to facility types
+   - Shows photo if available
+   - Lists all services (kitchens, clinics, etc.)
+   - Displays population served
+
+#### C. When Stories Button is Clicked:
+1. Clears all other displays
+2. Shows disclaimer about video locations
+3. Places all video markers on map
+4. Centers map on video cluster
+5. Each marker shows embedded YouTube player when clicked
+
+#### D. Map/Story Toggle:
+- Switches between:
+  - Full map interface
+  - Introductory story content
+
+### 5. Animation and Visual Effects
+- **Circle Animations**: Emergency room areas animate when interacted with
+- **Line Animations**: Connecting lines fade in when features are shown
+- **Popup Effects**: Smooth transitions for information popups
+- **Sticky Header**: Header becomes fixed when scrolling down
+
+### 6. Mobile Considerations
+- Special display area for mobile devices
+- Touch event support for markers
+- Responsive design elements
+
+### Key Data Flow:
+1. Configuration → Map Setup → Data Loading
+2. Data → Processed → Stored in State
+3. User Interaction → Filter Data → Update Map → Update UI
+

@@ -10,16 +10,45 @@
     <title>خريطة الخرطوم المدنية</title>
 
     <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+
 
 </head>
 <body class="body">
     <div class="header" id ="headermain">
-        <a href="https://khartoumerr.org/"><img src="images/logo.png" alt="" class = "logo"></a>
-        <div class="headerText">Khartoum CIVIC MAP خريطة الخرطوم المدنية</div> 
-       <button class="mapDispaly" onclick="displayMap()" id="mapStory">Map</button>
+      
         
     </div>
-    <div class="intro" id ="intro">
+    
+    
+  
+
+    <div class="container" id="container">
+        <div id="map"></div>
+       
+        <div class="buttons">
+           
+            <div  ><button class="headerText" id = "Openall"><span>KHARTOUM CIVIC MAP</span></button> </div> 
+            <div class="hosContatiner"><div id="HosList"><button id="hos" class="hos"><span> HOSPITALS</span> </button></div>
+            <div id="hosDetails" class="HosDe"></div></div>
+            <div class="roomContatiner"><div id="RoomList" ><button id="ER" class="ER" ><span> Emergency Response Rooms <br>  </span></button></div>
+            
+            <div id="RoomDetails" class="RoomDe"></div></div>
+            <div><button id= "story" class="Stories"><span>Stories </span></button></div>
+            
+        
+       
+             
+            
+            
+            <!--div><button id= "C" class="conflict">risky zones مناطق خطرة</button></div>
+            <div><button id= "story" class="conflict">Stories قصص</button></div-->
+        </div>
+        <div> <button class="mapDispaly" onclick="displayMap()" id="mapStory">Map</button></div>
+         
+       
+        <div class="intro" id ="intro">
+        
        
 
         The Counter-Militarisation Mapping project is a critical exploration of the dominant narrative surrounding the Sudan conflict, reframing it through an visual  lens to emphasize the experiences of civilian-led movements. 
@@ -31,24 +60,6 @@
         The API and JavaScript code developed for this project are open source and accessible via the <a   class="Firstpagelinks" href="https://github.com/kaliaAldin/err"> GitHub repository</a>, 
         allowing others to explore, adapt, and utilize them for their own initiatives.
     </div>
-    
-  
-
-    <div class="container" id="container">
-        <div id="map"></div>
-        <div class="buttons">
-            
-            <div class="hosContatiner"><div id="HosList"><button id="hos" class="hos"><span> HOSPITALSمستشفيات</span> </button></div>
-            <div id="hosDetails" class="HosDe"></div></div>
-            <div class="roomContatiner"><div id="RoomList" ><button id="ER" class="ER" ><span> Emergency Response Rooms <br>غرف الطوارئ </span></button></div>
-            
-            <div id="RoomDetails" class="RoomDe"></div></div>
-            <div><button id= "story" class="Stories">Stories قصص</button></div>
-            
-            
-            <!--div><button id= "C" class="conflict">risky zones مناطق خطرة</button></div>
-            <div><button id= "story" class="conflict">Stories قصص</button></div-->
-        </div>
         <div id="mobileDesplayID" class="mobileDesplay"></div>
         
         
