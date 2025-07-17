@@ -94,6 +94,10 @@ const elements = {
   container: document.getElementById("container"),
   openAll: document.getElementById("Openall")
 };
+function testopenAll (){
+  console.log("open all clicked ")
+}
+
 
 // State Management
 let state = {
@@ -387,10 +391,9 @@ function updateHospitalDetails(index) {
 }
 
 function handleEmergencyRoomButtonClick(showAllFeatures = false) {
-  clearDetails();
+   clearDetails();
    clearAnimatedElements();
-  elements.mapStoryButton.innerHTML = "ABOUT";
-  elements.intro.style.display = "none";
+  
   
   if (!state.emergencyRoomsDisplayed) {
     // Remove hospitals if displayed
@@ -459,6 +462,7 @@ function handleEmergencyRoomButtonClick(showAllFeatures = false) {
       state.map.setView(state.emergencyRoomData[selectedIndex].geolocation, 14);
     }
   });
+ 
 }
 function showAllRoomFeatures(room) {
   const roomInfoLayer = [];
@@ -636,8 +640,12 @@ function addRoomFeature(room, property, label, color, position, layerArray, radi
   
   // Animate all elements
   animateLineWithRAF(line, 1);
-  animateCircleWithRAF(shadow, radius * 1.1, 0.5); // Shadow with lower opacity
+  const delay = Math.random() * 400;
+
+setTimeout(() => {
+  animateCircleWithRAF(shadow, radius * 1.1, 0.4);
   animateCircleWithRAF(circle, radius, 0.8);
+}, delay);
   
   // Add shadow first so it appears behind the main circle
   layerArray.push(shadow, circle, line);
@@ -709,6 +717,10 @@ function toggleMapStory() {
     elements.intro.style.display = "block";
   }
 }
+function clearInro(){
+   elements.mapStoryButton.innerHTML = "ABOUT";
+   elements.intro.style.display = "none";
+}
 
 // Initialization
 // Initialization
@@ -724,8 +736,12 @@ function init() {
  
   elements.storiesButton.addEventListener('click', handleStoriesButtonClick);
   elements.hospitalButton.addEventListener('click', handleHospitalButtonClick);
-  elements.emergencyRoomButton.addEventListener('click', () => handleEmergencyRoomButtonClick(false)); // Don't show all features on button click
+elements.emergencyRoomButton.addEventListener('click', function() {
+    clearInro();
+    handleEmergencyRoomButtonClick(false);
+}); // Don't show all features on button click
   elements.mapStoryButton.addEventListener('click', toggleMapStory);
+  elements.openAll.addEventListener('click' ,() => handleEmergencyRoomButtonClick(true));
   
   
   // Fetch data

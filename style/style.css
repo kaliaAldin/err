@@ -7,14 +7,14 @@
 }
 .intro{
     position: absolute;
-  top: 0;
-  left: 20%;
+  top: 20vh;
+  left: 25vw;
   z-index: 9999;
-  width: 50%;
+  width: 40vw;
   font-size: small;
   height: 50vh;
-  margin-top: 25vh;
-  background-color: rgba(250, 235, 215, 0.687);
+ 
+  background-color: rgba(250, 235, 215, 0.828);
   display: block;
   flex-direction: column;
   justify-content: center;
@@ -33,27 +33,26 @@
     position: absolute !important;
     height: 100vh;
     width: 99%;
-    border: 3px solid rgb(254, 254, 254);
+    
     margin-left: 0rem;
-    margin-top: 0;
-    border-radius: 10px;
+    
+    
     
     
     
 }
 .header{
     display: none;
-    position: relative;
+    position: absolute;
     display: flex;
-    width: 100%;
-    width: 100%;
+   
    
     
     font-size: 20px;
     text-align: right;
     
     
-    margin-bottom: auto;
+    
 
   
  
@@ -66,21 +65,22 @@
 }
 
 .mapDispaly{
-    display: inline-block;
-    position:absolute;
-    margin-left: auto;
+    display:block;
+    position:fixed;
+    top: 12vh;
+    right: 2vw;
+    margin-left: 20vb;
       z-index: 9999;
 
     margin-bottom: 0;
-    font-size: 30px;
+    font-size: 1.5rem;
  
   
-   margin-left: 190vh;
-   height: 5%;
+   height: 2.5rem;
    background-color: rgb(76, 30, 79, 1);
    border-color: black;
    padding: auto;
-   margin-top: 12vh;
+  
    border-width: 2px;
    font-weight: 500;
    padding-top: 2px;
@@ -130,14 +130,15 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
     display: flex; /* Use flexbox for alignment if needed */
     flex-direction: column; /* Stack buttons vertically */
     gap: 10px; /* Add space between buttons */
-    width: 10%;
+    width: 10vw;
     display: inline;
    
 }
 .headerText{
    padding-left: 1rem;
 padding-right: 1rem;
-
+top: 12vh;
+    right: 2vw;
 margin-bottom: 1%;
 font-size:  1.5rem;
 text-transform: uppercase;
@@ -165,7 +166,7 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
 transition: 1s;
 background-color: antiquewhite;
 border-radius: 10px;
-width: 20vh;
+width: 10rem;
 
 }
 .hos:hover, .hos:active{
@@ -179,7 +180,7 @@ width: 20vh;
 
 .ER{
 
-width: 20vh;
+width: 10rem;
 padding-left: 1rem;
 padding-right: 0;
 border: none;
@@ -241,11 +242,11 @@ border-radius: 10px;
     transition: 1s;
     width: 50vh;
     opacity: 80%;
-    max-height: 50vh;
-    max-width: 50vh;
+    max-height:40vh;
+    max-width: 50vw;
     border-radius: 10px;
     overflow-y: auto;
-
+    padding-left: 5px;
 
 
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -260,6 +261,7 @@ border-radius: 10px;
     font-size: 20px;
     width: 50vh;
     opacity: 80%;
+    border-radius: 10px;
    
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
@@ -277,13 +279,13 @@ border-radius: 10px;
     position: relative;
     display: block;
     background-color:rgba(76, 30, 79, 0.904);
-    font-size: 20px;
-    border-radius: 10px ;
+    font-size:20px;
+    border-radius: 5px ;
     color: white;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border-color: white;
     transition:1s;
-    max-width: 10%;
+    
     max-width: 15vh;
 }  
 a{ color:rgb(2, 2, 2)
@@ -393,28 +395,28 @@ background-color: rgba(210, 127, 216, .5);
   
 footer {
     
-    border: 0.1rem #000 solid;
-    border-left: 0;
-    border-right:0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999;
+    background-color: rgba(76, 30, 79, 0.602);
+    color: antiquewhite;
+    padding: 0.1rem 0;
+    font-size: 1.3rem;
     text-align: center;
-    font-size: 1.5vw; 
-    height:auto;
-   
-    margin-top: auto;
-   
-    background-color:none;
-    margin-bottom: 0%;
+    border-top: 1px solid antiquewhite;
+    
 }
 
 .cells {
-    display: inline-block;
+    display: inline;
     border-right: 0.5vh #000 solid;
     
     text-align: center;
     color: rgba(244, 244, 244, 0.904);
     
-    padding: 0.2vw 0.2vw;
-    margin: 0.2vw;
+    padding: 0.1vw 0.1vw;
+    margin: 0.1vw;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
    
@@ -422,7 +424,7 @@ footer {
 }
 
 p:last-child {
-  border-right:0;
+  border-right:3px;
 }
 
 a { text-decoration: none;}
@@ -430,7 +432,7 @@ a { text-decoration: none;}
 and (min-device-width : 200px) 
 and (max-device-width : 812px) { .container{
     display: flex;
-    margin-top: 0;
+    margin-top: 0%;
     
 
 }
@@ -441,17 +443,18 @@ and (max-device-width : 812px) { .container{
 .buttons{
     display: flex;
     flex-flow: column;
-    top: 40%;
+    top: 5%;
     font-size: 70%;
     width: 50%;
     gap: 0;
 }
 .mapDispaly{
     display: inline;
-    margin-left: 10%;
-   margin-right: 10%;
-   margin-bottom: 3px;
+    
+   margin-right: 1vw;
+   margin-bottom: 1px;
    border-radius: 5px;
+   top: 10.5vh;
     
   
 }
@@ -465,20 +468,23 @@ and (max-device-width : 812px) { .container{
 
 }
 .headerText{
-    margin-left: 0%;
-    margin-top: 0%;
+    margin-left: 15vw;
+    margin-top: 0;
     text-align: center;
+    width: 18rem;
    
 }
 .intro{
     font-size: 100%;
-    height: 100%;
-    width: 100%;
-    left: 1vh;
-    right: 1vh;
-    margin-top: 45%;
-     background-color:  rgb(76, 30, 79, 1);
+    height:70%;
+    width: 50%;
+    left: 40vw;
+    right: 10vw;
+    margin-top: 0%;
+     background-color:  rgba(76, 30, 79, 0.648);
      color:antiquewhite;
+     top: 17vh;
+     
 }
 
 .logo{
@@ -490,15 +496,15 @@ and (max-device-width : 812px) { .container{
     content: "HOSPITALS";
     font-size: 15px;
     font-weight: 600;
+  
    
-    margin: 0;
 }
 .hos{
     width: 50%;
     padding: 1px;
     padding-top: 0;
     text-align: center;
-    margin-top: 0px;
+    margin-top: 10rem;
     opacity: 80%;
 }
 .ER span{
@@ -540,12 +546,11 @@ and (max-device-width : 812px) { .container{
 }
 
 .RoomDe{
-    display: none;
-
+    
+display: none;
 }
 .HosDe{
-    display: none;
-
+display: none;
 }
 #roomDropdown{
   
@@ -593,7 +598,10 @@ footer {
    
   
 }
-
+a{ color:rgba(59, 242, 56, 0.9)}
+a:hover{
+    color:rgb(6, 6, 5);
+}
 
 
 }
