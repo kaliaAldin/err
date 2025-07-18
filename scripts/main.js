@@ -16,18 +16,18 @@ const MAP_CONFIG = {
 const ICONS = {
   video: {
     iconUrl: "images/videoIcon.png",
-    shadowUrl: '/images/marker-shadow.png',
+    shadowUrl: '/images/videoShadow.png',
     iconSize: [70, 70],
     shadowSize: [70, 70],
     iconAnchor: [12, 55],
-    shadowAnchor: [4, 62],
+    shadowAnchor: [14, 50],
     popupAnchor: [-1, -36]
   },
   hospital1: {
     iconUrl: "/images/hospital.png",
     shadowUrl: '/images/marker-shadow.png',
-    iconSize: [30, 30],
-    shadowSize: [30, 30],
+    iconSize: [50, 50],
+    shadowSize: [50, 50],
     iconAnchor: [12, 55],
     shadowAnchor: [4, 62],
     popupAnchor: [-3, -76]
@@ -35,8 +35,8 @@ const ICONS = {
   hospital2: {
     iconUrl: "/images/hospital2.png",
     shadowUrl: '/images/marker-shadow.png',
-    iconSize: [30, 30],
-    shadowSize: [30, 30],
+    iconSize: [50, 50],
+    shadowSize: [50, 50],
     iconAnchor: [12, 55],
     shadowAnchor: [4, 62],
     popupAnchor: [-3, -76]
@@ -75,7 +75,27 @@ const VIDEO_MARKERS = [
   {
     position: [15.639717 - .06, 32.540528 - 0.09],
     videoId: "I_IBKcGYjlY"
+  },
+  {
+    position: [15.639717 , 32.540528 - 0.09],
+    videoId: "vd8hWuadV-M"
+  },
+  {
+    position: [15.639717 - .07, 32.540528 - 0.05],
+    videoId: "R8XY940Y-50"
+
+  },
+    {
+    position: [15.639717 - .12, 32.540528 - 0.05],
+    videoId: "D_kcpSrCecE"
+
+  },
+    {
+    position: [15.639717 - .1, 32.540528 - 0.1],
+    videoId: "P2BJEYFiJL4"
+
   }
+  
 ];
 
 // DOM Elements
@@ -94,8 +114,8 @@ const elements = {
   container: document.getElementById("container"),
   openAll: document.getElementById("Openall")
 };
-function testopenAll (){
-  console.log("open all clicked ")
+function getRandomColor() {
+  return '#' + Math.floor(Math.random()*0xFFFFFF).toString(16).padStart(6, '0');
 }
 
 
@@ -114,6 +134,7 @@ let state = {
   hospitalData: [],
   emergencyRoomData: [],
   emergencyRoomDetails:[],
+  videoLines: []
 
 };
 
@@ -127,6 +148,35 @@ function createVideoPopup(videoId) {
 
 function createIcon(iconType) {
   return L.icon(ICONS[iconType]);
+}
+function drawRandomVideoLines() {
+  // first remove any old lines
+  state.videoLines.forEach(line => state.map.removeLayer(line));
+  state.videoLines = [];
+
+  // grab their current positions
+  const pts = state.videoMarkers.map(m => m.getLatLng());
+
+  // example: connect each marker to the next in the array
+  for (let i = 0; i < pts.length - 1; i++) {
+    const color = getRandomColor();
+    const poly = L.polyline([ pts[i], pts[i+1] ], {
+      color,
+      weight: 4,
+      opacity: 0.8
+    }).addTo(state.map);
+
+    state.videoLines.push(poly);
+  }
+
+  // If you’d rather fully connect every pair:
+  // for (let i = 0; i < pts.length; i++) {
+  //   for (let j = i+1; j < pts.length; j++) {
+  //     const color = getRandomColor();
+  //     const poly = L.polyline([ pts[i], pts[j] ], { color }).addTo(state.map);
+  //     state.videoLines.push(poly);
+  //   }
+  // }
 }
 
 function animateCircleWithRAF(circle, targetRadius, targetOpacity, duration = 700) {
@@ -190,14 +240,28 @@ function initializeMap() {
 }
 
 // Video Markers
+// add this helper at top-level
+function randomOffset(maxDelta) {
+  return (Math.random() - 0.5) * maxDelta;
+}
+
+// replace your setupVideoMarkers() with:
 function setupVideoMarkers() {
   const videoIcon = createIcon('video');
-  
+  const jitter = 0.02;  // max ±0.01° lat/lng (~1–2 km)
+
   state.videoMarkers = VIDEO_MARKERS.map(video => {
-    return L.marker(video.position, { icon: videoIcon })
-      .bindPopup(createVideoPopup(video.videoId), { className: "videos" });
+    // compute a slightly random pos around the defined one
+    const lat = video.position[0] + randomOffset(jitter);
+    const lng = video.position[1] + randomOffset(jitter);
+
+    return L.marker([lat, lng], { icon: videoIcon })
+      .bindPopup(createVideoPopup(video.videoId), { className: "videos" })
+      .addTo(state.map);
   });
+  drawRandomVideoLines();
 }
+
 
 // Data Handling
 function handleHospitalData(data) {
@@ -249,9 +313,10 @@ function handleEmergencyRoomData(data) {
 // UI Functions
 function clearMap() {
   state.map.eachLayer(layer => {
-    if (layer instanceof L.Marker || layer instanceof L.Circle || layer instanceof L.polygon) {
+    if (layer instanceof L.Marker || layer instanceof L.Circle || layer instanceof L.polygon || layer instanceof L.Polyline) {
       state.map.removeLayer(layer);
     }
+    clearAnimatedElements()
   });
   
   if (state.emergencyRoomLayerGroup) {
@@ -516,6 +581,7 @@ function showAllRoomFeatures(room) {
   return L.featureGroup(roomInfoLayer);
 }
 
+
 function handleRoomClick(room, index) {
    
   if (state.emergencyRoomLayerGroup) {
@@ -702,7 +768,7 @@ function handleStoriesButtonClick() {
 
 function toggleMapStory() {
     clearDetails();
-  if (elements.mapStoryButton.innerHTML === "Map") {
+  if (elements.mapStoryButton.innerHTML === "MAP") {
    
     elements.mapStoryButton.innerHTML = "ABOUT";
     elements.intro.style.display = "none";
@@ -712,7 +778,7 @@ function toggleMapStory() {
     }, 100);
   } else {
      clearDetails();
-    elements.mapStoryButton.innerHTML = "Map";
+    elements.mapStoryButton.innerHTML = "MAP";
     elements.container.style.display = "flex";
     elements.intro.style.display = "block";
   }
@@ -734,7 +800,25 @@ function init() {
   
   // Set up button event listeners
  
-  elements.storiesButton.addEventListener('click', handleStoriesButtonClick);
+  elements.storiesButton.addEventListener('click', () => {
+  clearAnimatedElements();
+    clearMap();
+    clearDetails();
+    clearInro();
+  // for each marker, compute & set a new random lat/lng...
+  state.videoMarkers.forEach((marker, idx) => {
+    const [lat0, lng0] = VIDEO_MARKERS[idx].position;
+    const jitter = 0.02;
+    const newPos = [
+      lat0 + randomOffset(jitter),
+      lng0 + randomOffset(jitter)
+    ];
+    marker.setLatLng(newPos).addTo(state.map);
+  });
+  // **NEW**: draw fresh random-colored lines
+  drawRandomVideoLines();
+  state.map.setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
+});
   elements.hospitalButton.addEventListener('click', handleHospitalButtonClick);
 elements.emergencyRoomButton.addEventListener('click', function() {
     clearInro();
