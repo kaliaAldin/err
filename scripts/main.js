@@ -98,6 +98,7 @@ const VIDEO_MARKERS = [
   
 ];
 
+
 // DOM Elements
 const elements = {
   header: document.getElementById("headermain"),
@@ -137,7 +138,64 @@ let state = {
   videoLines: []
 
 };
+let availableDates = [];
 
+function formatDate(iso) {
+  const [year, month, day] = iso.split('-');
+  return `${day}/${month}/${year}`;
+}
+
+function initTimeline() {
+  console.log("▶ initTimeline() starting");
+  const slider = document.getElementById('date-slider');
+  const label  = document.getElementById('date-label');
+  console.log("   slider element:", slider, "label element:", label);
+  
+  // clear any stray text
+  label.textContent = "";
+
+  fetch('https://sudancivicmap.com/history/manifest')
+    .then(res => {
+      console.log("   fetch status:", res.status);
+      return res.json();
+    })
+    .then(dates => {
+      console.log("   manifest dates:", dates);
+      availableDates = dates;
+
+      slider.min   = 0;
+      slider.max   = dates.length - 1;
+      slider.value = dates.length - 1;
+
+      const today = dates[slider.value];
+      console.log("   initial date:", today);
+      label.textContent = formatDate(today);
+
+      slider.addEventListener('input', () => {
+        const idx  = +slider.value;
+        const date = availableDates[idx];
+        console.log("   slider moved to index", idx, "date", date);
+        label.textContent = formatDate(date);
+        
+        
+        loadHistory(date);
+      });
+    })
+    .catch(err => console.error('Failed to load timeline manifest:', err));
+}
+
+
+function loadHistory(date) {
+  fetch(`/history?date=${date}`)
+    .then(res => res.json())
+    .then(data => {
+      // clear only the ERR layer
+      clearMap();
+      state.emergencyRoomData = handleEmergencyRoomData(data);
+      handleEmergencyRoomButtonClick(true);
+    })
+    .catch(err => console.error(`Failed to load history for ${date}:`, err));
+}
 // Utility Functions
 function createVideoPopup(videoId) {
   return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}?si=_JZL9scwMPV1Hq5t" 
@@ -840,6 +898,7 @@ elements.emergencyRoomButton.addEventListener('click', function() {
       
       // Show emergency rooms with all features by default
       handleEmergencyRoomButtonClick(true);
+      initTimeline();
     })
     .catch(error => console.error('Error fetching data:', error));
 }
