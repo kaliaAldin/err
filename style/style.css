@@ -6,21 +6,21 @@
     background-color: rgb(76, 30, 79, 1);
 }
 .intro{
-    position: absolute;
-  top: 20vh;
-  left: 25vw;
+  position: absolute;
+  top: 1vh;
+  left: 40vw;
   z-index: 9999;
-  width: 40vw;
-  font-size: small;
-  height: 50vh;
+  width: 50vw;
+  font-size: large;
+  height:80vh;
  
-  background-color: rgba(250, 235, 215, 0.828);
+  background-color: rgba(7, 6, 7, 0.768);
   display: block;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  
   font-size: 1.5rem;
-  color: rgba(76, 30, 79, 0.95);
+  color:antiquewhite;
   padding: 4%;
   overflow-y: auto;
   
@@ -65,8 +65,8 @@
   right: 1rem;      /* distance from right */
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.833);
-  color: rgb(76, 30, 79, 0.95);
+  background: rgba(8, 3, 13, 0.734);
+  color: rgba(255, 254, 255, 0.95);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   z-index: 1000;
@@ -74,14 +74,21 @@
   align-items: center;
   gap: 1rem;
 }
+.introduction{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
 /* Base track styling */
 #date-slider {
   -webkit-appearance: none;
   width: 100%;
   height: 6px;
-  background:rgb(76, 30, 79, 0.95);
+  background:rgba(230, 164, 235, 0.486);
   border-radius: 3px;
   outline: none;
+  touch-action: pan-y;
 }
 
 /* WebKit/Blink thumbs */
@@ -90,8 +97,8 @@
   appearance: none;
   width: 16px;
   height: 16px;
-  background: #e83a57;      /* your new thumb color */
-  border: 2px solid #fff;   /* optional white border */
+  background: #3d02229b;      /* your new thumb color */
+  border: 2px solid #ffffffb0;   /* optional white border */
   border-radius: 50%;
   cursor: pointer;
        /* center thumb on track */
@@ -129,18 +136,20 @@
 
 .mapDispaly{
     display:block;
-    position:fixed;
-    top: 12vh;
-    right: 2vw;
-    margin-left: 20vb;
+    position:relative;
+    top: 30vh;
+    
+    
+    
+    margin-left: 2.5vw;
       z-index: 9999;
 
-    margin-bottom: 0;
+    
     font-size: 1.5rem;
  
-  
+  width: 8vw;
    height: 2.5rem;
-   background-color: rgb(76, 30, 79, 1);
+   background-color: rgba(18, 17, 18, 0.664);
    border-color: black;
    padding: auto;
   
@@ -148,7 +157,7 @@
    font-weight: 500;
    padding-top: 2px;
    color: antiquewhite;
-   border-radius: 10px;
+   
 }
 
 
@@ -185,34 +194,48 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
 }
 
 .buttons {
-    display:inline;
+    
     position: absolute; /* Ensure buttons are positioned relative to the map container */
-    top: 12%; /* Adjust the top distance as needed */
+    top:1vh; /* Adjust the top distance as needed */
     left: 30px; /* Adjust the left distance as needed */
     z-index: 1000; /* Ensure buttons are above the map */
     display: flex; /* Use flexbox for alignment if needed */
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 10px; /* Add space between buttons */
+    flex-direction:column; /* Stack buttons vertically */
+    gap: 5vh; /* Add space between buttons */
     width: 10vw;
-    display: inline;
+   
    
 }
 .headerText{
-   padding-left: 1rem;
+    
+position: relative;
+padding-left: 1rem;
 padding-right: 1rem;
-top: 20vh;
-right: 2vw;
-font-size:  1.5rem;
+top: 1vh;
+right: 1vw;
+left: 2vw;
+font-size:  2rem;
 text-transform: uppercase;
 color: antiquewhite;
 
 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 transition: 1s;
-background-color:rgba(76, 30, 79, 0.95);
+background-color:rgba(6, 6, 6, 0.592);
 border-radius: 10px;
 width: 50vh;
 text-align: center;
 margin-bottom: 50%;
+height: 10vh;
+}
+.Barbra{
+ position: relative;
+top: 12vh;
+margin-top: 3vh;
+left: 1vw;
+ display: flex;
+ flex-direction: column;
+
+    
 }
 .hos{
 
@@ -226,11 +249,12 @@ border: 3px solid rgb(9, 9, 9);
 
 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 transition: 1s;
-background-color: antiquewhite;
-border-radius: 10px;
+background-color: rgba(250, 235, 215, 0.5);
+
 width: 10rem;
 
 }
+
 .hos:hover, .hos:active{
     background-color: rgba(91, 89, 229, 0.904);
     color: white;
@@ -240,22 +264,24 @@ width: 10rem;
 }
 
 
+
 .ER{
 
-width: 10rem;
-padding-left: 1rem;
+width: 8rem;
+padding-left: 0rem;
 padding-right: 0;
 border: none;
 margin: top 0;;
 margin-bottom: 1%;
-font-size: 1.2rem;
+font-size: 1.5rem;
 text-align: center;
 text-transform: uppercase;
 transition:1s;
-background-color: antiquewhite;
+width: 20vw;
+background-color: rgba(250, 235, 215, 0.5);
 border: 3px solid rgb(9, 9, 9);
 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-border-radius: 10px;
+
 }
 .ER:hover, .ER:active{
     background-color: rgba(250, 79, 79, 0.888);
@@ -266,30 +292,21 @@ border-radius: 10px;
     transition: 10ms;
 }
 .Stories{
-width:10rem;
-padding-left: 1rem;
-padding-right: 0;
-border: none;
-margin: top 0;;
-margin-bottom: 1%;
-font-size: 1.2rem;
-text-align: center;
-text-transform: uppercase;
-transition:1s;
-background-color: antiquewhite;
-border: 3px solid rgb(9, 9, 9);
-font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-border-radius: 10px;
+    display:block;
+    position:relative;
+    top: 30vh;
+    
+    
+    z-index: 9999;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    height:2.5rem;
+     background-color: rgba(18, 17, 18, 0.664);
+     color: antiquewhite;
 
 }
-.Stories:hover, .Stories:active{
-    background-color: rgb(139, 48, 145);
-    
-    color: white;
-    border: 3px solid black;
-    box-shadow: 4px 4px rgba(76, 30, 79, 1);
-    transition: 10ms;
-}
+
 .mobileDesplay{
     display: none;}
 
@@ -376,8 +393,8 @@ border-color: white;}
     border-color: white;
     margin-top: 0;
     font-size: 20px;
-    border-radius: 10px;
-    margin-left: 8px;
+    
+    
     margin-bottom: 5px;
     max-width: 30vh;
 }
@@ -506,20 +523,11 @@ and (max-device-width : 812px) { .container{
     display: flex;
     flex-flow: column;
     top: 5%;
-    font-size: 70%;
+    font-size: 50%;
     width: 50%;
     gap: 0;
 }
-.mapDispaly{
-    display: inline;
-    
-   margin-right: 1vw;
-   margin-bottom: 1px;
-   border-radius: 5px;
-   top: 10.5vh;
-    
-  
-}
+
 .header{
     display: flex;
     flex-flow: column;
@@ -534,11 +542,12 @@ and (max-device-width : 812px) { .container{
     margin-top: 0;
     text-align: center;
     width: 18rem;
+    font-size: 20px;
    
 }
 .intro{
     font-size: 100%;
-    height:70%;
+    height:80%;
     width: 50%;
     left: 40vw;
     right: 10vw;
@@ -556,25 +565,31 @@ and (max-device-width : 812px) { .container{
 }
 .hos::after {
     content: "HOSPITALS";
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
   
    
+}
+.Barbra{
+    top:60%;
+  
 }
 .hos{
     width: 50%;
     padding: 1px;
     padding-top: 0;
     text-align: center;
-    margin-top: 10rem;
+    
     opacity: 80%;
 }
 .ER span{
     display: none;
 }
+
+
 .ER::after{
     content: "ERR";
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 600;
    
     margin: 0;
@@ -588,21 +603,37 @@ and (max-device-width : 812px) { .container{
     margin-top: 0px;
     opacity: 80%;
 }
+.introduction{
+    top: 40vh;
+    flex-direction: column;
+    gap: 5px;
+    left: 2%;
+}
+.mapDispaly{
+    
+   
+   
+   margin-bottom: 1px;
+   width: 90%;
+   font-size: 20px;
+    
+  
+}
 .Stories{
-    width: 50%;
+    margin-left: 10px;   
     padding: 1px;
     padding-top: 0;
     text-align: center;
     margin-top: 0px;
-    opacity: 80%;
+    
 }
 .Stories span{
     display: none;
 }
 .Stories::after{
     content: "STORIES";
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 20px;
+  
    
     margin: 0;
 }
@@ -631,9 +662,10 @@ display: none;
 }
 #timeline-container {
   
-  top: 10.8vh;        /* distance from top */
-  right: 8vw;      /* distance from right */
-  left:42%;
+  top: 18vh;        /* distance from top */
+  right: 5px;
+  left: 65%;    /* distance from right */
+  
 
  
 }

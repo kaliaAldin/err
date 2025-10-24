@@ -146,21 +146,18 @@ function formatDate(iso) {
 }
 
 function initTimeline() {
-  console.log("▶ initTimeline() starting");
   const slider = document.getElementById('date-slider');
   const label  = document.getElementById('date-label');
-  console.log("   slider element:", slider, "label element:", label);
   
   // clear any stray text
   label.textContent = "";
 
   fetch('https://sudancivicmap.com/history/manifest')
     .then(res => {
-      console.log("   fetch status:", res.status);
+      
       return res.json();
     })
     .then(dates => {
-      console.log("   manifest dates:", dates);
       availableDates = dates;
 
       slider.min   = 0;
@@ -168,33 +165,44 @@ function initTimeline() {
       slider.value = dates.length - 1;
 
       const today = dates[slider.value];
-      console.log("   initial date:", today);
       label.textContent = formatDate(today);
 
       slider.addEventListener('input', () => {
         const idx  = +slider.value;
         const date = availableDates[idx];
-        console.log("   slider moved to index", idx, "date", date);
         label.textContent = formatDate(date);
         
         
         loadHistory(date);
       });
+      slider.addEventListener('change', () => {
+  const idx  = Number(slider.value);
+  const iso  = availableDates[idx];
+  label.textContent = formatDate(iso);
+  loadHistory(date);
+});
     })
     .catch(err => console.error('Failed to load timeline manifest:', err));
 }
 
 
 function loadHistory(date) {
-  fetch(`/history?date=${date}`)
-    .then(res => res.json())
+   fetch(`https://sudancivicmap.com/history?date=${date}`)
+    .then(res => {
+      if (!res.ok) throw new Error('History fetch failed');
+      return res.json();
+    })
     .then(data => {
-      // clear only the ERR layer
       clearMap();
       state.emergencyRoomData = handleEmergencyRoomData(data);
+
+      // Force the “draw” path:
+      state.emergencyRoomsDisplayed = false;
+
+      // Now this will always draw the new rooms:
       handleEmergencyRoomButtonClick(true);
     })
-    .catch(err => console.error(`Failed to load history for ${date}:`, err));
+    .catch(err => console.error(`Failed to load history for ${date}:`, err))
 }
 // Utility Functions
 function createVideoPopup(videoId) {
@@ -207,35 +215,7 @@ function createVideoPopup(videoId) {
 function createIcon(iconType) {
   return L.icon(ICONS[iconType]);
 }
-function drawRandomVideoLines() {
-  // first remove any old lines
-  state.videoLines.forEach(line => state.map.removeLayer(line));
-  state.videoLines = [];
 
-  // grab their current positions
-  const pts = state.videoMarkers.map(m => m.getLatLng());
-
-  // example: connect each marker to the next in the array
-  for (let i = 0; i < pts.length - 1; i++) {
-    const color = getRandomColor();
-    const poly = L.polyline([ pts[i], pts[i+1] ], {
-      color,
-      weight: 4,
-      opacity: 0.8
-    }).addTo(state.map);
-
-    state.videoLines.push(poly);
-  }
-
-  // If you’d rather fully connect every pair:
-  // for (let i = 0; i < pts.length; i++) {
-  //   for (let j = i+1; j < pts.length; j++) {
-  //     const color = getRandomColor();
-  //     const poly = L.polyline([ pts[i], pts[j] ], { color }).addTo(state.map);
-  //     state.videoLines.push(poly);
-  //   }
-  // }
-}
 
 function animateCircleWithRAF(circle, targetRadius, targetOpacity, duration = 700) {
   const startTime = performance.now();
@@ -317,7 +297,7 @@ function setupVideoMarkers() {
       .bindPopup(createVideoPopup(video.videoId), { className: "videos" })
       .addTo(state.map);
   });
-  drawRandomVideoLines();
+  
 }
 
 
@@ -516,6 +496,14 @@ function updateHospitalDetails(index) {
 function handleEmergencyRoomButtonClick(showAllFeatures = false) {
    clearDetails();
    clearAnimatedElements();
+   // Remove any previous dropdown before we do anything
+  if (state.emergencyRoomDropdown) {
+  state.emergencyRoomDropdown = removeDropdown(
+      state.emergencyRoomDropdown,
+      elements.emergencyRoomList
+    );
+  }
+  state.emergencyRoomsDisplayed = false; // reset the toggle flag
   
   
   if (!state.emergencyRoomsDisplayed) {
@@ -529,6 +517,7 @@ function handleEmergencyRoomButtonClick(showAllFeatures = false) {
     
     // Display emergency rooms
     state.emergencyRoomDropdown = createDropdown(state.emergencyRoomData, elements.emergencyRoomList, "roomDropdown");
+    
     
     state.emergencyRoomData.forEach((room, index) => {
       const roomColor = "wheat";
@@ -874,7 +863,7 @@ function init() {
     marker.setLatLng(newPos).addTo(state.map);
   });
   // **NEW**: draw fresh random-colored lines
-  drawRandomVideoLines();
+  
   state.map.setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
 });
   elements.hospitalButton.addEventListener('click', handleHospitalButtonClick);
