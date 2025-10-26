@@ -5,29 +5,57 @@
     -moz-appearance: none; /* Remove default styling in Firefox */
     background-color: rgb(76, 30, 79, 1);
 }
-.intro{
+.intro {
   position: absolute;
-  top: 1vh;
+top: 0;
   left: 40vw;
   z-index: 9999;
-  width: 50vw;
-  font-size: large;
-  height:80vh;
- 
-  background-color: rgba(7, 6, 7, 0.768);
-  display: block;
-  flex-direction: column;
-  justify-content: left;
-  
+  width: 55vw;
+  height: 90vh;
+  background-color: rgba(7, 6, 7, 0.905);
   font-size: 1.5rem;
-  color:antiquewhite;
-  padding: 4%;
+  color: antiquewhite;
+  padding: 2%;
   overflow-y: auto;
+  font-family: 'Ronyino', sans-serif;
+  text-align: justify; /* ensures left alignment */
+  line-height: 1.5;
   
-  
-    
-
 }
+#videosDisplay {
+  position: absolute;
+  top: 0;
+  left: 35vw;
+  z-index: 9999;
+  width: 60vw;
+  height: 90vh;
+  background-color: rgba(7, 6, 7, 0.905);
+  font-size: 1.5rem;
+  color: antiquewhite;
+  padding: 2%;
+  overflow-y: auto;
+  font-family: 'Ronyino', sans-serif;
+
+  display: none;              /* ✅ correct flex property */
+  flex-wrap: wrap;            /* allow wrapping to next row */
+  justify-content: space-between; /* even spacing between items */
+  align-items: flex-start;    /* align items at top */
+  gap: 1vw;                  /* space between videos */
+}
+.video-item {
+    margin-left: 5vw;
+width: 20vw;
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.video-caption{
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: monospace;
+}
+
+
 
 #map{
     position: absolute !important;
@@ -73,19 +101,21 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-family: monospace;
 }
 .introduction{
     position: relative;
     display: flex;
     flex-direction: row;
     gap: 1vw;
+    
 }
 /* Base track styling */
 #date-slider {
   -webkit-appearance: none;
   width: 100%;
   height: 6px;
-  background:rgba(230, 164, 235, 0.486);
+  background:rgba(255, 255, 255, 0.69);
   border-radius: 3px;
   outline: none;
   touch-action: pan-y;
@@ -97,8 +127,8 @@
   appearance: none;
   width: 16px;
   height: 16px;
-  background: #3d02229b;      /* your new thumb color */
-  border: 2px solid #ffffffb0;   /* optional white border */
+  background: #f8f3f69b;      /* your new thumb color */
+  border: 2px solid #ffffff;   /* optional white border */
   border-radius: 50%;
   cursor: pointer;
        /* center thumb on track */
@@ -131,9 +161,13 @@
 
 
 .Firstpagelinks {
+    background-color: white;
    font-weight: 800;
+   font-family: monospace;
 }
-
+.Firstpagelinks:hover {
+   color: rgb(255, 0, 157);
+}
 .mapDispaly{
     display:block;
     position:relative;
@@ -147,9 +181,9 @@
     
     font-size: 1.5rem;
  
-  width: 8vw;
+  width: 8rem;
    height: 2.5rem;
-   background-color: rgba(18, 17, 18, 0.664);
+   background-color: rgba(7, 6, 7, 0.905);
    border-color: black;
    padding: auto;
   
@@ -157,6 +191,7 @@
    font-weight: 500;
    padding-top: 2px;
    color: antiquewhite;
+   font-family: monospace;
    
 }
 
@@ -185,7 +220,7 @@ display: inline;
 text-align:left;
   
 padding:0rem;
-padding-top: 1vh;
+padding-top: 0vh;
 padding-left: 0rem;
 padding-right: 0rem;
 margin-bottom: 0;
@@ -203,6 +238,7 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
     flex-direction:column; /* Stack buttons vertically */
     gap: 5vh; /* Add space between buttons */
     width: 10vw;
+    
    
    
 }
@@ -213,32 +249,54 @@ padding-left: 1rem;
 padding-right: 1rem;
 top: 1vh;
 right: 1vw;
-left: 2vw;
+left: 1vw;
 font-size:  2rem;
 text-transform: uppercase;
 color: antiquewhite;
 
-font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+font-family:monospace, sans-serif;
 transition: 1s;
-background-color:rgba(6, 6, 6, 0.592);
-border-radius: 10px;
-width: 50vh;
+background-color:rgba(7, 6, 7, 0.905);
+border-radius:5px;
+width: 28vw;
 text-align: center;
-margin-bottom: 50%;
+margin-bottom:20%;
 height: 10vh;
+}
+.MakeIt{
+position: absolute;
+padding-left: 1rem;
+padding-right: 1rem;
+top: 11.5vh;
+right: 1vw;
+left: 1vw;
+font-size:  1rem;
+text-transform: uppercase;
+color: antiquewhite;
+
+font-family:monospace, sans-serif;
+transition: 1s;
+background-color:rgba(7, 6, 7, 0.905);
+border-radius:5px;
+width: 18vw;
+text-align: left;
+margin-bottom: 40%;
+height: 5vh;
+
 }
 .Barbra{
  position: relative;
-top: 12vh;
+top: 8vh;
 margin-top: 3vh;
 left: 1vw;
  display: flex;
  flex-direction: column;
+ font-family:monospace,sans-serif;
 
     
 }
 .hos{
-
+margin-top: 1rem;
 padding-left: 1rem;
 padding-right: 1rem;
 
@@ -247,19 +305,20 @@ font-size:  1.5rem;
 text-transform: uppercase;
 border: 3px solid rgb(9, 9, 9);
 
-font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 transition: 1s;
 background-color: rgba(250, 235, 215, 0.5);
 
 width: 10rem;
+font-family:monospace,sans-serif;
 
 }
 
 .hos:hover, .hos:active{
-    background-color: rgba(91, 89, 229, 0.904);
+    background-color: rgba(7, 6, 7, 0.905);
     color: white;
     border: 3px solid black;
-    box-shadow: 4px 4px rgba(44, 41, 219, 0.904);
+    box-shadow: 4px 4px rgba(7, 6, 7, 0.905);
     transition: 1s;
 }
 
@@ -267,7 +326,7 @@ width: 10rem;
 
 .ER{
 
-width: 8rem;
+width: 16.5rem;
 padding-left: 0rem;
 padding-right: 0;
 border: none;
@@ -277,18 +336,17 @@ font-size: 1.5rem;
 text-align: center;
 text-transform: uppercase;
 transition:1s;
-width: 20vw;
+
 background-color: rgba(250, 235, 215, 0.5);
 border: 3px solid rgb(9, 9, 9);
-font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+font-family: monospace;
 }
 .ER:hover, .ER:active{
-    background-color: rgba(250, 79, 79, 0.888);
+    background-color: rgba(7, 6, 7, 0.905);
     
     color: white;
     border: 3px solid black;
-    box-shadow: 4px 4px rgba(219, 41, 41, 0.904);
+    box-shadow: 4px 4px rgba(7, 6, 7, 0.905);
     transition: 10ms;
 }
 .Stories{
@@ -302,8 +360,9 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
     margin-bottom: 0;
     font-size: 1.5rem;
     height:2.5rem;
-     background-color: rgba(18, 17, 18, 0.664);
+     background-color: rgba(7, 6, 7, 0.905);
      color: antiquewhite;
+     font-family: monospace;
 
 }
 
@@ -314,9 +373,9 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
 .RoomDe{
     
 
-    background-color: rgba(250, 79, 79, 0.888);;
+    background-color: rgba(7, 6, 7, 0.905) !important;
     color: white !important;
-    font-size: 100%;
+
    
     transition: 1s;
     width: 50vh;
@@ -325,25 +384,26 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
     max-width: 50vw;
     border-radius: 10px;
     overflow-y: auto;
-    padding-left: 5px;
-
-
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding-left: 10px;
+   
+font-size: 1.2rem;
+text-align: left;
+    font-family: 'Ronyino', sans-serif;
+    line-height: 1.5;
 
 }
 
 .HosDe{
         padding-left: 0.5rem;
 
-    background-color: rgba(76, 30, 79, 0.904);
+    background-color: rgba(7, 6, 7, 0.905);
     color: white;
     font-size: 20px;
     width: 50vh;
     opacity: 80%;
     border-radius: 10px;
    
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+font-family:monospace;
 }
 .HosDe:hover{
     font-size: 1.5rem;
@@ -357,11 +417,11 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
     
     position: relative;
     display: block;
-    background-color:rgba(76, 30, 79, 0.904);
+    background-color: rgba(7, 6, 7, 0.905);;
     font-size:20px;
     border-radius: 5px ;
     color: white;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family:monospace;
     border-color: white;
     transition:1s;
     
@@ -386,10 +446,10 @@ border-color: white;}
 #roomDropdown{
     position: relative;
     display: block;
-    background-color:  rgba(250, 79, 79, 0.888);
+    background-color: rgba(7, 6, 7, 0.905);
     font-size: 100%;
     color: white;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+font-family:monospace;
     border-color: white;
     margin-top: 0;
     font-size: 20px;
@@ -402,7 +462,7 @@ border-color: white;}
     width: 600px;
 }
 .leaflet-popup-content-wrapper{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: monospace;
     font-size: 20px;
     color: rgb(76, 30, 79, 1);
     font-weight: 800;
@@ -478,7 +538,7 @@ footer {
     bottom: 0;
     width: 100%;
     z-index: 9999;
-    background-color: rgba(76, 30, 79, 0.602);
+    background-color: rgba(4, 4, 4, 0.602);
     color: antiquewhite;
     padding: 0.1rem 0;
     font-size: 1.3rem;
@@ -506,7 +566,8 @@ p:last-child {
   border-right:3px;
 }
 
-a { text-decoration: none;}
+a { text-decoration: none;
+color: antiquewhite;}
 @media only screen 
 and (min-device-width : 200px) 
 and (max-device-width : 812px) { .container{
@@ -538,23 +599,24 @@ and (max-device-width : 812px) { .container{
 
 }
 .headerText{
-    margin-left: 15vw;
+    margin-left: 30vw;
     margin-top: 0;
     text-align: center;
-    width: 18rem;
+    width: 15rem;
     font-size: 20px;
    
 }
 .intro{
     font-size: 100%;
     height:80%;
-    width: 50%;
+    width: 55%;
     left: 40vw;
     right: 10vw;
     margin-top: 0%;
-     background-color:  rgba(76, 30, 79, 0.648);
+     background-color: rgba(7, 6, 7, 0.905);
      color:antiquewhite;
      top: 17vh;
+     text-align: left;
      
 }
 
@@ -669,7 +731,26 @@ display: none;
 
  
 }
+#videosDisplay {
+ width: 60%;  
+ flex-direction: row;  
+ ;          /* space between videos */
+}
+.video-item {
+    margin-left: 5vw;
+width: 80%;
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.video-caption{
+font-size: 12px;
+}
 
+.MakeIt{
+    display: none;
+}
 
 
 footer {
@@ -700,7 +781,7 @@ footer {
    
   
 }
-a{ color:rgba(59, 242, 56, 0.9)}
+a{ color:rgba(195, 86, 253, 0.9)}
 a:hover{
     color:rgb(6, 6, 5);
 }

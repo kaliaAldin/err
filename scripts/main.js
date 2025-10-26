@@ -54,45 +54,55 @@ const ICONS = {
 const VIDEO_MARKERS = [
   {
     position: [15.639717, 32.540528],
-    videoId: "LwOtvXB_Nwk"
+    videoId: "LwOtvXB_Nwk",
+    caption:"After spending 48 days in RSF detention, Camoun is home free. He tells us about what he experienced, and the ethnic and tribal tension fueling the war."
   },
   {
     position: [15.639717 - .12, 32.540528 + .04],
-    videoId: "UEQPi9febBA"
+    videoId: "UEQPi9febBA",
+    caption:"After 34 days in detention at one of the Rapid Support Forces' camps in Khartoum, West Jireif Emergency Response Team member Ahmed Elhadi is released, to the relief of his family, friends and comrades."
   },
   {
     position: [15.639717 - .08, 32.540528 + .04],
-    videoId: "S6LGZRqsYnk"
+    videoId: "S6LGZRqsYnk",
+    caption:"Get to know some of the electrical engineers on the front lines, working to provide residents of Khartoum with power in the midst of war."
   },
   {
     position: [15.639717 - .01, 32.540528 + .06],
-    videoId: "lLzjpKwYMSw"
+    videoId: "lLzjpKwYMSw",
+    caption:"Nafisa and her son run one of the few remaining shops in the Jireif neighborhood of Khartoum. Despite the danger and difficulty, they are determined to stay and help their community make it through."
   },
   {
     position: [15.639717 - .06, 32.540528 - .03],
-    videoId: "0EuxcBheteI"
+    videoId: "0EuxcBheteI",
+    caption:"In Sudan, this year's Eid-ul-Fitr was marked by the first sounds of war. For the fourth consecutive year, what should have been a time for celebration and togetherness, was marred by blood and tragedy. But to be Sudanese is to be resilient, to be unbroken, and to choose life in the midst of death."
   },
   {
     position: [15.639717 - .06, 32.540528 - 0.09],
-    videoId: "I_IBKcGYjlY"
+    videoId: "I_IBKcGYjlY",
+    caption:"As the war rages on, neighborhod committees and volunteers come together to support their communities, providing everything from food and basic necessities to lifesaving medications and healthcare. In the absence of a State, the people are doing for themselves."
   },
   {
     position: [15.639717 , 32.540528 - 0.09],
-    videoId: "vd8hWuadV-M"
+    videoId: "vd8hWuadV-M",
+    caption:"The civilian, voluntarily led Emergency Response Rooms are offering a lifeline for the multitude of war-affected civilians in Sudan -often at great personal risk. With NGOs facing severe access issues - people are relying more and more on these local efforts."
   },
   {
     position: [15.639717 - .07, 32.540528 - 0.05],
-    videoId: "R8XY940Y-50"
+    videoId: "R8XY940Y-50",
+    caption:"A representative of the Khartoum State Emergency Room said that their teams were able to evacuate citizens from areas attacked by the Rapid Support Forces. She also said that the Sudanese people are the first to suffer from the ongoing war between the Rapid Support Forces and the Sudanese army."
 
   },
     {
     position: [15.639717 - .12, 32.540528 - 0.05],
-    videoId: "D_kcpSrCecE"
+    videoId: "D_kcpSrCecE",
+    caption:"In light of the war, thousands have fled the capital Khartoum -- but millions remain. A tea vendor in West Jiref neighbourhood talks about why she and her family are staying."
 
   },
     {
     position: [15.639717 - .1, 32.540528 - 0.1],
-    videoId: "P2BJEYFiJL4"
+    videoId: "P2BJEYFiJL4",
+    caption:"Sarah Elobaid takes a close look into the work of the Emergency Response Rooms and their impacts, with guests who have direct experience with these youth-led networks."
 
   }
   
@@ -109,6 +119,7 @@ const elements = {
   emergencyRoomButton: document.getElementById("ER"),
   emergencyRoomList: document.getElementById("RoomList"),
   emergencyRoomDetails: document.getElementById("RoomDetails"),
+  videoDisplay: document.getElementById("videosDisplay"),
   mobileDisplay: document.getElementById("mobileDesplayID"),
   intro: document.getElementById("intro"),
   mapStoryButton: document.getElementById("mapStory"),
@@ -118,6 +129,7 @@ const elements = {
 function getRandomColor() {
   return '#' + Math.floor(Math.random()*0xFFFFFF).toString(16).padStart(6, '0');
 }
+
 
 
 // State Management
@@ -206,10 +218,20 @@ function loadHistory(date) {
 }
 // Utility Functions
 function createVideoPopup(videoId) {
-  return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}?si=_JZL9scwMPV1Hq5t" 
-          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
-          encrypted-media; gyroscope; picture-in-picture; web-share" 
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+  // Create an iframe element
+  const iframe = document.createElement('iframe');
+  iframe.width = '560';
+  iframe.height = '315';
+  iframe.src = `https://www.youtube.com/embed/${videoId}?si=_JZL9scwMPV1Hq5t`;
+  iframe.title = 'YouTube video player';
+  iframe.frameBorder = '0';
+  iframe.allow =
+    'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+  iframe.allowFullscreen = true;
+
+  // Append it to your target container
+  elements.videoDisplay.appendChild(iframe);
 }
 
 function createIcon(iconType) {
@@ -285,20 +307,37 @@ function randomOffset(maxDelta) {
 
 // replace your setupVideoMarkers() with:
 function setupVideoMarkers() {
-  const videoIcon = createIcon('video');
-  const jitter = 0.02;  // max ±0.01° lat/lng (~1–2 km)
+  // Clear existing videos
+  elements.videoDisplay.innerHTML = '';
 
-  state.videoMarkers = VIDEO_MARKERS.map(video => {
-    // compute a slightly random pos around the defined one
-    const lat = video.position[0] + randomOffset(jitter);
-    const lng = video.position[1] + randomOffset(jitter);
+  // Loop through each video and create an iframe + caption
+  VIDEO_MARKERS.forEach((video, index) => {
+    const videoContainer = document.createElement('div');
+    videoContainer.classList.add('video-item');
 
-    return L.marker([lat, lng], { icon: videoIcon })
-      .bindPopup(createVideoPopup(video.videoId), { className: "videos" })
-      .addTo(state.map);
+    const iframe = document.createElement('iframe');
+    iframe.width = '560';
+    iframe.height = '315';
+    iframe.src = `https://www.youtube.com/embed/${video.videoId}`;
+    iframe.title = `Video ${index + 1}`;
+    iframe.frameBorder = '0';
+    iframe.allow =
+      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allowFullscreen = true;
+
+    const caption = document.createElement('p');
+    caption.classList.add('video-caption');
+    caption.textContent = video.caption; // or any caption text you want
+
+    videoContainer.appendChild(iframe);
+    videoContainer.appendChild(caption);
+
+    elements.videoDisplay.appendChild(videoContainer);
+    elements.videoDisplay.style.display="flex"
   });
-  
 }
+
 
 
 // Data Handling
@@ -355,6 +394,7 @@ function clearMap() {
       state.map.removeLayer(layer);
     }
     clearAnimatedElements()
+    
   });
   
   if (state.emergencyRoomLayerGroup) {
@@ -419,6 +459,7 @@ function handleHeaderScroll() {
 
 function handleHospitalButtonClick() {
    clearAnimatedElements();
+   elements.videoDisplay.style.display="none"
   if (state.emergencyRoomLayerGroup) {
     state.map.removeLayer(state.emergencyRoomLayerGroup);
     state.emergencyRoomLayerGroup = null;
@@ -496,6 +537,7 @@ function updateHospitalDetails(index) {
 function handleEmergencyRoomButtonClick(showAllFeatures = false) {
    clearDetails();
    clearAnimatedElements();
+   elements.videoDisplay.style.display="none"
    // Remove any previous dropdown before we do anything
   if (state.emergencyRoomDropdown) {
   state.emergencyRoomDropdown = removeDropdown(
@@ -788,8 +830,11 @@ function updateEmergencyRoomDetails(index) {
 function handleStoriesButtonClick() {
   clearDetails();
   clearAnimatedElements();
+     
+
    elements.mapStoryButton.innerHTML = "ABOUT";
     elements.intro.style.display = "none";
+    elements.videoDisplay.style.display="none"
     
  
   elements.emergencyRoomDetails.innerHTML = "For the safety of citizens and activists, these videos do not represent actual locations";
@@ -815,6 +860,7 @@ function handleStoriesButtonClick() {
 
 function toggleMapStory() {
     clearDetails();
+    elements.videoDisplay.style.display="none"
   if (elements.mapStoryButton.innerHTML === "MAP") {
    
     elements.mapStoryButton.innerHTML = "ABOUT";
@@ -840,7 +886,7 @@ function clearInro(){
 function init() {
   // Initialize map
   initializeMap();
-  setupVideoMarkers();
+  
   
   // Set up scroll handler for sticky header
   window.onscroll = handleHeaderScroll;
@@ -852,6 +898,7 @@ function init() {
     clearMap();
     clearDetails();
     clearInro();
+    setupVideoMarkers();
   // for each marker, compute & set a new random lat/lng...
   state.videoMarkers.forEach((marker, idx) => {
     const [lat0, lng0] = VIDEO_MARKERS[idx].position;
