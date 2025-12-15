@@ -289,9 +289,11 @@ function initializeMap() {
   
   // Clear animations when clicking anywhere on the map
   state.map.on('click', function(e) {
-    if (e.originalEvent && e.originalEvent.target.classList.contains('leaflet-container')) {
-      clearAnimatedElements();
-    }
+   // if (e.originalEvent && e.originalEvent.target.classList.contains('leaflet-container')) {
+     // clearAnimatedElements();}
+    clearInro()
+    elements.videoDisplay.style.display="none"
+    
   });
   
   setTimeout(() => {
@@ -464,7 +466,7 @@ function handleHospitalButtonClick() {
     state.map.removeLayer(state.emergencyRoomLayerGroup);
     state.emergencyRoomLayerGroup = null;
   }
-   elements.mapStoryButton.innerHTML = "ABOUT";
+   elements.mapStoryButton.innerHTML = "About";
     elements.intro.style.display = "none";
   clearDetails();
   
@@ -832,7 +834,7 @@ function handleStoriesButtonClick() {
   clearAnimatedElements();
      
 
-   elements.mapStoryButton.innerHTML = "ABOUT";
+   elements.mapStoryButton.innerHTML = "About";
     elements.intro.style.display = "none";
     elements.videoDisplay.style.display="none"
     
@@ -861,9 +863,9 @@ function handleStoriesButtonClick() {
 function toggleMapStory() {
     clearDetails();
     elements.videoDisplay.style.display="none"
-  if (elements.mapStoryButton.innerHTML === "MAP") {
+  if (elements.mapStoryButton.innerHTML === "Map") {
    
-    elements.mapStoryButton.innerHTML = "ABOUT";
+    elements.mapStoryButton.innerHTML = "About";
     elements.intro.style.display = "none";
     elements.container.style.display = "flex";
     setTimeout(() => {
@@ -871,13 +873,13 @@ function toggleMapStory() {
     }, 100);
   } else {
      clearDetails();
-    elements.mapStoryButton.innerHTML = "MAP";
+    elements.mapStoryButton.innerHTML = "Map";
     elements.container.style.display = "flex";
     elements.intro.style.display = "block";
   }
 }
 function clearInro(){
-   elements.mapStoryButton.innerHTML = "ABOUT";
+   elements.mapStoryButton.innerHTML = "About";
    elements.intro.style.display = "none";
 }
 

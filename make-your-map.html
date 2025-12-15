@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make Your Own Civic Map</title>
+
+  <link rel="stylesheet" href="style/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+
+  <style>
+    .guide-wrap{
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 6vh 4vw;
+    }
+    .guide{
+      width: min(980px, 92vw);
+      background-color: rgba(7, 6, 7, 0.92);
+      color: antiquewhite;
+      padding: 2.4rem;
+      border-radius: 16px;
+      font-family: "JetBrains Mono", "Courier Prime", monospace;
+      line-height: 1.7;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.45);
+    }
+    .guide h1{
+      font-size: 2.2rem;
+      margin-bottom: 0.4rem;
+    }
+    .guide h2{
+      font-size: 1.3rem;
+      margin-top: 2.6rem;
+      border-left: 4px solid antiquewhite;
+      padding-left: 0.9rem;
+    }
+    .guide p, .guide li{
+      font-size: 1.08rem;
+    }
+    .guide .muted{
+      opacity: 0.82;
+      font-size: 0.98rem;
+    }
+    .guide .card{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      padding: 1.3rem 1.5rem;
+      margin: 1.3rem 0;
+    }
+    .guide code{
+      background: rgba(255,255,255,0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+    }
+    .top-actions{
+      display:flex;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .btn{
+      border: 2px solid rgba(255,255,255,0.6);
+      background: rgba(250,235,215,0.12);
+      color: antiquewhite;
+      padding: 0.55rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    .btn.primary{
+      background: rgba(169,229,249,0.14);
+      border-color: rgba(169,229,249,0.7);
+    }
+    footer.guide-footer{
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body class="body">
+<div class="guide-wrap">
+<main class="guide">
+
+<h1>Make Your Own Civic Map</h1>
+<p class="muted">
+A step-by-step guide to create your own interactive map using open-source civic infrastructure.
+</p>
+
+<div class="top-actions">
+  <button class="btn" onclick="window.location.href='index.html'">← Back to Map</button>
+  <button class="btn primary" onclick="document.getElementById('start').scrollIntoView({behavior:'smooth'})">
+    Start ↓
+  </button>
+</div>
+
+<div class="card">
+<p>
+This system allows communities, researchers, and collectives to publish maps
+directly from shared data — without relying on proprietary platforms.
+</p>
+<p>
+You do not need to be a programmer to maintain the map.
+You only need to understand how to structure data and edit configuration files.
+</p>
+</div>
+
+<h2 id="start">Before you start (important)</h2>
+
+<div class="card">
+<p>
+To create a functioning map, you need:
+</p>
+
+<ul>
+  <li>A Google account</li>
+  <li>A Google Sheet with location data</li>
+  <li>Access to a web server (local or hosted)</li>
+</ul>
+
+<p class="muted">
+You do not need to write JavaScript or Python logic.
+You will only edit configuration files.
+</p>
+</div>
+
+<h2>Step 1 — Prepare your Google Sheet</h2>
+
+<div class="card">
+<p>
+Your Google Sheet is the <strong>source of truth</strong>.
+It is where all map data lives.
+</p>
+
+<ul>
+  <li>Each row = one place</li>
+  <li>Each column = one attribute</li>
+  <li>One column must contain coordinates</li>
+</ul>
+
+<p>
+Coordinates must be written exactly as:
+</p>
+
+<p><code>latitude,longitude</code></p>
+
+<p class="muted">
+Example: <code>15.56,32.53</code>
+</p>
+
+<p>
+Avoid merged cells.
+Keep the first row as clear column headers.
+</p>
+</div>
+
+<h2>Step 2 — Clone the open-source repository</h2>
+
+<div class="card">
+<p>
+Clone the universal civic mapping repository:
+</p>
+
+<p>
+<a href="https://github.com/kaliaAldin/civicMappingDocumenation"
+   target="_blank" rel="noopener">
+https://github.com/kaliaAldin/civicMappingDocumenation
+</a>
+</p>
+
+<p>
+This repository contains:
+</p>
+
+<ul>
+  <li>The map frontend</li>
+  <li>The Flask server</li>
+  <li>All configuration files</li>
+</ul>
+
+<p class="muted">
+You are encouraged to copy and reuse this code.
+</p>
+</div>
+
+<h2>Step 3 — Configure the server (one-time)</h2>
+
+<div class="card">
+<p>
+The server reads your Google Sheet and exposes it as a data API.
+</p>
+
+<p>
+You do <strong>not</strong> change Python logic.
+</p>
+
+<p><strong>You must edit:</strong></p>
+
+<ul>
+  <li><code>serverside/project_config.json</code></li>
+</ul>
+
+<p>
+In this file you define:
+</p>
+
+<ul>
+  <li>The Google Sheet ID</li>
+  <li>The sheet tabs to read</li>
+  <li>Which column index means what</li>
+</ul>
+
+<p class="muted">
+If your sheet structure changes, update this file only.
+</p>
+</div>
+
+<h2>Step 4 — Configure the map (frontend)</h2>
+
+<div class="card">
+<p>
+The map does not know what your data represents.
+You tell it through configuration.
+</p>
+
+<p><strong>You must edit:</strong></p>
+
+<ul>
+  <li><code>js/project.config.js</code></li>
+</ul>
+
+<p>
+In this file you define:
+</p>
+
+<ul>
+  <li>Map center and zoom</li>
+  <li>Which datasets exist</li>
+  <li>Which backend keys they map to</li>
+  <li>Which field contains coordinates</li>
+  <li>How points or circles are rendered</li>
+  <li>What text appears in popups</li>
+</ul>
+
+<p class="muted">
+Dataset names here must match what the server returns.
+</p>
+</div>
+
+<h2>Step 5 — Run and publish</h2>
+
+<div class="card">
+<ul>
+  <li>Start the Flask server</li>
+  <li>Open the map in a browser</li>
+  <li>Edit the Google Sheet to update the map</li>
+</ul>
+
+<p>
+No redeployment is needed after setup.
+</p>
+</div>
+
+<h2>What you should not change</h2>
+
+<div class="card">
+<ul>
+  <li>Do not edit map rendering logic</li>
+  <li>Do not edit data adapters</li>
+  <li>Do not hardcode meanings in JavaScript</li>
+</ul>
+
+<p class="muted">
+Stability comes from shared infrastructure.
+Flexibility comes from configuration.
+</p>
+</div>
+
+<h2>If something does not appear</h2>
+
+<div class="card">
+<ul>
+  <li>Check that dataset names match exactly</li>
+  <li>Check that coordinate fields exist</li>
+  <li>Open the browser console for errors</li>
+  <li>Open the <code>/data</code> URL directly</li>
+</ul>
+</div>
+
+<footer class="guide-footer">
+<p>
+© Civic Mapping Guide — open-source civic infrastructure
+</p>
+<p>
+Repository:
+<a href="https://github.com/kaliaAldin/civicMappingDocumenation" target="_blank">
+civicMappingDocumenation
+</a>
+</p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>

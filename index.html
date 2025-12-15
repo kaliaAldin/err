@@ -32,10 +32,12 @@
        
         <div class="buttons">
             
-            <div  ><button class="headerText" id = "Openall"><span>KHARTOUM CIVIC MAP</span></button> </div> 
-            <div><button class="MakeIt">implement your  Map project !!</button></div>
+            <div  ><button class="headerText" id = "Openall"><span>Khartoum Civic Map</span></button> </div> 
+            <div><button class="MakeIt" onclick="window.location.href='make-your-map.html'">
+  implement your Map project !!
+</button></div>
             <div class="Barbra">
-            <div class="hosContatiner"><div id="HosList"><button id="hos" class="hos"><span> HOSPITALS</span> </button></div>
+            <div class="hosContatiner"><div id="HosList"><button id="hos" class="hos"><span> Hospitals</span> </button></div>
             <div id="hosDetails" class="HosDe"></div></div>
             
             
@@ -53,7 +55,7 @@
             <div><button id= "story" class="conflict">Stories قصص</button></div-->
         </div>
         <div class="introduction">
-         <div> <button class="mapDispaly" onclick="displayMap()" id="mapStory">MAP</button></div>
+         <div> <button class="mapDispaly" onclick="displayMap()" id="mapStory">Map</button></div>
         <div><button id= "story" class="Stories"><span>Stories </span></button></div>
         </div>
         
@@ -66,7 +68,7 @@
         Specifically, the map documents the extensive efforts of the emergency response rooms in Khartoum, showcasing their crucial contributions to sustaining lives and fostering resilience within the city. <br>
         Updated daily by activists, the <a  class="Firstpagelinks" href="https://sudancivicmap.com/data"  >Database</a> is designed as an open-source platform, providing valuable insights for researchers, artists, and activists. It serves as both a dynamic resource and a testament to the collective agency of civilian actors in conflict zones.<br>This project features an interactive map implemented using the Leaflet.js JavaScript library, with map tiles powered by Mapbox. The core data is collaboratively contributed by activists from the Emergency Response Room, stored in a shared Google Sheet.
 
-        The API and JavaScript code developed for this project are open source and accessible via the <a   class="Firstpagelinks" href="https://github.com/kaliaAldin/err"> GitHub repository</a>, 
+        The API and JavaScript code developed for this project are open source and accessible via the <a   class="Firstpagelinks" href="make-your-map.html"> Documentation </a>, 
         allowing others to explore, adapt, and utilize them for their own initiatives.
     </div>
     <div id="videosDisplay" ></div>
@@ -88,6 +90,6 @@
     
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="scripts/main.js"></script>
+    <script type="module" src="refactor/js/app.js"></script>
 </body>
 </html>
