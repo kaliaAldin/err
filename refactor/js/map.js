@@ -1,6 +1,7 @@
 import { MAP_CONFIG, ICONS } from './config.js';
 import { state } from './state.js';
 import { animateCircleWithRAF, animateLineWithRAF } from './animations.js';
+import { addCircleLegend } from './ui.js';
 
 export function createIcon(iconType){
   return L.icon(ICONS[iconType]);
@@ -12,6 +13,7 @@ export function initializeMap(elements){
 
   state.map.on('click', () => {
     clearIntro(elements);
+    addCircleLegend(elements);
     elements.videoDisplay.style.display = "none";
   });
 
@@ -35,6 +37,7 @@ export function clearMap(){
   });
 
   clearAnimatedElements();
+ 
 }
 
 export function clearAnimatedElements(){
@@ -90,6 +93,7 @@ export function addRoomFeature(room, property, label, color, position, layerArra
 
 export function showAllRoomFeatures(room){
   const roomInfoLayer = [];
+  
 
   if (room.activeRooms > 0) addRoomFeature(room, 'activeRooms', 'Base ERR', "rgba(246, 174, 194, 0.9)",
     [room.geolocation[0] + .02, room.geolocation[1] + .01], roomInfoLayer);
@@ -125,6 +129,7 @@ export function handleRoomClick(room, index, elements){
   if (state.emergencyRoomLayerGroup) state.map.removeLayer(state.emergencyRoomLayerGroup);
 
   if (state.emergencyRoomDropdown) state.emergencyRoomDropdown.selectedIndex = index;
+  addCircleLegend(elements)
 
   const detailsArray = [];
   const roomInfoLayer = [];
@@ -174,7 +179,7 @@ export function handleRoomClick(room, index, elements){
       room.geolocation
     ]).setStyle({ color: 'rgb(76, 30, 79, 1)', opacity: 1, weight: 3 });
 
-    roomInfoLayer.push(imageOverlay, photoLine);
+    //roomInfoLayer.push(imageOverlay, photoLine);
   }
 
   detailsArray.push(room.description || "");

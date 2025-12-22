@@ -3,10 +3,66 @@ import { createDropdown, removeDropdown, randomOffset } from './utils.js';
 import { clearMap, clearAnimatedElements, showAllRoomFeatures, handleRoomClick, createIcon, clearIntro } from './map.js';
 import { setupVideoMarkers } from './videos.js';
 import { MAP_CONFIG, VIDEO_MARKERS } from './config.js';
+// ---- MAP LEGEND (circle meanings) -----------------------------------------
+export function addCircleLegend() {
+  if (!state.map) return;
+
+  // prevent adding it twice
+  if (state.circleLegendControl) return;
+
+  const legend = L.control({ position: "topright" });
+
+  legend.onAdd = () => {
+    const div = L.DomUtil.create("div", "map-legend");
+
+    const items = [
+      { color: "dodgerblue", label: "Blue: Women coop — a place for women gathering" },
+      { color: "green", label: "Green: Population the Emergency Response Room is serving" },
+      { color: "rgba(246, 174, 194, 0.9)", label: "Light Pink: Number of active ERR cells" },
+      { color: "rgba(250, 126, 97, 0.904)", label: "Orange: Pots serving ready meals to the population" },
+      { color: "wheat", label: "Wheat: Kitchens serving free 2 meals per day" },
+      { color: "rgba(245, 217, 146, 0.9)", label: "Yellow: Children center for playing and learning" },
+      {color:"rgba(210, 127, 216, 1)", label: "Purple: Clinics providing medical services" },
+    ];
+
+    div.innerHTML = `
+      <div class="legend-title">Circle meanings</div>
+      <ul class="legend-list">
+        ${items
+          .map(
+            (it) => `
+          <li>
+            <span class="legend-swatch" style="background:${it.color}"></span>
+            <span class="legend-text">${it.label}</span>
+          </li>`
+          )
+          .join("")}
+      </ul>
+    `;
+
+    // Don't let legend clicks/scrolls mess with the map
+    L.DomEvent.disableClickPropagation(div);
+    L.DomEvent.disableScrollPropagation(div);
+
+    return div;
+  };
+
+  legend.addTo(state.map);
+  state.circleLegendControl = legend;
+}
+
+export function removeCircleLegend() {
+  if (state.circleLegendControl && state.map) {
+    state.map.removeControl(state.circleLegendControl);
+    state.circleLegendControl = null;
+  }
+}
+
 
 export function clearDetails(elements){
   elements.hospitalDetails.innerHTML = "";
   elements.emergencyRoomDetails.innerHTML = "";
+  elements.emergencyRoomDetails.style.padding = 0;
   elements.mobileDisplay.innerHTML = "";
 }
 
@@ -19,6 +75,7 @@ export function handleHeaderScroll(elements){
 }
 
 export function handleHospitalButtonClick(elements){
+  removeCircleLegend(elements)
   clearAnimatedElements();
   elements.videoDisplay.style.display = "none";
 
@@ -115,7 +172,7 @@ export function handleEmergencyRoomButtonClick(elements, showAllFeatures = false
     state.emergencyRoomDropdown = createDropdown(state.emergencyRoomData, elements.emergencyRoomList, "roomDropdown");
 
     state.emergencyRoomData.forEach((room, index) => {
-      const roomColor = "wheat";
+      const roomColor = "white";
       const initialRadius = 800;
 
       const roomCircle = L.circle(room.geolocation, {
@@ -220,8 +277,10 @@ export function handleStoriesButtonClick(elements){
 export function toggleMapStory(elements){
   clearDetails(elements);
   elements.videoDisplay.style.display = "none";
+  removeCircleLegend();
 
   if (elements.mapStoryButton.innerHTML === "Map") {
+    addCircleLegend();  
     elements.mapStoryButton.innerHTML = "About";
     elements.intro.style.display = "none";
     elements.container.style.display = "flex";
@@ -234,6 +293,8 @@ export function toggleMapStory(elements){
 }
 
 export function wireUI(elements){
+  removeCircleLegend(elements)
+  
   window.onscroll = () => handleHeaderScroll(elements);
 
   elements.storiesButton.addEventListener('click', () => {
@@ -242,11 +303,14 @@ export function wireUI(elements){
     clearDetails(elements);
     clearIntro(elements);
     handleStoriesButtonClick(elements);
+    removeCircleLegend(elements)
+     
   });
 
   elements.hospitalButton.addEventListener('click', () => handleHospitalButtonClick(elements));
 
   elements.emergencyRoomButton.addEventListener('click', () => {
+     addCircleLegend();
     clearIntro(elements);
     handleEmergencyRoomButtonClick(elements, false);
   });
