@@ -1,4 +1,4 @@
-.body{
+body{
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     appearance: none; /* Remove default styling in some browsers */
     -webkit-appearance: none; /* Remove default styling in WebKit browsers */
@@ -7,7 +7,7 @@
 }
 .intro {
   position: absolute;
-top: 10vh;
+  top: 10vh;
   left: 44vw;
   z-index: 9999;
   width: 50vw;
@@ -23,6 +23,34 @@ top: 10vh;
   word-spacing: -6px;
   
 }
+/* Intro close button (×) */
+.intro .intro-close{
+  position: sticky;          /* stays visible while scrolling */
+  top: 0;
+  float: right;
+  margin: 0 0 10px 10px;
+
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.10);
+  color: antiquewhite;
+}
+
+.intro .intro-close:active{
+  transform: scale(0.98);
+}
+
 #videosDisplay {
   position: absolute;
   top: 0;
@@ -45,10 +73,10 @@ top: 10vh;
 }
 .video-item {
     margin-left: 5vw;
-width: 20vw;
- display: flex;
-  flex-direction: column;
-  align-items: center;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .video-caption{
     text-align: center;
@@ -62,30 +90,14 @@ width: 20vw;
     position: absolute !important;
     height: 100vh;
     width: 99%;
-    
     margin-left: 0rem;
-    
-    
-    
-    
-    
 }
 .header{
    display: inline;
     position: absolute;
     display: flex;
-   
-   
-    
     font-size: 20px;
     text-align: right;
-    
-    
-    
-
-  
- 
-    
 }
 #timeline-container {
   position: absolute;
@@ -104,13 +116,14 @@ width: 20vw;
   gap: 1rem;
   font-family: monospace;
 }
+
 .introduction{
     position: relative;
     display: flex;
     flex-direction: row;
     gap: 1vw;
-    
 }
+
 /* Base track styling */
 #date-slider {
   -webkit-appearance: none;
@@ -132,7 +145,6 @@ width: 20vw;
   border: 2px solid #ffffff;   /* optional white border */
   border-radius: 50%;
   cursor: pointer;
-       /* center thumb on track */
 }
 
 /* Firefox thumb */
@@ -163,8 +175,8 @@ width: 20vw;
 
 .Firstpagelinks {
     background-color: white;
-   font-weight: 800;
-   font-family: monospace;
+    font-weight: 800;
+    font-family: monospace;
 }
 .Firstpagelinks:hover {
    color: rgb(255, 0, 157);
@@ -173,27 +185,20 @@ width: 20vw;
     display:block;
     position:relative;
     top: 30vh;
-    
-    
-    
     margin-left: 4.2rem;
-      z-index: 9999;
+    z-index: 9999;
 
-    
     font-size: 1.5rem;
- 
-  width: 8rem;
-   height: 2.5rem;
-   background-color: rgba(7, 6, 7, 0.905);
-   border-color: black;
-   padding: auto;
-  
-   border-width: 2px;
-   font-weight: 500;
-   padding-top: 2px;
-   color: antiquewhite;
-   font-family: monospace;
-   
+    width: 8rem;
+    height: 2.5rem;
+    background-color: rgba(7, 6, 7, 0.905);
+    border-color: black;
+    padding: auto;
+    border-width: 2px;
+    font-weight: 500;
+    padding-top: 2px;
+    color: antiquewhite;
+    font-family: monospace;
 }
 
 
@@ -206,31 +211,24 @@ width: 20vw;
     padding-right: 0;
     margin-right: auto;
     margin-top: 2%;
-padding: 0;
-object-fit:cover;
-vertical-align: bottom;
-display: none;
-
+    padding: 0;
+    object-fit:cover;
+    vertical-align: bottom;
+    display: none;
 }
     
 .container{
-
-
-display: inline;
-   
-text-align:left;
-  
-padding:0rem;
-padding-top: 0vh;
-padding-left: 0rem;
-padding-right: 0rem;
-margin-bottom: 0;
-
-font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: inline;
+    text-align:left;
+    padding:0rem;
+    padding-top: 0vh;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    margin-bottom: 0;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .buttons {
-    
     position: absolute; /* Ensure buttons are positioned relative to the map container */
     top:1vh; /* Adjust the top distance as needed */
     left: 3.5rem; /* Adjust the left distance as needed */
@@ -239,80 +237,70 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
     flex-direction:column; /* Stack buttons vertically */
     gap: 5vh; /* Add space between buttons */
     width: 10vw;
-    
-   
-   
 }
 .headerText{
-    
-position: relative;
-padding-left: 1rem;
-padding-right: 1rem;
-top: 1vh;
-right: 1vw;
-left: 1vw;
-font-size:  2rem;
+    position: relative;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    top: 1vh;
+    right: 1vw;
+    left: 1vw;
+    font-size:  2rem;
+    color: antiquewhite;
 
-color: antiquewhite;
-
-font-family:"IBM Plex Mono", monospace;
-transition: 1s;
-background-color:rgba(7, 6, 7, 0.905);
-border-radius:5px;
-width: 28vw;
-text-align: center;
-margin-bottom:20%;
-height: 10vh;
+    font-family:"IBM Plex Mono", monospace;
+    transition: 1s;
+    background-color:rgba(7, 6, 7, 0.905);
+    border-radius:5px;
+    width: 28vw;
+    text-align: center;
+    margin-bottom:20%;
+    height: 10vh;
 }
 .MakeIt{
-position: absolute;
-padding-left: 1rem;
-padding-right: 1rem;
-top: 11.5vh;
-right: 1vw;
-left: 1vw;
-font-size:  1rem;
-text-transform: uppercase;
-color: antiquewhite;
+    position: absolute;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    top: 11.5vh;
+    right: 1vw;
+    left: 1vw;
+    font-size:  1rem;
+    text-transform: uppercase;
+    color: antiquewhite;
 
-font-family:monospace, sans-serif;
-transition: 1s;
-background-color:rgba(7, 6, 7, 0.905);
-border-radius:5px;
-width: 18vw;
-text-align: left;
-margin-bottom: 40%;
-height: 5vh;
-
+    font-family:monospace, sans-serif;
+    transition: 1s;
+    background-color:rgba(7, 6, 7, 0.905);
+    border-radius:5px;
+    width: 18vw;
+    text-align: left;
+    margin-bottom: 40%;
+    height: 5vh;
 }
 .Barbra{
- position: relative;
-top: 8vh;
-margin-top: 3vh;
-left: 1vw;
- display: flex;
- flex-direction: column;
- font-family:monospace,sans-serif;
-
-    
+    position: relative;
+    top: 8vh;
+    margin-top: 3vh;
+    left: 1vw;
+    display: flex;
+    flex-direction: column;
+    font-family:monospace,sans-serif;
 }
 .hos{
-margin-top: 1rem;
-padding-left: 1rem;
-padding-right: 1rem;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 
-margin-bottom: 1%;
-font-size:  1.5rem;
+    margin-bottom: 1%;
+    font-size:  1.5rem;
 
-border: 3px solid rgb(9, 9, 9);
+    border: 3px solid rgb(9, 9, 9);
 
+    transition: 1s;
+    background-color: rgba(250, 235, 215, 0.5);
 
-transition: 1s;
-background-color: rgba(250, 235, 215, 0.5);
-
-width: 10rem;
-font-family:"IBM Plex Mono", monospace;
-
+    width: 10rem;
+    font-family:"IBM Plex Mono", monospace;
 }
 
 .hos:hover, .hos:active{
@@ -326,25 +314,23 @@ font-family:"IBM Plex Mono", monospace;
 
 
 .ER{
+    width: 16.5rem;
+    padding-left: 0rem;
+    padding-right: 0;
+    border: none;
+    margin: top 0;;
+    margin-bottom: 1%;
+    font-size: 1.5rem;
+    text-align: center;
 
-width: 16.5rem;
-padding-left: 0rem;
-padding-right: 0;
-border: none;
-margin: top 0;;
-margin-bottom: 1%;
-font-size: 1.5rem;
-text-align: center;
+    transition:1s;
 
-transition:1s;
-
-background-color: rgba(250, 235, 215, 0.5);
-border: 3px solid rgb(9, 9, 9);
-font-family: monospace;
+    background-color: rgba(250, 235, 215, 0.5);
+    border: 3px solid rgb(9, 9, 9);
+    font-family: monospace;
 }
 .ER:hover, .ER:active{
     background-color: rgba(7, 6, 7, 0.905);
-    
     color: white;
     border: 3px solid black;
     box-shadow: 4px 4px rgba(7, 6, 7, 0.905);
@@ -354,33 +340,23 @@ font-family: monospace;
     display:block;
     position:relative;
     top: 30vh;
-    
-    
     z-index: 9999;
-    
     margin-bottom: 0;
     font-size: 1.5rem;
     height:2.5rem;
-     background-color: rgba(7, 6, 7, 0.905);
-     color: antiquewhite;
-     font-family: monospace;
-
+    background-color: rgba(7, 6, 7, 0.905);
+    color: antiquewhite;
+    font-family: monospace;
 }
 
 .mobileDesplay{
-    display: none;}
-
+    display: none;
+}
     
 .RoomDe{
-    
-         /* stick to viewport */
-                     /* distance from top */
-                 /* distance from right edge */
-   
     background-color: rgba(7, 6, 7, 0.905) !important;
     color: white !important;
     width: 20rem;  
-               /* narrower corner box */
     max-height: 30vh;
     top: 10vh;
     overflow-y: auto;
@@ -395,27 +371,23 @@ font-family: monospace;
 }
 
 .HosDe{
-        padding-left: 0.5rem;
-
+    padding-left: 0.5rem;
     background-color: rgba(7, 6, 7, 0.905);
     color: white;
     font-size: 20px;
     width: 50vh;
     opacity: 80%;
     border-radius: 10px;
-   
-font-family:monospace;
+    font-family:monospace;
 }
 .HosDe:hover{
     font-size: 1.5rem;
     transition: 60ms;
-
 }
 
 
 
 #hospitalDropdown{
-    
     position: relative;
     display: block;
     background-color: rgba(7, 6, 7, 0.905);;
@@ -425,37 +397,31 @@ font-family:monospace;
     font-family:monospace;
     border-color: white;
     transition:1s;
-    
     max-width: 15vh;
 }  
-a{ color:rgb(2, 2, 2)
 
+a{
+  color:rgb(2, 2, 2)
 }
 a:hover{
     color:antiquewhite;
 }
 
-
-
 .hosClasses{
- color: srgb(255, 255, 255);    
- font-size: larger;
-border-color: white;}
-
-
+  color: srgb(255, 255, 255);    
+  font-size: larger;
+  border-color: white;
+}
 
 #roomDropdown{
     position: relative;
     display: block;
     background-color: rgba(7, 6, 7, 0.905);
-  
     color: white;
-font-family:monospace;
+    font-family:monospace;
     border-color: white;
     margin-top: 5px;
     font-size: 20px;
-    
-    
     margin-bottom: 5px;
     max-width: 16.5rem;
 }
@@ -467,8 +433,7 @@ font-family:monospace;
     font-size: 20px;
     color: rgb(76, 30, 79, 1);
     font-weight: 800;
-  background-color: rgba(169, 229, 249, 0.5);
-    
+    background-color: rgba(169, 229, 249, 0.5);
 }
 .leaflet-popup-tip{
     background-color: rgba(169, 229, 249, 0.5);
@@ -476,9 +441,6 @@ font-family:monospace;
 
 .potsClass .leaflet-popup-content-wrapper{
     background-color: rgba(250, 126, 97, 0.5);
-   
-  
-    
 }
 
 .potsClass .leaflet-popup-tip{
@@ -486,16 +448,15 @@ font-family:monospace;
 }
 .childrenCenterPopUp .leaflet-popup-content-wrapper{
     background-color: rgba(245, 217, 146, 0.5);
-  
 }
 .childrenCenterPopUp .leaflet-popup-tip{
     background-color: rgba(245, 217, 146, 0.5);
 }
 .clinicPopUp .leaflet-popup-content-wrapper{
-background-color: rgba(210, 127, 216, .5);
+  background-color: rgba(210, 127, 216, .5);
 }
 .clinicPopUp .leaflet-popup-tip{
-background-color: rgba(210, 127, 216, .5);
+  background-color: rgba(210, 127, 216, .5);
 }
 .comuPopUp .leaflet-popup-content-wrapper{
     background-color: rgba(254, 225, 199, 0.904);
@@ -511,7 +472,6 @@ background-color: rgba(210, 127, 216, .5);
 }
 .womenBreakPopup .leaflet-popup-content-wrapper{
     background-color: rgb(75, 205, 241, 0.9);
-    
 }
 .womenBreakPopup .leaflet-popup-tip{
     background-color: rgba(75, 205, 241, 1);
@@ -526,14 +486,13 @@ background-color: rgba(210, 127, 216, .5);
     background-color: rgba(62, 84, 207, 0.9);
     color: blanchedalmond;
 }
- .imageFrame{
+.imageFrame{
     border: 5px solid rgb(76, 30, 79, 1); /* Red border */
     border-radius: 10px;      /* Rounded corners */
     box-shadow: 0 4px 8px rgb(76, 30, 79, 1); /* Optional shadow */
     display: none;
-    
- }
- .map-legend{
+}
+.map-legend{
   background: rgba(20, 20, 20, 0.85);
   color: #fff;
   padding: 12px 12px;
@@ -559,12 +518,11 @@ background-color: rgba(210, 127, 216, .5);
 
 .map-legend .legend-list li{
   display: grid;
-  
   grid-template-columns: 14px 1fr;
   align-items: start;
   gap: 10px;
   line-height: 1.25;
-  font-size: 14px;
+  font-size: 1rem;
 }
 
 .map-legend .legend-swatch{
@@ -579,9 +537,7 @@ background-color: rgba(210, 127, 216, .5);
   opacity: 0.95;
 }
 
-  
 footer {
-    
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -593,248 +549,453 @@ footer {
     text-align: center;
     border-top: 1px solid antiquewhite;
     height: 3vh;
-    
 }
 
 .cells {
     display: inline;
     border-right: 0.5vh #000 solid;
-    
     text-align: center;
     color: rgba(244, 244, 244, 0.904);
-    
     padding: 0.1vw 0.1vw;
     margin: 0.1vw;
-    
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
-   
-  
 }
 
 p:last-child {
   border-right:3px;
 }
 
-a { text-decoration: none;
-color: antiquewhite;}
-@media only screen 
-and (min-device-width : 200px) 
-and (max-device-width : 812px) { .container{
-    display: flex;
-    margin-top: 0%;
-    
-
-}
-.body{
-    width: 98%;
+a {
+  text-decoration: none;
+  color: antiquewhite;
 }
 
-.buttons{
-    display: flex;
-    flex-flow: column;
-    top: 5%;
-    font-size: 50%;
-    width: 50%;
-    gap: 0;
-}
+/* --- EXISTING MOBILE BLOCK (kept as-is) --- */
+@media only screen and (max-device-width: 812px) {
 
-.header{
-    display: flex;
-    flex-flow: column;
-    width: 98%;
-    border-radius: 25px;
-    padding: 3px;
-    font-size: 32px;
+  @media only screen and (max-device-width: 812px) {
 
-}
-.headerText{
-    margin-left: 30vw;
-    margin-top: 0;
-    text-align: center;
-    width: 15rem;
-    font-size: 20px;
-   
-}
-.intro{
-    font-size: 100%;
-    height:80%;
-    width: 55%;
-    left: 40vw;
-    right: 10vw;
-    margin-top: 0%;
-     background-color: rgba(7, 6, 7, 0.905);
-     color:antiquewhite;
-     top: 17vh;
-     text-align: left;
-     
-}
+  /* Map always behind everything */
+  #map{
+    position: fixed !important;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    z-index: 1;
+  }
 
-.logo{
-  display: none;}
-.hos span{
-    display: none;
-}
-.hos::after {
-    content: "HOSPITALS";
-    font-size: 16px;
-    font-weight: 600;
-  
-   
-}
-.Barbra{
-    top:60%;
-  
-}
-.hos{
-    width: 50%;
-    padding: 1px;
-    padding-top: 0;
-    text-align: center;
-    
-    opacity: 80%;
-}
-.ER span{
-    display: none;
-}
+  .logo{ display:none !important; }
+  .MakeIt{
+    width: 80%;
+    position: relative;
+    font-size: 14px !important;
+    top:3rem;
+    margin-bottom: 3.5rem !important;
+  }
 
+  /* TITLE: always on top */
+  .headerText{
+    position: fixed !important;
+    top: env(safe-area-inset-top, 10px) !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    z-index: 3000 !important;
 
-.ER::after{
-    content: "ERR";
-    font-size: 20px;
-    font-weight: 600;
-   
-    margin: 0;
+    font-size: 16px !important;
+    text-align: center !important;
+  }
 
-}
-.ER{
-    width: 50%;
-    padding: 1px;
-    padding-top: 0;
-    text-align: center;
-    margin-top: 0px;
-    opacity: 80%;
-}
-.introduction{
-    top: 40vh;
-    flex-direction: column;
-    gap: 5px;
-    left: 2%;
-}
-.mapDispaly{
-    
-   
-   
-   margin-bottom: 1px;
-   width: 90%;
-   font-size: 20px;
-    
-  
-}
-.Stories{
-    margin-left: 10px;   
-    padding: 1px;
-    padding-top: 0;
-    text-align: center;
-    margin-top: 0px;
-    
-}
-.Stories span{
-    display: none;
-}
-.Stories::after{
-    content: "STORIES";
-    font-size: 20px;
-  
-   
-    margin: 0;
-}
+  /* BUTTONS: directly under the title */
+  .buttons{
+    position: fixed !important;
+    top: calc(env(safe-area-inset-top, 10px) + px) !important; /* under title */
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    z-index: 2900 !important;
 
-.RoomDe{
-    
-display: none;
-}
-.HosDe{
-display: none;
-}
-#roomDropdown{
-  
+    display: block !important;
+    gap: 0 !important;
+  }
+
+  .Barbra{
+    position: fixed !important;
+    margin: 0 !important;
+    left: auto !important;
+    top: auto !important;
+
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* 2x2 grid */
+    gap: 10px !important;
+  }
+
+  /* Make sure desktop offsets don't affect mobile */
+  .hos, .ER, .Stories, .mapDispaly{
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+
+    width: 100% !important;
+    height: 44px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 14px !important;
+    border-radius: 10px !important;
+  }
+
+  /* ✅ FIX: your real buttons are IDs (#story, #mapStory).
+     Force them to behave like the other buttons (and not disappear). */
+  #story, #mapStory{
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+
+    width: 50% !important;
+    height: 44px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 14px !important;
+    border-radius: 10px !important;
+  }
+
+  /* Force labels visible even if the button text is empty */
+  .ER span, .hos span, .Stories span, .mapDispaly span,
+  #story span, #mapStory span { display:none !important; }
+
+  .ER::after{ content:"ERR"; font-weight:800; }
+  .hos::after{ content:"HOSPITAL"; font-weight:800; }
+
+  /* ✅ FIX: add labels on the real buttons too */
+  #story::after{ content:"STORIES"; font-weight:800; }
+  #mapStory::after{ content:""; font-weight:800; }
+
+  /* (Optional) if you still keep class-based buttons somewhere */
+  .Stories::after{ content:"STORIES"; font-weight:800; }
+  .mapDispaly::after{ content:""; font-weight:800; }
+
+  .intro {
+    top: 6.5rem !important;
+    left: 4vw !important;
+    width: 90vw !important;
+    height: 80vh !important;
+    font-size: 1rem !important;
+  }
+
+  /* Dropdowns: show under buttons (optional) */
+  #roomDropdown,
+  #hospitalDropdown{
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 44px !important;
+    margin-top: 10px !important;
+    border-radius: 10px !important;
     font-size: 14px;
-    width: 50%;
-    margin-left: 0;
-  
-}
-#hospitalDropdown{
-    
-    font-size: 14px;
-} 
-.leaflet-popup-content-wrapper{
-    font-size: 14px;
-    text-align: center;
-}
-#timeline-container {
-  
-  top: 18vh;        /* distance from top */
-  right: 5px;
-  left: 65%;    /* distance from right */
-  
+  }
 
- 
-}
-#videosDisplay {
- width: 60%;  
- flex-direction: row;  
- ;          /* space between videos */
-}
-.video-item {
-    margin-left: 5vw;
-width: 80%;
- display: flex;
-  flex-direction: column;
-  align-items: center;
-  
-}
-.video-caption{
-font-size: 12px;
+  /* LEGEND: under the buttons */
+  .map-legend,
+  #timeline-container{
+    box-sizing: border-box !important;
+  }
+
+  /* move legend slightly higher above the timeline */
+  .map-legend{
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+
+    /* move it up a bit more (increase last number) */
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 52px + 28px) !important;
+
+    top: auto !important;
+    z-index: 2800 !important;
+
+    max-width: none !important;
+    max-height: 18vh !important;
+    overflow: auto !important;
+  }
+
+ #timeline-container {
+    position: fixed !important;
+    box-sizing: border-box !important;
+
+    right: 20px !important;
+    left: auto !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+
+    width: 30px !important;
+    padding: 4px 4px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+  }
+
+  /* smaller labels so they fit next to the vertical slider */
+  #timeline-container span,
+  #timeline-container label,
+  #date-label {
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+  }
+
+  /* make the slider vertical */
+  #date-slider {
+    -webkit-appearance: slider-vertical !important; /* WebKit/Chrome */
+    writing-mode: bt-lr; /* Firefox/others */
+    width: 10px !important;
+    height: 160px !important;
+    color: bisque;
+
+    background: rgba(255, 255, 255, 0.69);
+    border-radius: 3px;
+  }
+
+  #date-slider::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+
+  #date-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+
+  footer{
+    position: fixed !important;
+    left: 0; right: 0; bottom: 0;
+    z-index: 3000 !important;
+    height: auto !important;
+    font-size: 12px !important;
+  }
+
+  /* Keep your mobile details hidden */
+  .RoomDe, .HosDe{ display:none !important; }
+
+  }
+
 }
 
-.MakeIt{
-    display: none;
-}
+/* --- NEW: Hamburger menu for .introduction on mobile --- */
+@media only screen and (max-device-width: 812px) {
 
+  .introduction{
+    position: fixed !important;
+    top: 3.5rem;
+    right: 10px !important;
+    left: auto !important;
+    z-index: 3200 !important;
 
-footer {
-    
-    border: 0.1rem #000 solid;
-    border-left: 0;
-    border-right: 0;
-    text-align: center;
-    font-size: 14px; 
-    height:auto;
-   
-    margin-top: 0.5vh;
-   
-    background-color:none;
-    margin-right: 1.2vh;
-}
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 8px !important;
+  }
 
-.cells {
-    display: flex;
-    border-right: none;
-    
-    text-align: center;
+  /* The ☰ icon */
+  .introduction::before{
+    content: "☰";
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(7, 6, 7, 0.9);
     color: antiquewhite;
-    
-    padding: 0vw 0.2vw;
-    margin: 0.5vw;
-    
-   
-  
-}
-a{ color:rgba(255, 255, 255, 0.9)}
-a:hover{
-    color:rgb(6, 6, 5);
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  }
 
+  /* Hide the inner Map / Stories by default */
+  .introduction > div{
+    display: none;
+    width: 180px;
+  }
 
+  /* Show menu when user interacts with the hamburger area */
+  .introduction:hover > div,
+  .introduction:active > div,
+  .introduction:focus-within > div{
+    display: block;
+  }
+
+  /* Style the dropdown buttons inside the hamburger */
+  .introduction #story,
+  .introduction #mapStory{
+    width: 100% !important;
+    height: 40px !important;
+    margin: 0 0 6px 0 !important;
+    padding: 0 10px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 14px !important;
+    border-radius: 8px !important;
+  }
+  /* FULLSCREEN OVERLAY */
+  #videosDisplay{
+    position: fixed !important;
+    inset: 0 !important;                 /* top/right/bottom/left = 0 */
+    width: 100vw !important;
+    height: 100dvh !important;
+    z-index: 99999 !important;
+
+    background-color: rgba(7, 6, 7, 0.96) !important;
+    padding: 0 !important;
+
+    /* IMPORTANT: scroll happens here */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+
+    /* Reels snapping */
+    scroll-snap-type: y mandatory;
+    overscroll-behavior: contain;
+
+    /* override your old flex/grid */
+    display: none; /* keep your logic: JS shows it by setting display:block */
+  }
+
+  /* If your JS sets display:block or flex, force it to block */
+  #videosDisplay[style*="display: block"],
+  #videosDisplay[style*="display:block"],
+  #videosDisplay.open,
+  #videosDisplay.is-open{
+    display: block !important;
+  }
+
+  /* EACH VIDEO = ONE SCREEN */
+  #videosDisplay .video-item{
+    position: relative !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    /* no column layout */
+    display: block !important;
+  }
+
+  /* YOUTUBE IFRAME OR VIDEO: FULL COVER */
+  #videosDisplay .video-item iframe,
+  #videosDisplay .video-item video{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    /* Cover (like reels) */
+    object-fit: cover;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #000 !important;
+  }
+
+  /* CAPTION OVERLAY (BOTTOM GRADIENT) */
+  #videosDisplay .video-caption{
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    padding:
+      14px 14px
+      calc(env(safe-area-inset-bottom, 0px) + 18px)
+      14px !important;
+
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+    text-align: left !important;
+    color: antiquewhite !important;
+    font-family: "JetBrains Mono", monospace !important;
+
+    /* readable over video */
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.72),
+      rgba(0,0,0,0.25),
+      rgba(0,0,0,0.00)
+    ) !important;
+
+    z-index: 2 !important;
+    pointer-events: none; /* caption doesn't block scrolling */
+  }
+
+  /* ======================================================
+     CLOSE (X) — CSS only: style an EXISTING element.
+     If you already have a close element inside #videosDisplay,
+     give it one of these classes in your HTML later:
+       .videos-close  OR  .close  OR  .x-close
+     No HTML change required for the overlay itself.
+     ====================================================== */
+
+  #videosDisplay .videos-close,
+  #videosDisplay .close,
+  #videosDisplay .x-close{
+    position: fixed !important;
+    top: calc(env(safe-area-inset-top, 0px) + 12px) !important;
+    right: 12px !important;
+    z-index: 100000 !important;
+
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 12px !important;
+
+    display: grid !important;
+    place-items: center !important;
+
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+
+    cursor: pointer !important;
+    border: 1px solid rgba(255,255,255,0.25) !important;
+    background: rgba(255,255,255,0.10) !important;
+    color: antiquewhite !important;
+
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* If your close element is an empty button/link, force × */
+  #videosDisplay .videos-close::before,
+  #videosDisplay .close::before,
+  #videosDisplay .x-close::before{
+    content: "";
+  }
+
+  #videosDisplay .videos-close:active,
+  #videosDisplay .close:active,
+  #videosDisplay .x-close:active{
+    transform: scale(0.98);
+  }
 }

@@ -57,6 +57,32 @@ export function removeCircleLegend() {
     state.circleLegendControl = null;
   }
 }
+ export function setupIntroClose(elements){
+  if (!elements?.intro) return;
+
+  // Create button once
+  let btn = elements.intro.querySelector(".intro-close");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "intro-close";
+    btn.setAttribute("aria-label", "Close");
+    btn.innerHTML = "×";
+    elements.intro.prepend(btn); // stays inside intro
+  }
+
+  // Avoid double-binding
+  if (btn.dataset.bound === "1") return;
+  btn.dataset.bound = "1";
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();           // don't trigger map click
+    clearIntro(elements);          // hides intro + sets button text
+    elements.videoDisplay.style.display = "none";
+  });
+}
+
 
 
 export function clearDetails(elements){
@@ -294,6 +320,7 @@ export function toggleMapStory(elements){
 
 export function wireUI(elements){
   removeCircleLegend(elements)
+  setupIntroClose(elements);
   
   window.onscroll = () => handleHeaderScroll(elements);
 
