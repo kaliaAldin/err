@@ -1,10 +1,13 @@
 body{
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    appearance: none; /* Remove default styling in some browsers */
-    -webkit-appearance: none; /* Remove default styling in WebKit browsers */
-    -moz-appearance: none; /* Remove default styling in Firefox */
-    background-color: rgb(76, 30, 79, 1);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* FIX: rgb(..., 1) is invalid -> use rgba */
+    background-color: rgba(76, 30, 79, 1);
 }
+
 .intro {
   position: absolute;
   top: 10vh;
@@ -18,14 +21,14 @@ body{
   padding: 2%;
   overflow-y: auto;
   font-family: "JetBrains Mono", monospace;
-  text-align: justify; /* ensures left alignment */
+  text-align: justify;
   line-height: 1.5;
   word-spacing: -6px;
-  
 }
+
 /* Intro close button (×) */
 .intro .intro-close{
-  position: sticky;          /* stays visible while scrolling */
+  position: sticky;
   top: 0;
   float: right;
   margin: 0 0 10px 10px;
@@ -65,12 +68,13 @@ body{
   overflow-y: auto;
   font-family: "JetBrains Mono", monospace;
 
-  display: none;              /* ✅ correct flex property */
-  flex-wrap: wrap;            /* allow wrapping to next row */
-  justify-content: space-between; /* even spacing between items */
-  align-items: flex-start;    /* align items at top */
-  gap: 1vw;                  /* space between videos */
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1vw;
 }
+
 .video-item {
     margin-left: 5vw;
     width: 20vw;
@@ -78,32 +82,32 @@ body{
     flex-direction: column;
     align-items: center;
 }
+
 .video-caption{
     text-align: center;
     font-size: 1.2rem;
     font-family: monospace;
 }
 
-
-
 #map{
     position: absolute !important;
     height: 100vh;
-    width: 99%;
+    width: 100% !important; /* nicer than 99% */
     margin-left: 0rem;
 }
+
 .header{
-   display: inline;
     position: absolute;
     display: flex;
     font-size: 20px;
     text-align: right;
 }
+
 #timeline-container {
   position: absolute;
   width: 50%;
-  top:90vh;        /* distance from top */
-  right: 1rem;      /* distance from right */
+  top:90vh;
+  right: 1rem;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(8, 3, 13, 0.734);
@@ -141,8 +145,8 @@ body{
   appearance: none;
   width: 16px;
   height: 16px;
-  background: #f8f3f69b;      /* your new thumb color */
-  border: 2px solid #ffffff;   /* optional white border */
+  background: #f8f3f69b;
+  border: 2px solid #ffffff;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -151,13 +155,12 @@ body{
 #date-slider::-moz-range-thumb {
   width: 16px;
   height: 16px;
-  background: #4A90E2;      /* same color */
+  background: #4A90E2;
   border: 2px solid #fff;
   border-radius: 50%;
   cursor: pointer;
 }
 
-/* Optional: hover/active states */
 #date-slider::-webkit-slider-thumb:hover,
 #date-slider::-moz-range-thumb:hover {
   background: #357ABD;
@@ -172,7 +175,6 @@ body{
   font-weight: bold;
 }
 
-
 .Firstpagelinks {
     background-color: white;
     font-weight: 800;
@@ -181,11 +183,12 @@ body{
 .Firstpagelinks:hover {
    color: rgb(255, 0, 157);
 }
+
 .mapDispaly{
     display:block;
     position:relative;
     top: 30vh;
-    margin-left: 4.2rem;
+    margin-left: 1.2rem; /* Barbara: a bit more left (was 4.2rem) */
     z-index: 9999;
 
     font-size: 1.5rem;
@@ -193,19 +196,29 @@ body{
     height: 2.5rem;
     background-color: rgba(7, 6, 7, 0.905);
     border-color: black;
-    padding: auto;
-    border-width: 2px;
+
+    /* FIX: padding:auto is invalid */
+    padding: 12px 35px !important;
+    border-width: 1px;
+
     font-weight: 500;
-    padding-top: 2px;
     color: antiquewhite;
     font-family: monospace;
-}
 
+    text-align: left;              /* Barbara: align left */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.mapDispaly:hover{
+    background-color: antiquewhite !important;
+    color: black!important;
+    
+}
 
 .logo{
     display: inline-block;
     justify-content: flex-start;
-    
     width: 14rem;
     height: 7rem;
     padding-right: 0;
@@ -216,7 +229,7 @@ body{
     vertical-align: bottom;
     display: none;
 }
-    
+
 .container{
     display: inline;
     text-align:left;
@@ -229,15 +242,16 @@ body{
 }
 
 .buttons {
-    position: absolute; /* Ensure buttons are positioned relative to the map container */
-    top:1vh; /* Adjust the top distance as needed */
-    left: 3.5rem; /* Adjust the left distance as needed */
-    z-index: 1000; /* Ensure buttons are above the map */
-    display: flex; /* Use flexbox for alignment if needed */
-    flex-direction:column; /* Stack buttons vertically */
-    gap: 5vh; /* Add space between buttons */
+    position: absolute;
+    top:1vh;
+    /* Barbara: shift all buttons slightly left (was 3.5rem) */
+    z-index: 1000;
+    display: flex;
+    flex-direction:column;
+    gap: 5vh;
     width: 10vw;
 }
+
 .headerText{
     position: relative;
     padding-left: 1rem;
@@ -256,6 +270,10 @@ body{
     text-align: center;
     margin-bottom:20%;
     height: 10vh;
+}
+.headerText:hover{
+    background-color: antiquewhite !important;
+    color: black!important;
 }
 .MakeIt{
     position: absolute;
@@ -277,6 +295,11 @@ body{
     margin-bottom: 40%;
     height: 5vh;
 }
+.MakeIt:hover{
+    background-color: antiquewhite !important;
+    color: black!important;
+}
+
 .Barbra{
     position: relative;
     top: 8vh;
@@ -286,19 +309,35 @@ body{
     flex-direction: column;
     font-family:monospace,sans-serif;
 }
+
+/* =========================================================
+   BARBARA: Button clean-up (minimal change, keep your style)
+   - remove 3D shadows
+   - unify padding
+   - unify typography + left alignment
+   ========================================================= */
+
+/* Common button padding/typography */
+.hos,
+.ER,
+.Stories,
+#story,
+#mapStory{
+    font-size: 1.5rem;          /* unify size */
+    padding: 10px 14px;         /* unify text-to-edge spacing */
+    text-align: left;           /* unify alignment */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Hospital button */
 .hos{
     margin-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-
     margin-bottom: 1%;
-    font-size:  1.5rem;
-
-    border: 3px solid rgb(9, 9, 9);
-
-    transition: 1s;
+    border: 1px solid rgba(9, 9, 9, 0.75); /* lighter edge (no heavy 3D) */
+    transition: 180ms;
     background-color: rgba(250, 235, 215, 0.5);
-
     width: 10rem;
     font-family:"IBM Plex Mono", monospace;
 }
@@ -306,57 +345,64 @@ body{
 .hos:hover, .hos:active{
     background-color: rgba(7, 6, 7, 0.905);
     color: white;
-    border: 3px solid black;
-    box-shadow: 4px 4px rgba(7, 6, 7, 0.905);
-    transition: 1s;
+    border: 1px solid rgba(0,0,0,0.9);
+    box-shadow: none;            /* remove 3D effect */
+    transition: 180ms;
 }
 
-
-
+/* ERR button */
 .ER{
     width: 16.5rem;
-    padding-left: 0rem;
-    padding-right: 0;
-    border: none;
-    margin: top 0;;
+    border: 1px solid rgba(9, 9, 9, 0.75); /* add clean edge */
     margin-bottom: 1%;
-    font-size: 1.5rem;
-    text-align: center;
-
-    transition:1s;
+    transition: 180ms;
 
     background-color: rgba(250, 235, 215, 0.5);
-    border: 3px solid rgb(9, 9, 9);
     font-family: monospace;
+
+    /* FIX: was centered -> left */
+    text-align: left;
+    justify-content: flex-start;
 }
+
 .ER:hover, .ER:active{
     background-color: rgba(7, 6, 7, 0.905);
     color: white;
-    border: 3px solid black;
-    box-shadow: 4px 4px rgba(7, 6, 7, 0.905);
-    transition: 10ms;
+    border: 1px solid rgba(0,0,0,0.9);
+    box-shadow: none;            /* remove 3D effect */
+    transition: 180ms;
 }
+
+/* Stories button */
 .Stories{
     display:block;
     position:relative;
     top: 30vh;
     z-index: 9999;
     margin-bottom: 0;
-    font-size: 1.5rem;
     height:2.5rem;
     background-color: rgba(7, 6, 7, 0.905);
     color: antiquewhite;
     font-family: monospace;
+
+    border: 1px solid rgba(0,0,0,0.75); /* cleaner edge */
 }
+.Stories:hover, .Stories:active{
+    background-color: antiquewhite !important;
+    color: black!important;
+    border: 1px solid rgba(0,0,0,0.9);
+    box-shadow: none;            /* remove 3D effect */
+    transition: 180ms;
+} 
 
 .mobileDesplay{
     display: none;
 }
-    
+
 .RoomDe{
     background-color: rgba(7, 6, 7, 0.905) !important;
     color: white !important;
-    width: 20rem;  
+    width: 20rem;
     max-height: 30vh;
     top: 10vh;
     overflow-y: auto;
@@ -365,9 +411,13 @@ body{
     font-size: 1rem;
     font-family: "JetBrains Mono", monospace;
     line-height: 1.5;
-    z-index: 99999;            /* always above map */
+    z-index: 99999;
     opacity: 0.9;
-    padding: 2px;
+    padding: 10px !important;
+}
+.RoomDe:empty{
+  padding: 0 !important;
+  display: none;
 }
 
 .HosDe{
@@ -385,12 +435,10 @@ body{
     transition: 60ms;
 }
 
-
-
 #hospitalDropdown{
     position: relative;
     display: block;
-    background-color: rgba(7, 6, 7, 0.905);;
+    background-color: rgba(7, 6, 7, 0.905);
     font-size:20px;
     border-radius: 5px ;
     color: white;
@@ -398,17 +446,11 @@ body{
     border-color: white;
     transition:1s;
     max-width: 15vh;
-}  
-
-a{
-  color:rgb(2, 2, 2)
-}
-a:hover{
-    color:antiquewhite;
 }
 
+/* FIX: srgb(...) invalid */
 .hosClasses{
-  color: srgb(255, 255, 255);    
+  color: rgb(255, 255, 255);
   font-size: larger;
   border-color: white;
 }
@@ -425,13 +467,21 @@ a:hover{
     margin-bottom: 5px;
     max-width: 16.5rem;
 }
+.leaflet-control-zoom-out .leaflet-control-zoom-in{
+    
+}
+
 .videos .leaflet-popup-content-wrapper{
     width: 600px;
 }
+
 .leaflet-popup-content-wrapper{
     font-family: monospace;
     font-size: 20px;
-    color: rgb(76, 30, 79, 1);
+
+    /* FIX: rgb(..., 1) invalid */
+    color: rgba(76, 30, 79, 1);
+
     font-weight: 800;
     background-color: rgba(169, 229, 249, 0.5);
 }
@@ -471,7 +521,8 @@ a:hover{
     background-color: rgba(246, 174, 194, 0.9);
 }
 .womenBreakPopup .leaflet-popup-content-wrapper{
-    background-color: rgb(75, 205, 241, 0.9);
+    /* FIX: rgb(...,0.9) invalid */
+    background-color: rgba(75, 205, 241, 0.9);
 }
 .womenBreakPopup .leaflet-popup-tip{
     background-color: rgba(75, 205, 241, 1);
@@ -486,12 +537,15 @@ a:hover{
     background-color: rgba(62, 84, 207, 0.9);
     color: blanchedalmond;
 }
+
 .imageFrame{
-    border: 5px solid rgb(76, 30, 79, 1); /* Red border */
-    border-radius: 10px;      /* Rounded corners */
-    box-shadow: 0 4px 8px rgb(76, 30, 79, 1); /* Optional shadow */
+    /* FIX: rgb(...,1) invalid */
+    border: 5px solid rgba(76, 30, 79, 1);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(76, 30, 79, 1);
     display: none;
 }
+
 .map-legend{
   background: rgba(20, 20, 20, 0.85);
   color: #fff;
@@ -565,15 +619,40 @@ p:last-child {
   border-right:3px;
 }
 
+/* Keep final link style consistent */
 a {
   text-decoration: none;
   color: antiquewhite;
 }
+a:hover{
+  color: rgb(255, 0, 157);
+}
 
-/* --- EXISTING MOBILE BLOCK (kept as-is) --- */
+/* =========================================================
+   BARBARA: Move the +/- (Leaflet zoom) away from your buttons
+   -> Move to TOP-RIGHT (safe, not fixed fullscreen)
+   ========================================================= */
+.leaflet-top.leaflet-left .leaflet-control-zoom{
+  left: auto !important;
+  right: 12px !important;
+}
+.leaflet-control-zoom{
+  margin-top: 12px !important;
+  box-shadow: none !important; /* remove 3D-ish shadow */
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+.leaflet-control-zoom a{
+  background: rgba(7, 6, 7, 0.85) !important;
+  color: antiquewhite !important;
+  border-bottom: 1px solid rgba(255,255,255,0.18) !important;
+}
+.leaflet-control-zoom a:hover{
+  background: rgba(7, 6, 7, 0.95) !important;
+}
+
+/* --- EXISTING MOBILE BLOCK (FIXED: remove nested @media + fix calc) --- */
 @media only screen and (max-device-width: 812px) {
-
-  @media only screen and (max-device-width: 812px) {
 
   /* Map always behind everything */
   #map{
@@ -585,12 +664,13 @@ a {
   }
 
   .logo{ display:none !important; }
+
   .MakeIt{
     width: 80%;
     position: relative;
     font-size: 14px !important;
-    top:3rem;
-    margin-bottom: 3.5rem !important;
+    top:0.1rem;
+    margin-bottom: 1rem !important;
   }
 
   /* TITLE: always on top */
@@ -612,7 +692,7 @@ a {
   /* BUTTONS: directly under the title */
   .buttons{
     position: fixed !important;
-    top: calc(env(safe-area-inset-top, 10px) + px) !important; /* under title */
+    top: calc(env(safe-area-inset-top, 10px) + 56px) !important; /* FIX: was + px */
     left: 10px !important;
     right: 10px !important;
     width: auto !important;
@@ -629,7 +709,7 @@ a {
     top: auto !important;
 
     display: grid !important;
-    grid-template-columns: 1fr 1fr !important; /* 2x2 grid */
+    grid-template-columns: 1fr 1fr !important;
     gap: 10px !important;
   }
 
@@ -646,14 +726,16 @@ a {
 
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
+
+    /* Barbara: left alignment (mobile too) */
+    justify-content: flex-start !important;
+    text-align: left !important;
 
     font-size: 14px !important;
     border-radius: 10px !important;
   }
 
-  /* ✅ FIX: your real buttons are IDs (#story, #mapStory).
-     Force them to behave like the other buttons (and not disappear). */
+  /* your real buttons are IDs (#story, #mapStory) */
   #story, #mapStory{
     position: static !important;
     top: auto !important;
@@ -666,7 +748,8 @@ a {
 
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-start !important; /* left aligned */
+    text-align: left !important;
 
     font-size: 14px !important;
     border-radius: 10px !important;
@@ -678,12 +761,9 @@ a {
 
   .ER::after{ content:"ERR"; font-weight:800; }
   .hos::after{ content:"HOSPITAL"; font-weight:800; }
-
-  /* ✅ FIX: add labels on the real buttons too */
   #story::after{ content:"STORIES"; font-weight:800; }
   #mapStory::after{ content:""; font-weight:800; }
 
-  /* (Optional) if you still keep class-based buttons somewhere */
   .Stories::after{ content:"STORIES"; font-weight:800; }
   .mapDispaly::after{ content:""; font-weight:800; }
 
@@ -695,7 +775,7 @@ a {
     font-size: 1rem !important;
   }
 
-  /* Dropdowns: show under buttons (optional) */
+  /* Dropdowns */
   #roomDropdown,
   #hospitalDropdown{
     display: block !important;
@@ -707,21 +787,17 @@ a {
     font-size: 14px;
   }
 
-  /* LEGEND: under the buttons */
+  /* LEGEND + timeline */
   .map-legend,
   #timeline-container{
     box-sizing: border-box !important;
   }
 
-  /* move legend slightly higher above the timeline */
   .map-legend{
     position: fixed !important;
     left: 10px !important;
     right: 10px !important;
-
-    /* move it up a bit more (increase last number) */
     bottom: calc(env(safe-area-inset-bottom, 0px) + 52px + 28px) !important;
-
     top: auto !important;
     z-index: 2800 !important;
 
@@ -730,7 +806,7 @@ a {
     overflow: auto !important;
   }
 
- #timeline-container {
+  #timeline-container {
     position: fixed !important;
     box-sizing: border-box !important;
 
@@ -750,7 +826,6 @@ a {
     gap: 4px !important;
   }
 
-  /* smaller labels so they fit next to the vertical slider */
   #timeline-container span,
   #timeline-container label,
   #date-label {
@@ -759,28 +834,14 @@ a {
     text-align: center !important;
   }
 
-  /* make the slider vertical */
   #date-slider {
-    -webkit-appearance: slider-vertical !important; /* WebKit/Chrome */
-    writing-mode: bt-lr; /* Firefox/others */
+    -webkit-appearance: slider-vertical !important;
+    writing-mode: bt-lr;
     width: 10px !important;
     height: 160px !important;
-    color: bisque;
 
     background: rgba(255, 255, 255, 0.69);
     border-radius: 3px;
-  }
-
-  #date-slider::-webkit-slider-thumb {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-  }
-
-  #date-slider::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
   }
 
   footer{
@@ -791,11 +852,13 @@ a {
     font-size: 12px !important;
   }
 
-  /* Keep your mobile details hidden */
   .RoomDe, .HosDe{ display:none !important; }
 
+  /* mobile: keep zoom visible but not blocking buttons */
+  .leaflet-top.leaflet-left .leaflet-control-zoom{
+    right: 10px !important;
+    margin-top: calc(env(safe-area-inset-top, 10px) + 10px) !important;
   }
-
 }
 
 /* --- NEW: Hamburger menu for .introduction on mobile --- */
@@ -814,7 +877,6 @@ a {
     gap: 8px !important;
   }
 
-  /* The ☰ icon */
   .introduction::before{
     content: "☰";
     font-size: 24px;
@@ -830,20 +892,17 @@ a {
     box-shadow: 0 2px 10px rgba(0,0,0,0.4);
   }
 
-  /* Hide the inner Map / Stories by default */
   .introduction > div{
     display: none;
     width: 180px;
   }
 
-  /* Show menu when user interacts with the hamburger area */
   .introduction:hover > div,
   .introduction:active > div,
   .introduction:focus-within > div{
     display: block;
   }
 
-  /* Style the dropdown buttons inside the hamburger */
   .introduction #story,
   .introduction #mapStory{
     width: 100% !important;
@@ -853,15 +912,17 @@ a {
 
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-start !important; /* Barbara: left */
+    text-align: left !important;
 
     font-size: 14px !important;
     border-radius: 8px !important;
   }
+
   /* FULLSCREEN OVERLAY */
   #videosDisplay{
     position: fixed !important;
-    inset: 0 !important;                 /* top/right/bottom/left = 0 */
+    inset: 0 !important;
     width: 100vw !important;
     height: 100dvh !important;
     z-index: 99999 !important;
@@ -869,20 +930,16 @@ a {
     background-color: rgba(7, 6, 7, 0.96) !important;
     padding: 0 !important;
 
-    /* IMPORTANT: scroll happens here */
     overflow-y: auto !important;
     overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch;
 
-    /* Reels snapping */
     scroll-snap-type: y mandatory;
     overscroll-behavior: contain;
 
-    /* override your old flex/grid */
-    display: none; /* keep your logic: JS shows it by setting display:block */
+    display: none;
   }
 
-  /* If your JS sets display:block or flex, force it to block */
   #videosDisplay[style*="display: block"],
   #videosDisplay[style*="display:block"],
   #videosDisplay.open,
@@ -890,7 +947,6 @@ a {
     display: block !important;
   }
 
-  /* EACH VIDEO = ONE SCREEN */
   #videosDisplay .video-item{
     position: relative !important;
     margin: 0 !important;
@@ -900,11 +956,9 @@ a {
     scroll-snap-align: start;
     scroll-snap-stop: always;
 
-    /* no column layout */
     display: block !important;
   }
 
-  /* YOUTUBE IFRAME OR VIDEO: FULL COVER */
   #videosDisplay .video-item iframe,
   #videosDisplay .video-item video{
     position: absolute !important;
@@ -912,7 +966,6 @@ a {
     width: 100% !important;
     height: 100% !important;
 
-    /* Cover (like reels) */
     object-fit: cover;
 
     border: 0 !important;
@@ -921,7 +974,6 @@ a {
     background: #000 !important;
   }
 
-  /* CAPTION OVERLAY (BOTTOM GRADIENT) */
   #videosDisplay .video-caption{
     position: absolute !important;
     left: 0 !important;
@@ -939,7 +991,6 @@ a {
     color: antiquewhite !important;
     font-family: "JetBrains Mono", monospace !important;
 
-    /* readable over video */
     background: linear-gradient(
       to top,
       rgba(0,0,0,0.72),
@@ -948,16 +999,8 @@ a {
     ) !important;
 
     z-index: 2 !important;
-    pointer-events: none; /* caption doesn't block scrolling */
+    pointer-events: none;
   }
-
-  /* ======================================================
-     CLOSE (X) — CSS only: style an EXISTING element.
-     If you already have a close element inside #videosDisplay,
-     give it one of these classes in your HTML later:
-       .videos-close  OR  .close  OR  .x-close
-     No HTML change required for the overlay itself.
-     ====================================================== */
 
   #videosDisplay .videos-close,
   #videosDisplay .close,
@@ -986,7 +1029,6 @@ a {
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* If your close element is an empty button/link, force × */
   #videosDisplay .videos-close::before,
   #videosDisplay .close::before,
   #videosDisplay .x-close::before{
@@ -999,3 +1041,81 @@ a {
     transform: scale(0.98);
   }
 }
+/* =========================================
+   REMOVE 3D LOOK (keep same design)
+   paste at END of CSS
+   ========================================= */
+
+/* Header title panel: flatter, cleaner */
+.headerText{
+  box-shadow: none !important;
+  border: 1px solid rgba(255,255,255,0.18) !important; /* subtle edge */
+  background-color: rgba(7, 6, 7, 0.86) !important;     /* same tone, slightly softer */
+}
+
+/* Optional: MakeIt panel same treatment so it matches */
+.MakeIt{
+  box-shadow: none !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+}
+
+/* Buttons: remove the “3D” border thickness + shadow on hover */
+.hos, .ER, .Stories, .mapDispaly, #story, #mapStory{
+  border-width: 0px !important;      /* was 3px on some */
+  box-shadow: none !important;
+}
+
+/* Hover/active should NOT add shadow */
+.hos:hover, .hos:active,
+.ER:hover, .ER:active,
+.Stories:hover, .Stories:active,
+.mapDispaly:hover, .mapDispaly:active,
+#story:hover, #story:active,
+#mapStory:hover, #mapStory:active{
+  box-shadow: none !important;
+}
+/* =========================================
+   Leaflet zoom → bottom-right corner
+   ========================================= */
+
+/* Move zoom control to bottom-right */
+.leaflet-top.leaflet-left{
+  left: auto !important;
+  right: 12px !important;
+  top: auto !important;
+  bottom: 5rem !important;
+}
+
+/* Flatten container */
+.leaflet-control-zoom{
+  box-shadow: none !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+/* Style + and − buttons */
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out{
+
+  background: rgba(7,6,7,0.9) !important;
+  color: antiquewhite !important;
+
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  box-shadow: none !important;
+
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+
+  font-size: 20px !important;
+  font-weight: bold;
+
+  text-align: center;
+}
+
+/* subtle hover */
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover{
+  background: rgba(7,6,7,1) !important;
+}
+
