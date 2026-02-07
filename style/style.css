@@ -192,7 +192,7 @@ body{
     z-index: 9999;
 
     font-size: 1.5rem;
-    width: 8rem;
+   
     height: 2.5rem;
     background-color: rgba(7, 6, 7, 0.905);
     border-color: black;
@@ -333,7 +333,7 @@ body{
 
 /* Hospital button */
 .hos{
-    margin-top: 1rem;
+    margin-top: 0.3rem;
     margin-bottom: 1%;
     border: 1px solid rgba(9, 9, 9, 0.75); /* lighter edge (no heavy 3D) */
     transition: 180ms;
@@ -551,7 +551,7 @@ body{
   color: #fff;
   padding: 12px 12px;
   border-radius: 12px;
-  max-width: 280px;
+  max-width: 28rem;
   font-family: monospace, sans-serif;
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
@@ -710,7 +710,7 @@ a:hover{
 
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
+    gap: 2px !important;
   }
 
   /* Make sure desktop offsets don't affect mobile */
@@ -719,7 +719,7 @@ a:hover{
     top: auto !important;
     left: auto !important;
 
-    width: 100% !important;
+    width:80% !important;
     height: 44px !important;
     margin: 0 !important;
     padding: 0 10px !important;
@@ -769,8 +769,9 @@ a:hover{
 
   .intro {
     top: 6.5rem !important;
-    left: 4vw !important;
-    width: 90vw !important;
+    left: 0px !important;
+    
+    width: 100vw !important;
     height: 80vh !important;
     font-size: 1rem !important;
   }
@@ -866,14 +867,14 @@ a:hover{
 
   .introduction{
     position: fixed !important;
-    top: 3.5rem;
-    right: 10px !important;
-    left: auto !important;
+    top: 14rem;
+    right: auto !important;
+    left: 10px !important;
     z-index: 3200 !important;
 
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-end !important;
+    
     gap: 8px !important;
   }
 
@@ -1117,5 +1118,79 @@ a:hover{
 .leaflet-control-zoom-in:hover,
 .leaflet-control-zoom-out:hover{
   background: rgba(7,6,7,1) !important;
+}
+/* ===== Mobile width lock fix (desktop-safe) ===== */
+@media only screen and (max-width: 812px){
+
+  /* keep these INSIDE mobile only */
+  *, *::before, *::after{
+    box-sizing: border-box;
+  }
+
+  html, body{
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* fixed mobile button area */
+  .buttons{
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+  }
+
+  .Barbra{
+    width: calc(100vw - 20px) !important;
+    max-width: calc(100vw - 20px) !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+
+  /* lock geometry in ALL states */
+  .hos, .ER, .Stories, .mapDispaly, #story, #mapStory,
+  .hos:hover, .ER:hover, .Stories:hover, .mapDispaly:hover, #story:hover, #mapStory:hover,
+  .hos:active, .ER:active, .Stories:active, .mapDispaly:active, #story:active, #mapStory:active,
+  .hos:focus, .ER:focus, .Stories:focus, .mapDispaly:focus, #story:focus, #mapStory:focus{
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+
+    padding: 0 10px !important;
+    margin: 0 !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 10px !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+    line-height: 1 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+
+  /* pseudo labels stable */
+  .ER::after, .hos::after, .Stories::after, .mapDispaly::after, #story::after, #mapStory::after{
+    display: block;
+    width: 100%;
+    line-height: 1;
+    font-weight: 500; /* avoid 500 -> 800 jump */
+  }
+
+  /* dropdowns */
+  #roomDropdown, #hospitalDropdown{
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
 }
 
