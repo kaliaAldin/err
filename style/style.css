@@ -57,9 +57,9 @@ body{
 #videosDisplay {
   position: absolute;
   top: 0;
-  left: 35vw;
+  left: 30vw;
   z-index: 9999;
-  width: 60vw;
+  width: 66vw;
   height: 90vh;
   background-color: rgba(7, 6, 7, 0.905);
   font-size: 1.5rem;
@@ -70,13 +70,13 @@ body{
 
   display: none;
   flex-wrap: wrap;
-  justify-content: space-between;
+  
   align-items: flex-start;
-  gap: 1vw;
+  gap: 6vw;
 }
 
 .video-item {
-    margin-left: 5vw;
+    margin-left: 7.8vw;
     width: 20vw;
     display: flex;
     flex-direction: column;
@@ -127,6 +127,21 @@ body{
     flex-direction: row;
     gap: 1vw;
 }
+.videos-close{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(7, 6, 7, 0.9);
+    color: antiquewhite;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    cursor: pointer;
+} 
 
 /* Base track styling */
 #date-slider {

@@ -76,6 +76,26 @@ export const VIDEO_MARKERS = [
     caption:"Nafisa and her son run one of the few remaining shops in the Jireif neighborhood of Khartoum. Despite the danger and difficulty, they are determined to stay and help their community make it through."
   },
   {
+    position: [15.639717 - .01, 32.540528 + .06],
+    videoId: "GoOIhcRFCIQ",
+    caption:"At a distance of 625 km from the war-torn Khartoum due to the conflict between the Rapid Support Forces and the Sudanese Armed Forces, the film “Kassala Youth Emergency Room”, documents an initiative by people working in Kassala.."
+  },
+  {
+    position: [15.639717 - .01, 32.540528 + .06],
+    videoId: "Lp7epnxBXKc",
+    caption:"The April 15 war between the Armed Sudanese Forces and the Rapid Support Forces caused the death of more than 12,000 innocent people in Sudan and the displacement of more than six million citizens and forced them to leave their homes, which turned into military targets and arenas for looting and fighting"
+  },
+   {
+    position: [15.639717 - .01, 32.540528 + .06],
+    videoId: "KG-wwLTKSxA",
+    caption:"During the past eight months since the outbreak of the April 15th war, Al-Naw Hospital remained the only hospital providing medical services in the city of Omdurman. The hospital is fully managed by a team of volunteers who have been running it since the second day of the war."
+  },
+    {
+    position: [15.639717 - .01, 32.540528 + .06],
+    videoId: "aVu883uWOL4",
+    caption:"The population of Wadi Halfa, numbering 15,725 people, is sharing their city with twice the number of displaced people due to the April 15th war. Halfa city hosts more than 52,205 displaced women, men and children. A team of volunteers is at their service, "
+  },
+  {
     position: [15.639717 - .06, 32.540528 - .03],
     videoId: "0EuxcBheteI",
     caption:"In Sudan, this year's Eid-ul-Fitr was marked by the first sounds of war. For the fourth consecutive year, what should have been a time for celebration and togetherness, was marred by blood and tragedy. But to be Sudanese is to be resilient, to be unbroken, and to choose life in the midst of death."
@@ -106,6 +126,19 @@ export const VIDEO_MARKERS = [
     position: [15.639717 - .1, 32.540528 - 0.1],
     videoId: "P2BJEYFiJL4",
     caption:"Sarah Elobaid takes a close look into the work of the Emergency Response Rooms and their impacts, with guests who have direct experience with these youth-led networks."
+
+  }
+  ,
+    {
+    position: [15.639717 - .1, 32.540528 - 0.1],
+    videoId: "yRonhgYXP88",
+    caption:"Sarah Elobaid takes a close look into the work of the Emergency Response Rooms and their impacts, with guests who have direct experience with these youth-led networks."
+
+  },
+     {
+    position: [15.639717 - .1, 32.540528 - 0.1],
+    videoId: "9QcmEq78sio",
+    caption:"Who are the Emergency Response Rooms? How did they come to be? "
 
   }
   
